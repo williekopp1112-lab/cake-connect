@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Apptronik × Megaport — The cake was the easy part.</title>
+<meta name="description" content="A personal note from Willie Kopp at Megaport to the Apptronik team. Apollo runs on data. We move data privately between factory floors, GPU clusters and clouds.">
+<meta name="theme-color" content="#0E0F11">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Apptronik × Megaport — The cake was the easy part.">
+<meta property="og:description" content="Apollo runs on data. We move it — privately — between factory floors, GPU clusters and clouds.">
+<meta property="og:image" content="og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230E0F11'/%3E%3Cpolygon points='4,25 16,7 28,25 22.6,25 16,15.2 9.4,25' fill='%23F44C1B'/%3E%3C/svg%3E">
+<style>
+/* ============================================================
+   CAKE CONNECT — Apptronik pilot
+   Brand host: Apptronik  (orange #F44C1B, charcoal, Gotham feel)
+   Brand guest: Megaport  (blue #1AA0FF, logo + sender block only)
+   Self-contained. Zero external requests. 375px-first.
+   ============================================================ */
+:root{
+  /* ---- HOST: Apptronik tokens (sampled from apptronik.com) ---- */
+  --ap-orange:#F44C1B;
+  --ap-orange-deep:#C93A11;
+  --ap-blue:#0050BD;
+  --ap-ink:#0E0F11;
+  --ap-ink-2:#16181B;
+  --ap-smoke:#3B4E57;
+  --ap-sage:#E0E6DC;
+  --ap-paper:#F5F7FA;
+  --ap-line:rgba(255,255,255,.10);
+  --ap-line-dk:rgba(14,15,17,.12);
+  /* ---- GUEST: Megaport tokens (sampled from megaport.com) ---- */
+  --mp-blue:#1AA0FF;
+  --mp-navy:#080D20;
+  --mp-mint:#61FFB6;
+  /* type */
+  --sans:"Gotham","Gotham SSm","Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  --pad:22px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--ap-ink);color:#fff;
+  font-family:var(--sans);font-size:16px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+.wrap{width:100%;max-width:760px;margin:0 auto;padding:0 var(--pad)}
+
+/* ---------- shared type ---------- */
+.eyebrow{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.20em;text-transform:uppercase;
+  color:var(--ap-orange);margin:0 0 14px;display:flex;align-items:center;gap:9px;
+}
+.eyebrow.on-light{color:var(--ap-orange-deep)}
+.eyebrow::before{content:"";width:20px;height:1px;background:currentColor;flex:none}
+h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.022em;line-height:1.04}
+h1{font-size:clamp(38px,10.5vw,68px)}
+h2{font-size:clamp(27px,7.2vw,42px);line-height:1.08}
+h3{font-size:18px;letter-spacing:-.01em;line-height:1.25}
+p{margin:0 0 17px}
+.lede{font-size:clamp(17px,4.4vw,20px);line-height:1.55;color:rgba(255,255,255,.76)}
+.muted{color:rgba(255,255,255,.62)}
+.muted-dk{color:var(--ap-smoke)}
+strong{font-weight:700;color:#fff}
+.on-light strong{color:var(--ap-ink)}
+
+/* ---------- logos ---------- */
+.lg-appt{width:186px;height:auto;color:#fff}
+.lg-mp{width:132px;height:auto;color:#fff}
+
+/* ---------- top rail ---------- */
+.rail{
+  border-bottom:1px solid var(--ap-line);background:rgba(14,15,17,.86);
+  backdrop-filter:saturate(140%) blur(8px);position:sticky;top:0;z-index:40;
+}
+.rail-in{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:11px 0;font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase}
+.rail-l{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.66)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--ap-orange);flex:none;
+  box-shadow:0 0 0 0 rgba(244,76,27,.55);animation:pulse 2.6s infinite}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(244,76,27,.5)}
+  70%{box-shadow:0 0 0 9px rgba(244,76,27,0)}
+  100%{box-shadow:0 0 0 0 rgba(244,76,27,0)}
+}
+.rail-r{color:rgba(255,255,255,.38);text-align:right}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;padding:52px 0 46px;isolation:isolate}
+.hero::before{ /* engineering grid */
+  content:"";position:absolute;inset:0;z-index:-2;
+  background-image:linear-gradient(var(--ap-line) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--ap-line) 1px,transparent 1px);
+  background-size:48px 48px;
+  -webkit-mask-image:radial-gradient(120% 78% at 50% 6%,#000 12%,transparent 76%);
+          mask-image:radial-gradient(120% 78% at 50% 6%,#000 12%,transparent 76%);
+}
+.hero::after{ /* Apptronik chevron watermark */
+  content:"";position:absolute;z-index:-1;right:-16%;top:8%;width:86%;aspect-ratio:1/.78;
+  background:
+    linear-gradient(160deg,rgba(244,76,27,.30),rgba(244,76,27,0) 62%);
+  clip-path:polygon(50% 0%,100% 100%,80.5% 100%,50% 38%,19.5% 100%,0% 100%);
+  opacity:.85;
+}
+.hero-logo{margin-bottom:34px}
+.hero h1{margin:0 0 20px}
+.hero h1 .flip{
+  display:block;color:var(--ap-orange);
+}
+.hero .lede{max-width:36ch}
+.scan{
+  margin-top:34px;display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.45);border:1px solid var(--ap-line);border-radius:999px;padding:7px 14px;
+}
+.scan i{width:5px;height:5px;background:var(--ap-orange);border-radius:50%;display:block;flex:none}
+
+/* ---------- section shells ---------- */
+section{position:relative}
+.pad{padding:56px 0}
+.light{background:var(--ap-paper);color:var(--ap-ink)}
+.light h1,.light h2,.light h3{color:var(--ap-ink)}
+.light p{color:var(--ap-smoke)}
+.sage{background:var(--ap-sage);color:var(--ap-ink)}
+.sage p{color:var(--ap-smoke)}
+.hr-orange{width:52px;height:3px;background:var(--ap-orange);border:0;margin:0 0 24px}
+
+/* corner ticks — industrial detail */
+.ticks{position:relative}
+.ticks::before,.ticks::after{
+  content:"";position:absolute;width:11px;height:11px;border:1px solid var(--ap-orange);opacity:.9
+}
+.ticks::before{left:0;top:-1px;border-right:0;border-bottom:0}
+.ticks::after{right:0;bottom:-1px;border-left:0;border-top:0}
+
+/* ---------- SLOT A ---------- */
+.slot-a h2{margin-bottom:22px;max-width:16ch}
+.slot-a p{font-size:16.5px}
+.pull{
+  margin:26px 0;padding:20px 22px;background:#fff;border-left:3px solid var(--ap-orange);
+  border-radius:0 10px 10px 0;box-shadow:0 1px 0 var(--ap-line-dk);
+}
+.pull p{margin:0;font-size:17px;line-height:1.5;color:var(--ap-ink);font-weight:600;letter-spacing:-.01em}
+
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ap-line-dk);
+  border:1px solid var(--ap-line-dk);margin-top:30px}
+.fact{background:var(--ap-paper);padding:18px 16px}
+.fact b{display:block;font-size:clamp(21px,6vw,28px);line-height:1;letter-spacing:-.025em;color:var(--ap-ink);font-weight:800}
+.fact span{display:block;margin-top:8px;font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ap-smoke);line-height:1.5}
+.fact.hi b{color:var(--ap-orange-deep)}
+
+.partners{margin-top:26px;display:flex;flex-wrap:wrap;gap:7px}
+.chip{
+  font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid var(--ap-line-dk);padding:6px 11px;border-radius:999px;color:var(--ap-smoke);background:#fff
+}
+
+/* ---------- pitch ---------- */
+.pitch{background:var(--ap-ink-2)}
+.pitch .item{padding:30px 0;border-top:1px solid var(--ap-line)}
+.pitch .item:first-of-type{border-top:0}
+.num{
+  font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--ap-orange);
+  display:block;margin-bottom:12px
+}
+.pitch h3{margin-bottom:11px}
+.pitch p{margin:0;color:rgba(255,255,255,.66);font-size:15.5px}
+.tags{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);border:1px solid var(--ap-line);padding:5px 9px;border-radius:4px}
+
+/* ---------- cta ---------- */
+.cta{background:var(--ap-orange);color:#fff;text-align:left}
+.cta h2{color:#fff;max-width:14ch;margin-bottom:16px}
+.cta p{color:rgba(255,255,255,.90);max-width:44ch}
+.btns{display:flex;flex-direction:column;gap:11px;margin-top:26px}
+.btn{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:16px 20px;border-radius:8px;text-decoration:none;font-weight:700;font-size:16px;
+  letter-spacing:-.01em;transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.btn span.k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:400;opacity:.62}
+.btn-primary{background:var(--ap-ink);color:#fff;box-shadow:0 6px 0 rgba(14,15,17,.28)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 0 rgba(14,15,17,.30)}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.6)}
+.btn-ghost:hover{background:rgba(255,255,255,.12)}
+
+/* ---------- sender (SLOT C) ---------- */
+.sender{background:var(--mp-navy)}
+.sender .card{
+  border:1px solid rgba(255,255,255,.13);border-radius:14px;padding:26px 22px;
+  background:linear-gradient(180deg,rgba(26,160,255,.09),rgba(26,160,255,0) 62%);
+}
+.sender .who{display:flex;align-items:flex-start;gap:16px}
+.avatar{
+  width:56px;height:56px;border-radius:50%;flex:none;display:grid;place-items:center;
+  background:var(--mp-blue);color:var(--mp-navy);font-weight:800;font-size:19px;letter-spacing:-.02em
+}
+.sender .name{font-size:20px;font-weight:800;letter-spacing:-.02em;margin:0 0 3px}
+.sender .role{margin:0;font-size:13.5px;color:rgba(255,255,255,.66);line-height:1.45}
+.sender .quote{margin:22px 0 0;font-size:15.5px;color:rgba(255,255,255,.80);line-height:1.6}
+.sender .meta{margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.13);
+  display:flex;flex-wrap:wrap;gap:9px}
+.mlink{
+  display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.10em;text-transform:uppercase;
+  color:rgba(255,255,255,.82);border:1px solid rgba(255,255,255,.20);border-radius:999px;padding:8px 13px;
+}
+.mlink:hover{border-color:var(--mp-blue);color:#fff}
+.guest{
+  margin-top:26px;display:flex;align-items:center;gap:14px;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.40)
+}
+.guest .bar{flex:1;height:1px;background:rgba(255,255,255,.16)}
+
+/* ---------- QR keepsake ---------- */
+.qr-panel{background:var(--ap-ink);border-top:1px solid var(--ap-line)}
+.qr-card{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.qr-img{
+  width:132px;height:132px;flex:none;background:#fff;border-radius:10px;padding:9px;
+}
+.qr-img svg,.qr-img img{width:100%;height:100%;display:block}
+.qr-copy{flex:1;min-width:210px}
+.qr-copy h3{margin-bottom:8px}
+.qr-copy p{margin:0;color:rgba(255,255,255,.60);font-size:14.5px}
+.qr-url{margin-top:11px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;
+  color:var(--ap-orange);word-break:break-all;text-decoration:none;display:inline-block}
+
+/* ---------- footer ---------- */
+footer{background:var(--ap-ink);padding:26px 0 40px;border-top:1px solid var(--ap-line)}
+.foot{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:rgba(255,255,255,.30);line-height:1.9}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  .dot{animation:none}
+}
+
+/* ---------- >= 700px ---------- */
+@media (min-width:700px){
+  :root{--pad:40px}
+  .pad{padding:88px 0}
+  .hero{padding:84px 0 76px}
+  .facts{grid-template-columns:repeat(4,1fr)}
+  .btns{flex-direction:row}
+  .btn{flex:1}
+  .lg-appt{width:230px}
+  .pitch .item{padding:38px 0}
+}
+</style>
+</head>
+<body>
+
+<!-- ======================= TOP RAIL ======================= -->
+<div class="rail">
+  <div class="wrap rail-in">
+    <div class="rail-l"><span class="dot"></span> Hand-delivered · Austin, TX</div>
+    <div class="rail-r">For the Apptronik team</div>
+  </div>
+</div>
+
+<!-- ======================= HERO ======================= -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-logo rv"><svg class="lg-appt" fill="currentColor" aria-label="Apptronik" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 342.5 27.68"> <polygon points="0 26.23 5.4 26.23 14.09 10.08 22.77 26.23 28.15 26.23 14.09 0 0 26.23"/> <path d="M66.52,6.41c-.51-.96-1.16-1.79-1.97-2.51-.8-.73-1.71-1.3-2.7-1.71-1.01-.43-2.05-.65-3.13-.7l-.39-.02h-12.1v24.75h4.82v-6.07h7.23c1.08,0,2.12-.19,3.14-.55,1.01-.36,1.95-.89,2.79-1.57s1.52-1.49,2.08-2.41c.55-.94.92-1.93,1.14-2.99.1-.53.15-1.06.17-1.59s-.02-1.08-.1-1.61c-.15-1.06-.5-2.07-.99-3.02ZM62.73,11.69c-.1.51-.29.99-.56,1.45-.27.44-.62.84-1.01,1.16-.41.34-.85.6-1.35.77s-.99.26-1.52.27h-7.23V6.29h7.45c.53.02,1.03.14,1.5.34.48.19.92.46,1.32.82s.7.77.96,1.23c.24.46.39.94.48,1.45.03.26.05.53.05.79-.02.26-.03.51-.09.77Z"/> <path d="M106.82,6.41c-.51-.96-1.16-1.79-1.97-2.51-.8-.73-1.71-1.3-2.7-1.71-1.01-.43-2.05-.65-3.13-.7l-.39-.02h-12.1v24.75h4.82v-6.07h7.23c1.08,0,2.12-.19,3.14-.55,1.01-.36,1.95-.89,2.79-1.57s1.52-1.49,2.08-2.41c.55-.94.92-1.93,1.14-2.99.1-.53.15-1.06.17-1.59s-.02-1.08-.1-1.61c-.15-1.06-.5-2.07-.99-3.02ZM103.03,11.69c-.1.51-.29.99-.56,1.45-.27.44-.62.84-1.01,1.16-.41.34-.85.6-1.35.77s-.99.26-1.52.27h-7.23V6.29h7.45c.53.02,1.03.14,1.5.34.48.19.92.46,1.32.82s.7.77.96,1.23c.24.46.39.94.48,1.45.03.26.05.53.05.79-.02.26-.03.51-.09.77Z"/> <polygon points="126.3 6.29 135.33 6.29 135.33 26.22 140.15 26.22 140.15 6.29 149.12 6.29 149.12 1.47 126.3 1.47 126.3 6.29"/> <path d="M185.66,18.63c.21-.14.39-.27.6-.43.07-.05.15-.1.22-.17.82-.68,1.54-1.5,2.08-2.41.55-.92.94-1.95,1.14-2.99.1-.53.17-1.06.17-1.59.02-.53-.02-1.08-.09-1.61-.17-1.06-.5-2.08-1.01-3.02s-1.18-1.79-1.97-2.51-1.71-1.3-2.7-1.71c-.99-.43-2.05-.65-3.13-.7l-.39-.02h-12.08v24.75h4.8V6.29h7.45c.51.03,1.03.14,1.5.34.48.19.92.48,1.32.82.38.36.7.77.96,1.23.24.44.41.96.48,1.45.03.26.05.53.05.79-.02.26-.03.53-.09.77-.1.51-.29,1.01-.56,1.45-.17.29-.39.56-.63.82-.12.12-.24.24-.38.34-.05.05-.12.1-.17.14-.19.15-.39.27-.62.39-.17.09-.36.17-.56.24-.03.02-.07.03-.1.03-.24.09-.48.14-.73.17-.22.03-.44.05-.68.07h-3.82l7.79,10.87h5.55l-5.03-7.21c.21-.12.41-.24.62-.38Z"/> <path d="M229.89,4.75c-1.21-1.21-2.6-2.14-4.19-2.8-1.59-.65-3.23-.97-4.94-.97s-3.35.32-4.94.97c-1.59.67-2.97,1.59-4.19,2.8s-2.14,2.6-2.8,4.19c-.65,1.59-.97,3.23-.97,4.94s.32,3.35.97,4.94c.67,1.59,1.59,2.97,2.8,4.19s2.6,2.14,4.19,2.8c1.59.65,3.23.97,4.94.97s3.35-.32,4.94-.97c1.59-.67,2.97-1.59,4.19-2.8s2.14-2.6,2.8-4.19c.65-1.59.97-3.23.97-4.94s-.32-3.35-.97-4.94c-.67-1.59-1.59-2.97-2.8-4.19ZM228.25,16.97c-.43.99-1.01,1.86-1.76,2.63-.77.77-1.64,1.35-2.63,1.76s-2.02.62-3.09.62-2.12-.21-3.09-.62c-.99-.41-1.86-.99-2.63-1.76s-1.35-1.64-1.76-2.63c-.41-.97-.62-2.02-.62-3.09s.21-2.1.62-3.09.99-1.86,1.76-2.63c.77-.75,1.64-1.33,2.63-1.76.97-.39,2.02-.6,3.09-.62,1.08.02,2.1.22,3.09.62.99.43,1.86,1.01,2.63,1.76.75.77,1.33,1.64,1.76,2.63.39.99.6,2.02.62,3.09-.02,1.08-.22,2.12-.62,3.09Z"/> <polygon points="271.4 16.87 252.93 .24 252.93 26.22 257.75 26.22 257.75 11.06 276.21 27.68 276.21 1.47 271.4 1.47 271.4 16.87"/> <rect x="296.6" y="1.47" width="4.82" height="24.75"/> <polygon points="334.45 12.97 342.08 1.47 336.32 1.47 326.22 16.68 326.22 1.47 321.42 1.47 321.42 26.22 325.69 26.22 331.52 17.4 336.86 26.22 342.5 26.22 334.45 12.97"/> </svg></div>
+    <p class="eyebrow rv">Scanned from the icing</p>
+    <h1 class="rv">The cake was<br>the easy part.<span class="flip">The data isn't.</span></h1>
+    <p class="lede rv">Apollo doesn't learn on a factory floor alone. Every hour of teleop, every camera frame, every grasp gets hauled somewhere else to become a model — and then hauled back. That round trip is a network problem. It's the one we solve.</p>
+    <div class="scan rv"><i></i> Keep scrolling · 90 seconds</div>
+  </div>
+</section>
+
+<!-- ======================= SLOT A ======================= -->
+<section class="pad light slot-a">
+  <div class="wrap">
+    <p class="eyebrow on-light rv">The real reason</p>
+    <h2 class="rv">Why are we sending cake to Apptronik?</h2>
+    <hr class="hr-orange rv">
+
+    <p class="rv">Because you just raised <strong>$520M in a Series A-X at a $5B valuation</strong> — <strong>$935M in total Series A capital</strong> — with Google, Mercedes-Benz, B Capital, PEAK6, AT&amp;T Ventures, John Deere and the Qatar Investment Authority on the cap table. That money is earmarked for two things that are really the same thing: <strong>ramping Apollo production</strong> and <strong>building facilities for robot training and data collection</strong>.</p>
+
+    <p class="rv">The second one is where we live. A training-and-data-collection facility is, physically, a data-generation plant. Apollo units at Mercedes-Benz, GXO Logistics and Jabil sites are generating multi-modal capture — video, depth, force, teleop traces — that has to reach model training. Your Google DeepMind partnership means a lot of that gradient lands in Google's world via Gemini Robotics, while the compute you rent for your own training runs will live wherever the GPUs actually are. That's a multi-site, multi-cloud, multi-tenant data movement problem, and today most companies solve it by shoving petabytes over the public internet and hoping.</p>
+
+    <div class="pull rv">
+      <p>Fleet scale-out is a networking event before it's a manufacturing event. Every new deployment site is a new ingest point that has to reach your training stack privately, predictably, and without a 90-day circuit order.</p>
+    </div>
+
+    <p class="rv">Right now that's survivable — a handful of pilot sites, a few named partners. It stops being survivable at fleet scale, when a new customer site means a new ingest path, a new cloud on-ramp, a new egress bill, and a new place for jitter to quietly eat your GPU utilization. We'd rather have that conversation while it's still cheap to fix. Hence: cake.</p>
+
+    <div class="facts rv">
+      <div class="fact hi"><b>$935M</b><span>Total Series&nbsp;A raised</span></div>
+      <div class="fact"><b>$5B</b><span>Valuation, Feb&nbsp;2026</span></div>
+      <div class="fact"><b>3</b><span>Named commercial partners</span></div>
+      <div class="fact"><b>2026</b><span>Next robot debut</span></div>
+    </div>
+
+    <div class="partners rv">
+      <span class="chip">Mercedes-Benz</span>
+      <span class="chip">GXO Logistics</span>
+      <span class="chip">Jabil</span>
+      <span class="chip">Google DeepMind</span>
+      <span class="chip">Gemini Robotics</span>
+      <span class="chip">Goods-to-person</span>
+      <span class="chip">Packout · Kitting</span>
+      <span class="chip">Machine &amp; tool tending</span>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= THREE PITCH SECTIONS ======================= -->
+<section class="pad pitch">
+  <div class="wrap">
+    <p class="eyebrow rv">What Megaport actually does</p>
+    <h2 class="rv" style="max-width:15ch;margin-bottom:8px">Three layers under the icing.</h2>
+
+    <div class="item rv">
+      <span class="num">01 / Private lanes, not the public internet</span>
+      <h3>Every site gets a private on-ramp to every cloud.</h3>
+      <p>Software-defined interconnection across a global fabric touching more than 1,000 data centers. A virtual cross connect comes up in minutes, not a quarter. Training data leaves a factory floor and arrives in your cloud without ever transiting the open internet — which is the difference between a predictable p99 and an incident channel.</p>
+      <div class="tags"><span class="tag">VXC</span><span class="tag">Cloud on-ramps</span><span class="tag">MCR routing</span><span class="tag">1,000+ DCs</span></div>
+    </div>
+
+    <div class="item rv">
+      <span class="num">02 / Compute on the same fabric</span>
+      <h3>Rent GPUs that are already on the network.</h3>
+      <p>Megaport acquired Latitude.sh, which means dedicated CPU and GPU compute on demand sitting directly on the private fabric — not bolted to it afterwards. Burst a training run, wire it privately to your data sources and your cloud, tear it down. No egress surprise, no separate networking project to unblock the compute decision.</p>
+      <div class="tags"><span class="tag">Latitude.sh</span><span class="tag">On-demand GPU</span><span class="tag">Private by default</span><span class="tag">Egress control</span></div>
+    </div>
+
+    <div class="item rv">
+      <span class="num">03 / Provisioned like code</span>
+      <h3>Your fleet scales weekly. Networking should too.</h3>
+      <p>Full API and Terraform coverage, so a new deployment site is a pull request rather than a procurement cycle. Stand connectivity up with the robots, scale it down when a pilot ends, and let the same repo that describes your infrastructure describe the path your data takes home.</p>
+      <div class="tags"><span class="tag">REST API</span><span class="tag">Terraform provider</span><span class="tag">Per-site templates</span><span class="tag">Spin up / spin down</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= CTA ======================= -->
+<section class="pad cta">
+  <div class="wrap ticks">
+    <p class="eyebrow rv" style="color:rgba(255,255,255,.85)">The ask</p>
+    <h2 class="rv">Let's cut into it.</h2>
+    <p class="rv">Thirty minutes, no deck. Bring whoever owns the data path from an Apollo deployment site to your training stack. We'll whiteboard what it looks like at ten sites, then at a hundred, and you can tell us where we're wrong.</p>
+    <div class="btns rv">
+      <a class="btn btn-primary" href="mailto:willie.kopp@megaport.com?subject=Re%3A%20the%20cake%20%E2%80%94%20Apptronik%20%C3%97%20Megaport&amp;body=Willie%2C%0A%0AThe%20cake%20landed.%20Here%27s%20a%20time%20that%20works%20for%20a%2030-minute%20conversation%3A%0A%0A">Reply to the cake <span class="k">Email Willie</span></a>
+      <a class="btn btn-ghost" href="https://www.megaport.com/" target="_blank" rel="noopener">See how the fabric works <span class="k">megaport.com</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= SLOT C — SENDER ======================= -->
+<section class="pad sender">
+  <div class="wrap">
+    <p class="eyebrow rv">Who sent the cake</p>
+    <div class="card rv">
+      <div class="who">
+        <div class="avatar">WK</div>
+        <div>
+          <p class="name">Willie Kopp</p>
+          <p class="role">Head of Solutions Architecture &amp; Technical GTM<br>Megaport</p>
+        </div>
+      </div>
+      <p class="quote">“My focus is the connected, on-demand infrastructure that turns AI ambition into something enterprises can actually run in production — not just talk about. Apollo is about as production as it gets. I'd like to hear how you're moving the data.”</p>
+      <div class="meta">
+        <a class="mlink" href="mailto:willie.kopp@megaport.com?subject=Re%3A%20the%20cake%20%E2%80%94%20Apptronik%20%C3%97%20Megaport">willie.kopp@megaport.com</a>
+        <a class="mlink" href="https://www.linkedin.com/in/willie-kopp-7289791b/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div class="guest">
+        <span>Cake by us</span><span class="bar"></span><svg class="lg-mp" fill="currentColor" aria-label="Megaport" role="img" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 43" xml:space="preserve"> <polygon points="51.9,23.2 48.2,14.2 42.5,14.2 42.5,29.6 46.7,29.6 46.7,21.2 50.1,29.6 53.4,29.6 56.9,21.1 56.9,29.6 61,29.6 61,14.2 55.3,14.2 "/> <path d="M84,20.8c0.2,0.3,0.3,0.6,0.4,1c0.1,0.4,0.1,0.9,0.1,1.3c0,0.4-0.1,0.8-0.2,1.1c-0.1,0.4-0.3,0.7-0.5,0.9 s-0.4,0.5-0.8,0.6s-0.7,0.2-1.1,0.2c-0.4,0-0.8-0.1-1.1-0.3c-0.3-0.2-0.5-0.4-0.7-0.7c-0.2-0.3-0.3-0.6-0.4-1 c-0.1-0.4-0.1-0.8-0.1-1.2c0-0.4,0.1-0.8,0.1-1.2c0.1-0.4,0.2-0.7,0.4-1c0.2-0.3,0.4-0.5,0.7-0.6c0.3-0.1,0.6-0.2,1-0.2 c0.5,0,0.9,0.1,1.2,0.2C83.5,20.2,83.8,20.5,84,20.8 M84.5,17.9c-0.3-0.3-0.6-0.6-1-0.8c-0.6-0.3-1.4-0.5-2.2-0.5 c-0.9,0-1.7,0.2-2.4,0.5c-0.7,0.4-1.3,0.8-1.7,1.4c-0.5,0.6-0.8,1.3-1,2s-0.3,1.5-0.3,2.3c0,0.8,0.1,1.7,0.3,2.4 c0.2,0.8,0.5,1.5,1,2c0.4,0.6,1,1.1,1.7,1.4s1.5,0.5,2.5,0.5c0.8,0,1.5-0.2,2.2-0.5c0.4-0.2,0.7-0.4,1-0.7v0.6 c0,0.8-0.2,1.4-0.5,1.9c-0.3,0.5-0.9,0.7-1.7,0.7c-0.5,0-1-0.1-1.4-0.3c-0.3-0.2-0.6-0.5-0.7-1l-0.1-0.3h-3.9l0,0.4 c0.1,0.7,0.3,1.4,0.6,1.9c0.4,0.5,0.8,1,1.4,1.3c0.5,0.3,1.1,0.6,1.8,0.7c0.6,0.2,1.3,0.2,1.9,0.2c1.4,0,2.6-0.2,3.4-0.6 s1.5-0.9,2-1.5s0.8-1.2,0.9-1.9c0.1-0.6,0.2-1.2,0.2-1.7V17h-3.8V17.9z"/> <path d="M111.5,23.3c0,0.5,0,0.9-0.1,1.3c-0.1,0.4-0.2,0.8-0.4,1.1c-0.2,0.3-0.4,0.5-0.8,0.7c-0.3,0.2-0.7,0.3-1.2,0.3 c-0.5,0-0.8-0.1-1.2-0.3c-0.3-0.2-0.6-0.4-0.8-0.7c-0.2-0.3-0.3-0.7-0.4-1.1c-0.1-0.4-0.1-0.9-0.1-1.3c0-0.5,0-0.9,0.1-1.4 c0.1-0.4,0.2-0.8,0.4-1.1c0.2-0.3,0.4-0.6,0.8-0.8c0.3-0.2,0.7-0.3,1.2-0.3c0.4,0,0.8,0.1,1.1,0.3s0.6,0.5,0.8,0.8 c0.2,0.3,0.4,0.7,0.4,1.1C111.5,22.4,111.5,22.9,111.5,23.3 M114.2,18.7c-0.5-0.6-1.1-1.1-1.8-1.5c-0.7-0.4-1.6-0.6-2.6-0.6 c-0.8,0-1.5,0.2-2.2,0.5c-0.4,0.2-0.7,0.4-1.1,0.7v-0.9h-3.8v16.9h4v-5.1c0.3,0.3,0.7,0.5,1.1,0.7c0.7,0.3,1.4,0.5,2.2,0.5 c0.9,0,1.8-0.2,2.5-0.5c0.7-0.4,1.3-0.9,1.8-1.5c0.5-0.6,0.8-1.3,1-2.1c0.2-0.8,0.3-1.6,0.3-2.4c0-0.9-0.1-1.7-0.3-2.5 C115,20.1,114.6,19.3,114.2,18.7"/> <path d="M124.3,26.5c-0.3,0.2-0.7,0.3-1.2,0.3s-0.9-0.1-1.2-0.3c-0.3-0.2-0.6-0.4-0.8-0.7c-0.2-0.3-0.3-0.7-0.4-1.1 c-0.1-0.4-0.1-0.9-0.1-1.3s0-0.9,0.1-1.3c0.1-0.4,0.2-0.8,0.4-1.1c0.2-0.3,0.4-0.5,0.8-0.8c0.3-0.2,0.7-0.3,1.2-0.3 c0.5,0,0.9,0.1,1.2,0.3c0.3,0.2,0.6,0.4,0.8,0.8c0.2,0.3,0.3,0.7,0.4,1.1c0.1,0.4,0.1,0.9,0.1,1.3s0,0.9-0.1,1.3 c-0.1,0.4-0.2,0.8-0.4,1.1C124.8,26,124.6,26.3,124.3,26.5 M127.8,18.5c-0.6-0.6-1.3-1-2.1-1.4c-0.8-0.3-1.7-0.5-2.7-0.5 s-1.9,0.2-2.7,0.5c-0.8,0.3-1.5,0.8-2.1,1.4c-0.6,0.6-1,1.3-1.3,2.1c-0.3,0.8-0.5,1.7-0.5,2.7s0.2,1.9,0.5,2.7 c0.3,0.8,0.8,1.5,1.3,2.1s1.3,1,2.1,1.3c0.8,0.3,1.7,0.5,2.7,0.5c1,0,1.9-0.2,2.7-0.5c0.8-0.3,1.5-0.8,2.1-1.3s1-1.3,1.3-2.1 c0.3-0.8,0.5-1.7,0.5-2.7s-0.2-1.9-0.5-2.7C128.8,19.7,128.4,19,127.8,18.5"/> <path d="M145.7,20.3v-3.7h-2.4v-3.2h-4v13.2c0,0.7,0.1,1.2,0.3,1.6c0.2,0.4,0.6,0.8,1,1c0.4,0.2,0.8,0.4,1.3,0.5 c0.5,0.1,1,0.1,1.5,0.1c0.3,0,0.7,0,1,0c0.4,0,0.7,0,1-0.1l0.3,0v-3.3l-0.4,0.1c-0.1,0-0.3,0-0.4,0.1s-0.3,0-0.5,0 c-0.6,0-0.8-0.1-0.9-0.2c0,0-0.2-0.2-0.2-0.9v-5.1L145.7,20.3L145.7,20.3z"/> <path d="M138.3,16.6c-0.4,0-1.4,0.1-1.8,0.2c-0.4,0.1-0.8,0.3-1.2,0.6s-0.7,0.5-1,0.9c0,0,0,0,0,0v-1.4h-3.9v12.7h4 v-5.8c0-0.5,0.1-1,0.1-1.4c0.1-0.4,0.3-0.8,0.5-1.1c0.2-0.3,0.5-0.5,0.9-0.7c0.5-0.2,1.1-0.3,1.9-0.2l0.4,0V17L138.3,16.6"/> <path d="M67.4,20c0.3-0.1,0.7-0.2,1.1-0.2c0.7,0,1.2,0.2,1.5,0.5c0.3,0.3,0.5,0.7,0.6,1.3h-4.5c0-0.1,0.1-0.2,0.1-0.3 c0.1-0.2,0.2-0.5,0.4-0.7C66.9,20.4,67.1,20.2,67.4,20 M73.4,18.9c-0.5-0.7-1.2-1.3-2-1.7s-1.8-0.6-2.8-0.6c-0.9,0-1.8,0.2-2.6,0.5 c-0.8,0.3-1.5,0.8-2,1.4c-0.6,0.6-1,1.3-1.3,2.1c-0.3,0.8-0.5,1.7-0.5,2.6c0,1,0.2,1.9,0.5,2.7s0.7,1.5,1.3,2.1 c0.6,0.6,1.2,1,2.1,1.4c0.8,0.3,1.7,0.5,2.7,0.5c1.4,0,2.7-0.3,3.7-1c0.8-0.5,1.4-1.3,1.9-2.4l0.2-0.5h-3.9l-0.1,0.1 c-0.1,0.1-0.1,0.1-0.2,0.2c-0.4,0.3-0.9,0.4-1.5,0.4c-0.8,0-1.4-0.2-1.9-0.6c-0.4-0.4-0.6-0.9-0.7-1.7h8.6l0-0.3 c0.1-1,0-1.9-0.2-2.8C74.3,20.4,73.9,19.6,73.4,18.9"/> <path d="M97.2,24v0.6c0,0.2,0,0.4-0.1,0.7c0,0.3-0.1,0.5-0.3,0.8c-0.1,0.2-0.4,0.5-0.7,0.6C96,26.9,95.5,27,95,27 c-0.2,0-0.5,0-0.7-0.1c-0.2,0-0.4-0.1-0.5-0.2c-0.1-0.1-0.2-0.2-0.3-0.3c-0.1-0.1-0.1-0.3-0.1-0.6c0-0.2,0-0.4,0.1-0.6 s0.2-0.3,0.3-0.4c0.1-0.1,0.3-0.2,0.5-0.3c0.2-0.1,0.4-0.1,0.7-0.2c0.2,0,0.5-0.1,0.8-0.1c0.3,0,0.5-0.1,0.8-0.1 C96.7,24.2,97,24.1,97.2,24C97.2,24,97.2,24,97.2,24 M101.3,26.6v-6.2c0-0.8-0.2-1.5-0.6-2c-0.4-0.5-0.8-0.9-1.4-1.1 c-0.5-0.3-1.1-0.4-1.8-0.5c-1.3-0.2-2.6-0.2-3.9,0.1c-0.7,0.1-1.3,0.4-1.9,0.7c-0.6,0.3-1,0.8-1.4,1.3s-0.6,1.3-0.6,2.1l0,0.4h4 l0-0.3c0.1-0.5,0.2-0.9,0.5-1.1c0.3-0.2,0.7-0.3,1.3-0.3c0.3,0,0.5,0,0.8,0c0.2,0,0.4,0.1,0.5,0.2c0.1,0.1,0.2,0.2,0.3,0.4 s0.1,0.4,0.1,0.7c0,0.3-0.1,0.4-0.2,0.5c-0.2,0.1-0.4,0.2-0.7,0.3c-0.3,0.1-0.8,0.1-1.2,0.2c-0.5,0-1,0.1-1.5,0.2 c-0.5,0.1-1,0.2-1.5,0.3c-0.5,0.1-1,0.4-1.4,0.6c-0.4,0.3-0.8,0.7-1,1.2c-0.3,0.5-0.4,1.1-0.4,1.9c0,0.7,0.1,1.2,0.3,1.8 c0.2,0.5,0.6,0.9,1,1.2c0.4,0.3,0.9,0.6,1.4,0.7c0.5,0.1,1.1,0.2,1.7,0.2c0.8,0,1.5-0.1,2.3-0.3c0.5-0.2,1-0.4,1.5-0.8 c0,0.2,0.1,0.4,0.2,0.5l0.1,0.2h3.6v-2C101.3,27.3,101.3,26.9,101.3,26.6"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M35.5,31.2c1.8-2.7,2.8-6,2.8-9.2c0-4.4-1.8-8.6-4.9-11.8C30.3,7,26.1,5.3,21.6,5.3c-3.3,0-6.5,1-9.3,2.8 c-2.7,1.8-4.9,4.4-6.1,7.5s-1.6,6.4-0.9,9.6s2.2,6.2,4.6,8.5s5.3,3.9,8.5,4.6c3.2,0.6,6.6,0.3,9.6-1C31.1,36,33.7,33.9,35.5,31.2z M23.8,18.5l-2.1-2.1l-2.1,2.1v4.4l2.1,2.1l2.1-2.1V18.5z M26.8,22.9l3.6,3.6v5.6l-1.5,1l-1.5-1v-4.4l-2.1-2.1l-2.1,2.1v4.4l-1.5,1 l-1.5-1v-4.4l-2.1-2.1l-2.1,2.1v4.4l-1.5,1l-1.5-1v-5.6l3.6-3.6v-5.6l3.6-3.6V9.2l1.5-1l1.5,1v4.4l3.6,3.6V22.9z"/> </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--QR_SLOT-->
+
+<!-- ======================= FOOTER ======================= -->
+<footer>
+  <div class="wrap foot">
+    Apptronik × Megaport · Cake Connect<br>
+    Company facts sourced from public reporting, February 2026. Apptronik and Megaport marks belong to their respective owners.
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)){
+    for(var i=0;i<els.length;i++) els[i].classList.add('in');
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  var d=0;
+  for(var i=0;i<els.length;i++){ els[i].style.transitionDelay=(Math.min(i,6)*40)+'ms'; io.observe(els[i]); }
+})();
+</script>
+</body>
+</html>
