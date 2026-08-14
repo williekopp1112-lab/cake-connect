@@ -82,6 +82,42 @@
   .layer--2 .icing { --icing: var(--tz-cream); }
   .layer--4 .icing { --icing: var(--tz-blue); }
 
+  /* Frosting micro-motion, V2.1. Two restrained accents, both finite: a glisten
+     that pulses along the icing — masked to the scallop shape so it cannot bleed
+     into the notches — and a single drip that swells and runs off the edge.
+     Opacity and transform only; both stop after two passes and end invisible. */
+  .icing::before,
+  .icing::after { content: ""; position: absolute; pointer-events: none; opacity: 0; }
+  .icing::before {
+    inset: 0;
+    background: linear-gradient(96deg, transparent 6%, rgba(255,255,255,.40) 34%, rgba(255,255,255,.06) 64%, transparent 92%);
+    -webkit-mask: radial-gradient(circle at 14px 16px, transparent 13px, #000 13.5px) repeat-x 0 0 / 28px 16px;
+            mask: radial-gradient(circle at 14px 16px, transparent 13px, #000 13.5px) repeat-x 0 0 / 28px 16px;
+  }
+  .icing::after {
+    top: 12px;
+    left: 22%;
+    width: 9px;
+    height: 13px;
+    border-radius: 0 0 60% 60% / 0 0 76% 76%;
+    background: var(--icing);
+    transform-origin: 50% 0;
+    transform: scaleY(.12);
+  }
+  .layer.baked .icing::before { animation: glisten 2.0s ease-in-out .2s 2 both; }
+  .layer.baked .icing::after  { animation: drip 2.2s cubic-bezier(.36,0,.5,1) .45s 2 both; }
+
+  @keyframes glisten {
+    0%, 100% { opacity: 0; }
+    46%      { opacity: .55; }
+  }
+  @keyframes drip {
+    0%   { transform: scaleY(.12) translateY(0); opacity: 0; }
+    22%  { opacity: .9; }
+    58%  { transform: scaleY(1) translateY(0); opacity: .85; }
+    100% { transform: scaleY(1) translateY(8px); opacity: 0; }
+  }
+
   .tier {
     display: inline-flex;
     align-items: center;
@@ -120,6 +156,8 @@
     background:
       radial-gradient(115% 68% at 50% -8%, var(--tz-blue-dim) 0%, var(--tz-ink) 62%);
   }
+  /* Hero copy sits above the sprinkle burst — decoration never crosses text. */
+  .hero .wrap { position: relative; z-index: 1; }
 
   .marks {
     display: flex;
@@ -156,6 +194,8 @@
 
   /* ── CTA ──────────────────────────────────────────────────────────────── */
   .cta {
+    position: relative;
+    overflow: hidden;
     display: block;
     width: 100%;
     min-height: 60px;
@@ -169,10 +209,36 @@
     text-align: center;
     text-decoration: none;
     box-shadow: 0 10px 30px rgba(45,129,255,.26);
-    transition: transform .32s var(--spring), box-shadow .32s var(--spring);
+    /* Transform only: animating box-shadow costs paint on every frame and the
+       lift reads just as well without it. */
+    transition: transform .32s var(--spring);
   }
-  .cta:hover, .cta:focus-visible { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(45,129,255,.34); }
-  .cta:active { transform: translateY(0); }
+  .cta:hover, .cta:focus-visible { transform: translateY(-2px); }
+  /* Tap has to read on touch as well as hover — this page is opened on a phone. */
+  .cta:active { transform: translateY(-1px) scale(.985); }
+
+  /* Frosting swipe: one sheen on load to draw the eye, then again on hover/tap.
+     The label sits above it, so the swipe never dims the text underneath. */
+  .cta > span { position: relative; z-index: 1; }
+  .cta::after {
+    content: "";
+    position: absolute;
+    top: -60%; bottom: -60%; left: 0;
+    width: 40%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,.5), transparent);
+    transform: translateX(-180%) skewX(-18deg);
+    opacity: 0;
+    pointer-events: none;
+    animation: swipe 1.1s ease-out .5s 1 both;
+  }
+  .cta:hover::after, .cta:focus-visible::after, .cta:active::after { animation: swipe .7s ease-out 0s 1 both; }
+
+  @keyframes swipe {
+    0%   { transform: translateX(-180%) skewX(-18deg); opacity: 0; }
+    14%  { opacity: 1; }
+    86%  { opacity: 1; }
+    100% { transform: translateX(400%) skewX(-18deg); opacity: 0; }
+  }
 
   .byline {
     margin-top: 14px;
@@ -199,6 +265,7 @@
     border: 1px solid var(--tz-charcoal);
     border-radius: 12px;
     background: var(--tz-surface-1);
+    transition: transform .5s var(--spring);
   }
   .logo img { width: 100%; height: auto; max-height: 30px; object-fit: contain; }
   /* Very wide wordmarks get the full row, otherwise a half-column caps them at
@@ -250,13 +317,107 @@
   }
   .qr figcaption { margin-top: 9px; font-size: 16px; color: var(--tz-stone); }
 
+  /* ── Sprinkles. One burst as the page opens, then done — no loop, no timer.
+        Purely decorative, behind the hero copy, and gone inside two seconds. */
+  .sprinkles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .sprinkles i {
+    position: absolute;
+    top: -26px;
+    width: 7px;
+    height: 14px;
+    border-radius: 4px;
+    opacity: 0;
+    animation: sprinkle 1.7s cubic-bezier(.28,.7,.4,1) both;
+  }
+  @keyframes sprinkle {
+    0%   { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0; }
+    9%   { opacity: 1; }
+    72%  { opacity: 1; }
+    100% { transform: translate3d(var(--drift), var(--fall), 0) rotate(var(--spin)); opacity: 0; }
+  }
+  .sprinkles i:nth-child(1)  { left:  6%; --drift:  14px; --fall: 300px; --spin: 220deg; background: var(--tz-blue);      animation-delay: .04s; }
+  .sprinkles i:nth-child(2)  { left: 14%; --drift: -18px; --fall: 380px; --spin:-260deg; background: var(--tz-white);     animation-delay: .22s; }
+  .sprinkles i:nth-child(3)  { left: 22%; --drift:  10px; --fall: 260px; --spin: 180deg; background: var(--mp-blue);      animation-delay: .12s; }
+  .sprinkles i:nth-child(4)  { left: 30%; --drift: -12px; --fall: 420px; --spin: 300deg; background: var(--tz-blue-lift); animation-delay: .34s; }
+  .sprinkles i:nth-child(5)  { left: 38%; --drift:  20px; --fall: 330px; --spin:-200deg; background: var(--tz-white);     animation-delay: .00s; }
+  .sprinkles i:nth-child(6)  { left: 46%; --drift: -16px; --fall: 290px; --spin: 240deg; background: var(--tz-blue);      animation-delay: .28s; }
+  .sprinkles i:nth-child(7)  { left: 54%; --drift:  12px; --fall: 400px; --spin:-320deg; background: var(--tz-stone);     animation-delay: .10s; }
+  .sprinkles i:nth-child(8)  { left: 62%; --drift: -20px; --fall: 250px; --spin: 160deg; background: var(--mp-blue);      animation-delay: .40s; }
+  .sprinkles i:nth-child(9)  { left: 70%; --drift:  16px; --fall: 360px; --spin: 280deg; background: var(--tz-white);     animation-delay: .18s; }
+  .sprinkles i:nth-child(10) { left: 78%; --drift: -10px; --fall: 310px; --spin:-220deg; background: var(--tz-blue-lift); animation-delay: .30s; }
+  .sprinkles i:nth-child(11) { left: 86%; --drift:  18px; --fall: 270px; --spin: 200deg; background: var(--tz-blue);      animation-delay: .08s; }
+  .sprinkles i:nth-child(12) { left: 93%; --drift: -14px; --fall: 390px; --spin:-180deg; background: var(--tz-white);     animation-delay: .36s; }
+
   /* ── Motion. Threshold .05 with a hard 2s opacity fallback so nothing can
-        be stranded invisible if the observer never fires. ───────────────── */
-  .rise { opacity: 0; transform: translateY(18px); transition: opacity .6s var(--spring), transform .6s var(--spring); }
+        be stranded invisible if the observer never fires. Each layer's children
+        bake in on a short stagger rather than the whole slab snapping on.
+
+        The rise carries the reveal and opacity is deliberately NOT transitioned.
+        A cross-fade parks text at 27-45% alpha, and at those alphas the blue
+        label pairs composite down to 2.5-4.3:1 — a legible frame that fails
+        WCAG. Even a 3ms ramp can be caught by one 16.7ms display frame, so
+        opacity flips discretely: it is only ever 0 or 1, never in between. */
+  .rise { opacity: 0; transform: translateY(18px); transition: transform .62s var(--spring); }
   .rise.lit { opacity: 1; transform: none; }
+
+  .rise > * { opacity: 0; transform: translateY(12px); transition: transform .56s var(--spring); }
+  .rise.lit > * { opacity: 1; transform: none; }
+  .rise:not(.lit) > * { will-change: transform, opacity; }
+  .rise.lit > *:nth-child(1) { transition-delay: .04s; }
+  .rise.lit > *:nth-child(2) { transition-delay: .12s; }
+  .rise.lit > *:nth-child(3) { transition-delay: .20s; }
+  .rise.lit > *:nth-child(4) { transition-delay: .28s; }
+  .rise.lit > *:nth-child(5) { transition-delay: .36s; }
+  .rise.lit > *:nth-child(6) { transition-delay: .44s; }
+
+  /* The layer-04 CTA is also a staggered child, so it needs its own transition
+     and hover/tap rules back at a specificity that clears the stagger. */
+  .rise > .cta { transition: transform .38s var(--spring); }
+  .rise.lit > .cta:hover, .rise.lit > .cta:focus-visible {
+    transform: translateY(-2px);
+    transition-delay: 0s;
+  }
+  .rise.lit > .cta:active { transform: translateY(-1px) scale(.985); transition-delay: 0s; }
+
+  /* Logo tiles pop in on their own beat, then take a lift on hover or tap. */
+  .rise .logo { opacity: 0; transform: translateY(10px) scale(.965); }
+  .rise.lit .logo { opacity: 1; transform: none; }
+  .rise.lit .logo:nth-child(1) { transition-delay: .30s; }
+  .rise.lit .logo:nth-child(2) { transition-delay: .36s; }
+  .rise.lit .logo:nth-child(3) { transition-delay: .42s; }
+  .rise.lit .logo:nth-child(4) { transition-delay: .48s; }
+  .rise.lit .logo:nth-child(5) { transition-delay: .54s; }
+  .rise.lit .logo:nth-child(6) { transition-delay: .60s; }
+  .rise.lit .logo:hover { transform: translateY(-4px) rotate(-1.1deg); transition-delay: 0s; }
+  .rise.lit .logo:active { transform: translateY(-2px) rotate(1.2deg) scale(.99); transition-delay: 0s; }
+
+  /* Reduced motion: nothing moves, nothing fades, everything is already there. */
   @media (prefers-reduced-motion: reduce) {
-    .rise { opacity: 1; transform: none; transition: none; }
-    .cta { transition: none; }
+    .rise,
+    .rise > *,
+    .rise .logo,
+    .rise.lit .logo:hover,
+    .rise.lit .logo:active {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+      transition-delay: 0s !important;
+      will-change: auto !important;
+    }
+    .cta, .logo { transition: none !important; }
+    .cta:hover, .cta:focus-visible, .cta:active { transform: none !important; }
+    .cta::after,
+    .icing::before,
+    .icing::after,
+    .layer.baked .icing::before,
+    .layer.baked .icing::after { animation: none !important; opacity: 0 !important; }
+    .sprinkles { display: none !important; }
   }
 
   @media (min-width: 600px) {
@@ -268,10 +429,12 @@
     .byline { text-align: left; }
   }
 </style>
+<noscript><style>.rise,.rise>*,.rise .logo{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
 
 <header class="hero">
+  <div class="sprinkles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
   <div class="wrap">
     <div class="marks">
       <span class="mark-tz">Topaz Labs</span>
@@ -281,7 +444,7 @@
     <p class="eyebrow">We sent cake. Here's why.</p>
     <h1>Nice frosting. <span class="glaze">Let's talk about the layers underneath.</span></h1>
     <p class="lede">Topaz enhancement models eat GPU and move a lot of pixels. We build the compute they run on, and the private path the media travels.</p>
-    <a class="cta" href="https://megaport.chilipiper.com/personal-page/henry-barton">Book 20 minutes with Henry</a>
+    <a class="cta" href="https://megaport.chilipiper.com/personal-page/henry-barton"><span>Book 20 minutes with Henry</span></a>
     <p class="byline">Henry Barton, Latitude Specialist</p>
   </div>
 </header>
@@ -329,7 +492,7 @@
     <h2>Proposed solution</h2>
     <p class="body">Our hypothesis: a dedicated GPU pool for the heaviest enhancement jobs, fast flash beside it for the active working set, and a private Megaport connection to wherever the rest of the media lives.<span class="pun">The whole stack, not just the frosting.</span></p>
     <p class="close">Worth twenty minutes to find out if we're right?</p>
-    <a class="cta" href="https://megaport.chilipiper.com/personal-page/henry-barton">Book 20 minutes with Henry</a>
+    <a class="cta" href="https://megaport.chilipiper.com/personal-page/henry-barton"><span>Book 20 minutes with Henry</span></a>
     <div class="sender">
       <div class="sender-id">
         <p class="sender-name">Henry Barton</p>
@@ -347,14 +510,26 @@
 <script>
   (function () {
     var risers = document.querySelectorAll('.rise');
-    function lightAll() { for (var i = 0; i < risers.length; i++) risers[i].classList.add('lit'); }
+    // Lighting a block also bakes its layer, which is what starts the frosting
+    // glisten and drip on that band's icing.
+    function bake(el) {
+      el.classList.add('lit');
+      var layer = el.parentElement;
+      while (layer && layer.classList && !layer.classList.contains('layer')) layer = layer.parentElement;
+      if (layer && layer.classList) layer.classList.add('baked');
+    }
+    function lightAll() { for (var i = 0; i < risers.length; i++) bake(risers[i]); }
+    // iOS only paints :active states on non-link elements once the document has
+    // a touch listener, so the logo-tile tap state needs this one no-op.
+    document.addEventListener('touchstart', function () {}, { passive: true });
     if (!('IntersectionObserver' in window)) { lightAll(); return; }
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('lit'); io.unobserve(e.target); }
+        if (e.isIntersecting) { bake(e.target); io.unobserve(e.target); }
       });
     }, { threshold: 0.05, rootMargin: '0px 0px -5% 0px' });
     for (var i = 0; i < risers.length; i++) io.observe(risers[i]);
+    // Hard fallback: one shot, then it is over. Nothing can stay invisible.
     setTimeout(lightAll, 2000);
   })();
 </script>
