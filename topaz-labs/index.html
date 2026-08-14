@@ -82,6 +82,22 @@
   .layer--2 .icing { --icing: var(--tz-cream); }
   .layer--4 .icing { --icing: var(--tz-blue); }
 
+  /* V2.2: the divider DRAWS itself across the layer before that layer's copy
+     settles — the cut edge being iced. Each band draws from a different
+     origin so the four reveals never read as the same effect twice, and the
+     blue layer-04 edge takes the longest sweep. scaleX only, so this costs
+     the compositor a transform and nothing else. */
+  .icing {
+    transform: scaleX(0);
+    transform-origin: var(--ice-from);
+    transition: transform .66s var(--spring);
+  }
+  .layer--1 .icing { --ice-from: 0 50%; }
+  .layer--2 .icing { --ice-from: 100% 50%; transition-duration: .74s; }
+  .layer--3 .icing { --ice-from: 50% 50%; }
+  .layer--4 .icing { --ice-from: 0 50%; transition-duration: .84s; }
+  .layer.baked .icing { transform: none; }
+
   /* Frosting micro-motion, V2.1. Two restrained accents, both finite: a glisten
      that pulses along the icing — masked to the scallop shape so it cannot bleed
      into the notches — and a single drip that swells and runs off the edge.
@@ -159,18 +175,52 @@
   /* Hero copy sits above the sprinkle burst — decoration never crosses text. */
   .hero .wrap { position: relative; z-index: 1; }
 
-  .marks {
-    display: flex;
-    align-items: center;
-    gap: 11px;
+  /* ── Sender lockup (V2.2) ──────────────────────────────────────────────
+     The sender has to register on sight, so Latitude leads at display
+     weight, the Megaport endorsement sits under its own rule, and the
+     prospect tag closes the block. Placement changes; dominance does not —
+     Topaz still owns the palette and the type for the whole page below.
+     Text and CSS only: no Megaport or Latitude logo files, so the page
+     stays self-contained and carries no third-party asset risk. */
+  .lockup { margin-bottom: 26px; }
+  .lockup-name {
+    display: block;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--tz-white);
+  }
+  .lockup-name::after {
+    content: "";
+    display: block;
+    width: 46px;
+    height: 3px;
+    margin: 11px 0 9px;
+    border-radius: 2px;
+    background: var(--mp-blue);
+  }
+  .lockup-sub {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: .005em;
+    color: var(--tz-stone);
+  }
+  .lockup-mp { color: var(--mp-blue); font-weight: 800; }
+  /* Stone, not the blue lift: this label sits at the brightest point of the
+     hero gradient, where a mid-blue lands near 4:1 against the wash. */
+  .lockup-for {
+    display: block;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--mp-rule);
     font-size: 16px;
     font-weight: 700;
-    letter-spacing: .03em;
-    margin-bottom: 30px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--tz-stone);
   }
-  .mark-tz { color: var(--tz-white); }
-  .mark-x  { color: var(--tz-stone); font-weight: 600; }
-  .mark-mp { color: var(--mp-blue); }
 
   .eyebrow {
     font-size: 16px;
@@ -363,45 +413,99 @@
         label pairs composite down to 2.5-4.3:1 — a legible frame that fails
         WCAG. Even a 3ms ramp can be caught by one 16.7ms display frame, so
         opacity flips discretely: it is only ever 0 or 1, never in between. */
-  .rise { opacity: 0; transform: translateY(18px); transition: transform .62s var(--spring); }
+  /* V2.2 — one reveal engine, four personalities. Every knob is a custom
+     property set on the .rise block, so all four layers share a single set of
+     rules at one specificity and `.rise.lit` can always win the lit state:
+
+       --rest   resting transform for the block's children
+       --block  resting transform for the block itself
+       --dur    travel duration
+       --lead   offset before the first child moves, so a layer can let its
+                frosting divider finish drawing first
+
+     No fallback values inside var() in a `transition` shorthand: a comma
+     inside var() splits the declaration and reads as a second animated
+     property. Defaults live on `.rise` instead. */
+  .rise {
+    --rest:  translateY(12px);
+    --block: translateY(18px);
+    --dur:   .56s;
+    --lead:  0s;
+    opacity: 0;
+    transform: var(--block);
+    transition: transform .62s var(--spring);
+  }
   .rise.lit { opacity: 1; transform: none; }
 
-  .rise > * { opacity: 0; transform: translateY(12px); transition: transform .56s var(--spring); }
+  .rise > * { opacity: 0; transform: var(--rest); transition: transform var(--dur) var(--spring); }
   .rise.lit > * { opacity: 1; transform: none; }
   .rise:not(.lit) > * { will-change: transform, opacity; }
-  .rise.lit > *:nth-child(1) { transition-delay: .04s; }
-  .rise.lit > *:nth-child(2) { transition-delay: .12s; }
-  .rise.lit > *:nth-child(3) { transition-delay: .20s; }
-  .rise.lit > *:nth-child(4) { transition-delay: .28s; }
-  .rise.lit > *:nth-child(5) { transition-delay: .36s; }
-  .rise.lit > *:nth-child(6) { transition-delay: .44s; }
+  .rise.lit > *:nth-child(1) { transition-delay: calc(var(--lead) + .04s); }
+  .rise.lit > *:nth-child(2) { transition-delay: calc(var(--lead) + .13s); }
+  .rise.lit > *:nth-child(3) { transition-delay: calc(var(--lead) + .22s); }
+  .rise.lit > *:nth-child(4) { transition-delay: calc(var(--lead) + .31s); }
+  .rise.lit > *:nth-child(5) { transition-delay: calc(var(--lead) + .40s); }
+  .rise.lit > *:nth-child(6) { transition-delay: calc(var(--lead) + .49s); }
+
+  /* 01 — the slice slides in from the cut face. */
+  .rise--slice   { --rest: translateX(-20px); --block: translateX(-10px); --dur: .58s; }
+  /* 02 — the layer is set DOWN onto the stack, and only after its icing has
+          finished drawing, so the divider visibly leads the copy. */
+  .rise--settle  { --rest: translateY(-16px); --block: translateY(10px);  --dur: .70s; --lead: .22s; }
+  /* 03 — short and snappy, so the logo shelf reads as a ripple. */
+  .rise--cascade { --rest: translateY(14px);  --dur: .48s; --lead: .04s; }
+  /* 04 — the longest travel on the page. The plate lands last. */
+  .rise--finale  { --rest: translateY(22px);  --block: translateY(24px); --dur: .72s; --lead: .08s; }
+
+  /* The layer number's rule draws itself out before the number settles, so
+     each band announces which slice you are looking at. */
+  .rise .tier::before { transform: scaleX(0); transform-origin: 0 50%; transition: transform .52s var(--spring); }
+  .rise.lit .tier::before { transform: scaleX(1); transition-delay: calc(var(--lead) + .12s); }
 
   /* The layer-04 CTA is also a staggered child, so it needs its own transition
      and hover/tap rules back at a specificity that clears the stagger. */
   .rise > .cta { transition: transform .38s var(--spring); }
+  /* …and in the finale it gets the biggest entrance on the page: the longest
+     travel, a scale-up, and a second frosting swipe fired on arrival. */
+  .rise--finale > .cta { transform: translateY(26px) scale(.88); transition: transform .66s var(--spring); }
+  .rise--finale.lit > .cta { transform: none; }
+  .rise--finale.lit > .cta::after { animation: swipe .95s ease-out .62s 1 both; }
   .rise.lit > .cta:hover, .rise.lit > .cta:focus-visible {
     transform: translateY(-2px);
     transition-delay: 0s;
   }
   .rise.lit > .cta:active { transform: translateY(-1px) scale(.985); transition-delay: 0s; }
 
-  /* Logo tiles pop in on their own beat, then take a lift on hover or tap. */
-  .rise .logo { opacity: 0; transform: translateY(10px) scale(.965); }
+  /* Logo tiles cascade in sequence with an alternating tilt — tiles being
+     laid onto the shelf rather than six copies of the same fade. */
+  .rise .logo { opacity: 0; transform: translateY(16px) scale(.93) rotate(var(--tilt)); transition: transform .46s var(--spring); }
+  .rise .logo:nth-child(odd)  { --tilt: -2.4deg; }
+  .rise .logo:nth-child(even) { --tilt:  2.4deg; }
   .rise.lit .logo { opacity: 1; transform: none; }
-  .rise.lit .logo:nth-child(1) { transition-delay: .30s; }
-  .rise.lit .logo:nth-child(2) { transition-delay: .36s; }
-  .rise.lit .logo:nth-child(3) { transition-delay: .42s; }
-  .rise.lit .logo:nth-child(4) { transition-delay: .48s; }
-  .rise.lit .logo:nth-child(5) { transition-delay: .54s; }
-  .rise.lit .logo:nth-child(6) { transition-delay: .60s; }
+  .rise.lit .logo:nth-child(1) { transition-delay: .26s; }
+  .rise.lit .logo:nth-child(2) { transition-delay: .32s; }
+  .rise.lit .logo:nth-child(3) { transition-delay: .38s; }
+  .rise.lit .logo:nth-child(4) { transition-delay: .44s; }
+  .rise.lit .logo:nth-child(5) { transition-delay: .50s; }
+  .rise.lit .logo:nth-child(6) { transition-delay: .56s; }
   .rise.lit .logo:hover { transform: translateY(-4px) rotate(-1.1deg); transition-delay: 0s; }
   .rise.lit .logo:active { transform: translateY(-2px) rotate(1.2deg) scale(.99); transition-delay: 0s; }
+
+  /* The pun is the punchline of layer 04 — it lands on its own beat, after
+     the paragraph it closes. */
+  .rise .pun { opacity: 0; transform: translateY(12px) scale(.92); transition: transform .54s var(--spring); }
+  .rise.lit .pun { opacity: 1; transform: none; transition-delay: calc(var(--lead) + .30s); }
 
   /* Reduced motion: nothing moves, nothing fades, everything is already there. */
   @media (prefers-reduced-motion: reduce) {
     .rise,
     .rise > *,
     .rise .logo,
+    .rise .pun,
+    .rise .tier::before,
+    .rise--finale > .cta,
+    .icing,
+    .layer.baked .icing,
     .rise.lit .logo:hover,
     .rise.lit .logo:active {
       opacity: 1 !important;
@@ -413,6 +517,7 @@
     .cta, .logo { transition: none !important; }
     .cta:hover, .cta:focus-visible, .cta:active { transform: none !important; }
     .cta::after,
+    .rise--finale.lit > .cta::after,
     .icing::before,
     .icing::after,
     .layer.baked .icing::before,
@@ -422,6 +527,8 @@
 
   @media (min-width: 600px) {
     body { font-size: 20px; }
+    .lockup-name { font-size: 44px; }
+    .lockup-sub { font-size: 19px; }
     h1 { font-size: 46px; }
     h2 { font-size: 34px; }
     .logos { grid-template-columns: repeat(3, 1fr); }
@@ -429,17 +536,17 @@
     .byline { text-align: left; }
   }
 </style>
-<noscript><style>.rise,.rise>*,.rise .logo{opacity:1;transform:none}</style></noscript>
+<noscript><style>.rise,.rise>*,.rise .logo,.rise .pun,.rise .tier::before,.rise--finale>.cta,.icing{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
 
 <header class="hero">
   <div class="sprinkles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
   <div class="wrap">
-    <div class="marks">
-      <span class="mark-tz">Topaz Labs</span>
-      <span class="mark-x">+</span>
-      <span class="mark-mp">Megaport</span>
+    <div class="lockup">
+      <span class="lockup-name">Latitude</span>
+      <span class="lockup-sub">a <span class="lockup-mp">Megaport</span> company</span>
+      <span class="lockup-for">for Topaz Labs</span>
     </div>
     <p class="eyebrow">We sent cake. Here's why.</p>
     <h1>Nice frosting. <span class="glaze">Let's talk about the layers underneath.</span></h1>
@@ -451,7 +558,7 @@
 
 <section class="layer layer--1">
   <span class="icing"></span>
-  <div class="wrap rise">
+  <div class="wrap rise rise--slice">
     <p class="tier">Layer 01</p>
     <h2>Who we are</h2>
     <p class="body">Megaport and Latitude, one company. Latitude runs dedicated GPU and CPU bare metal in 25 locations. Megaport runs the private network fabric between that compute, your clouds, and your storage.</p>
@@ -460,16 +567,16 @@
 
 <section class="layer layer--2">
   <span class="icing"></span>
-  <div class="wrap rise">
+  <div class="wrap rise rise--settle">
     <p class="tier">Layer 02</p>
     <h2>What we do</h2>
-    <p class="body">Dedicated GPU capacity for render and API jobs. A private route between the media sitting in storage and the GPUs waiting on it. Fewer public hops, fewer idle GPUs, a cost per render you can forecast.</p>
+    <p class="body">Proteus, Artemis, Iris, Starlight: one inference per frame, per model, per pass. A ten-minute 24fps clip is 14,400 of them. Dedicated GPUs chosen against each model's VRAM floor, and a private route from storage to the cards waiting on it. Cost per render you can forecast.</p>
   </div>
 </section>
 
 <section class="layer layer--3">
   <span class="icing"></span>
-  <div class="wrap rise">
+  <div class="wrap rise rise--cascade">
     <p class="tier">Layer 03</p>
     <h2>Who we've helped</h2>
     <p class="body">Teams already running on us:</p>
@@ -487,10 +594,10 @@
 
 <section class="layer layer--4">
   <span class="icing"></span>
-  <div class="wrap rise">
+  <div class="wrap rise rise--finale">
     <p class="tier">Layer 04</p>
     <h2>Proposed solution</h2>
-    <p class="body">Our hypothesis: a dedicated GPU pool for the heaviest enhancement jobs, fast flash beside it for the active working set, and a private Megaport connection to wherever the rest of the media lives.<span class="pun">The whole stack, not just the frosting.</span></p>
+    <p class="body">Our hypothesis: a high-VRAM pool for the generative and diffusion tier, a batch tier for Gigapixel upscales, fast flash beside both for the working set, and a private Megaport path so 4K and 8K masters never cross the public internet.<span class="pun">The whole stack, not just the frosting.</span></p>
     <p class="close">Worth twenty minutes to find out if we're right?</p>
     <a class="cta" href="https://megaport.chilipiper.com/personal-page/henry-barton"><span>Book 20 minutes with Henry</span></a>
     <div class="sender">
