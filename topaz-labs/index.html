@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Megaport + Latitude for Topaz Labs</title>
+<meta name="description" content="Topaz enhancement models eat GPU and move a lot of pixels. Latitude builds the compute they run on; Megaport builds the private path the media travels. Book 20 minutes with Henry Barton.">
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Megaport + Latitude for Topaz Labs">
+<meta property="og:description" content="Nice frosting. Let's talk about the layers underneath.">
+<meta property="og:url" content="https://cake-connect.vercel.app/topaz-labs/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230A0A0B'/%3E%3Crect x='7' y='8' width='18' height='5' rx='2' fill='%232D81FF'/%3E%3Crect x='7' y='14' width='18' height='4' rx='1.5' fill='%23A8A7A3'/%3E%3Crect x='7' y='19' width='18' height='5' rx='2' fill='%232D81FF' opacity='.55'/%3E%3C/svg%3E">
+<style>
+  /* ── Brand tokens ──────────────────────────────────────────────────────
+     --tz-*  Topaz Labs. Hex values observed on topazlabs.com; these carry the
+             page. --mp-* Megaport, the guest: sender block and hairlines only. */
+  :root {
+    --tz-ink:        #0A0A0B;
+    --tz-surface-1:  #101012;
+    --tz-surface-2:  #17171A;
+    --tz-surface-3:  #1F1F23;
+    --tz-blue:       #2D81FF;
+    /* Small-text tint of the same hue. The saturated brand blue lands at
+       4.45:1 on the lightest cake layer, just under the 4.5:1 body floor, so
+       every label-sized use takes the lift instead. */
+    --tz-blue-lift:  #4A91FF;
+    --tz-blue-dim:   #1B4B94;
+    --tz-white:      #FFFFFF;
+    --tz-stone:      #A8A7A3;
+    --tz-charcoal:   #2E2D2D;
+    --tz-cream:      #3B3A38;
+    --tz-on-blue:    #06070A;
+    --mp-blue:       #1AA0FF;
+    --mp-rule:       #123A5C;
+
+    --shell: 560px;
+    --spring: cubic-bezier(.22,1.2,.36,1);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--tz-ink);
+    color: var(--tz-white);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 19px;
+    line-height: 1.55;
+    letter-spacing: -0.005em;
+    overflow-x: hidden;
+  }
+
+  p { margin: 0; }
+
+  .wrap { max-width: var(--shell); margin: 0 auto; padding: 0 22px; }
+
+  /* ── Cake construction ────────────────────────────────────────────────
+     Every band is a layer of the cake. The scalloped icing strip sits on top
+     of each one so the stack reads as a cross-section at a glance. */
+  .layer { position: relative; padding: 84px 0 88px; }
+  .layer--1 { background: var(--tz-surface-1); }
+  .layer--2 { background: var(--tz-surface-2); }
+  .layer--3 { background: var(--tz-surface-3); }
+  .layer--4 { background: var(--tz-ink); padding-bottom: 76px; }
+
+  /* The scalloped strip is the filling between two cake layers, so it takes a
+     lighter tone of its own rather than the colour of the layer it caps —
+     otherwise it disappears into the dark and the cross-section reads flat. */
+  .icing {
+    position: absolute;
+    top: -15px; left: 0; right: 0;
+    height: 16px;
+    background:
+      radial-gradient(circle at 14px 16px, transparent 13px, var(--icing) 13.5px) repeat-x 0 0 / 28px 16px;
+  }
+  .layer--1 .icing,
+  .layer--3 .icing { --icing: var(--tz-charcoal); }
+  .layer--2 .icing { --icing: var(--tz-cream); }
+  .layer--4 .icing { --icing: var(--tz-blue); }
+
+  .tier {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--tz-blue-lift);
+    margin-bottom: 14px;
+  }
+  .tier::before {
+    content: "";
+    width: 26px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--tz-blue-lift);
+  }
+
+  h2 {
+    margin: 0 0 18px;
+    font-size: 30px;
+    line-height: 1.18;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--tz-white);
+  }
+
+  .body { font-size: 19px; color: var(--tz-white); }
+  .muted { color: var(--tz-stone); }
+
+  /* ── Hero ─────────────────────────────────────────────────────────────── */
+  .hero {
+    position: relative;
+    padding: 44px 0 82px;
+    background:
+      radial-gradient(115% 68% at 50% -8%, var(--tz-blue-dim) 0%, var(--tz-ink) 62%);
+  }
+
+  .marks {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: .03em;
+    margin-bottom: 30px;
+  }
+  .mark-tz { color: var(--tz-white); }
+  .mark-x  { color: var(--tz-stone); font-weight: 600; }
+  .mark-mp { color: var(--mp-blue); }
+
+  .eyebrow {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--tz-blue-lift);
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    margin: 0 0 18px;
+    font-size: 38px;
+    line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: -0.032em;
+  }
+  h1 .glaze { color: var(--tz-blue); }
+
+  .lede { font-size: 19px; color: var(--tz-white); margin-bottom: 30px; }
+
+  /* ── CTA ──────────────────────────────────────────────────────────────── */
+  .cta {
+    display: block;
+    width: 100%;
+    min-height: 60px;
+    padding: 17px 24px;
+    border-radius: 14px;
+    background: var(--tz-blue);
+    color: var(--tz-on-blue);
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(45,129,255,.26);
+    transition: transform .32s var(--spring), box-shadow .32s var(--spring);
+  }
+  .cta:hover, .cta:focus-visible { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(45,129,255,.34); }
+  .cta:active { transform: translateY(0); }
+
+  .byline {
+    margin-top: 14px;
+    font-size: 17px;
+    color: var(--tz-stone);
+    text-align: center;
+  }
+
+  /* ── Layer 3, the customer shelf ─────────────────────────────────────── */
+  .logos {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin: 22px 0 24px;
+    padding: 0;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 68px;
+    padding: 14px 16px;
+    border: 1px solid var(--tz-charcoal);
+    border-radius: 12px;
+    background: var(--tz-surface-1);
+  }
+  .logo img { width: 100%; height: auto; max-height: 30px; object-fit: contain; }
+  /* Very wide wordmarks get the full row, otherwise a half-column caps them at
+     ~14px tall and they read as an afterthought beside the squarer marks. */
+  .logo--wide { grid-column: 1 / -1; }
+  .logo--wide img { max-height: 26px; }
+
+  .proof {
+    font-size: 19px;
+    color: var(--tz-white);
+    border-left: 3px solid var(--tz-blue);
+    padding-left: 16px;
+  }
+
+  /* ── Layer 4, the plate ───────────────────────────────────────────────── */
+  .pun {
+    display: block;
+    margin-top: 14px;
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    color: var(--tz-blue);
+  }
+  .close { font-size: 19px; margin: 26px 0 22px; }
+
+  .sender {
+    margin-top: 34px;
+    padding-top: 26px;
+    border-top: 1px solid var(--mp-rule);
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .sender-id { flex: 1 1 auto; min-width: 0; }
+  .sender-name { font-size: 19px; font-weight: 700; color: var(--tz-white); }
+  .sender-role { font-size: 17px; color: var(--tz-stone); }
+  .sender-org  { font-size: 17px; font-weight: 700; color: var(--mp-blue); margin-top: 4px; }
+
+  /* figure carries a 40px UA margin that otherwise crushes the sender block
+     to ~129px and wraps "Latitude Specialist" onto two lines. */
+  .qr { flex: 0 0 auto; margin: 0; text-align: center; }
+  .qr img {
+    display: block;
+    width: 104px;
+    height: 104px;
+    border-radius: 10px;
+    background: var(--tz-white);
+    padding: 7px;
+  }
+  .qr figcaption { margin-top: 9px; font-size: 16px; color: var(--tz-stone); }
+
+  /* ── Motion. Threshold .05 with a hard 2s opacity fallback so nothing can
+        be stranded invisible if the observer never fires. ───────────────── */
+  .rise { opacity: 0; transform: translateY(18px); transition: opacity .6s var(--spring), transform .6s var(--spring); }
+  .rise.lit { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .rise { opacity: 1; transform: none; transition: none; }
+    .cta { transition: none; }
+  }
+
+  @media (min-width: 600px) {
+    body { font-size: 20px; }
+    h1 { font-size: 46px; }
+    h2 { font-size: 34px; }
+    .logos { grid-template-columns: repeat(3, 1fr); }
+    .cta { display: inline-block; width: auto; min-width: 320px; }
+    .byline { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="marks">
+      <span class="mark-tz">Topaz Labs</span>
+      <span class="mark-x">+</span>
+      <span class="mark-mp">Megaport</span>
+    </div>
+    <p class="eyebrow">We sent cake. Here's why.</p>
+    <h1>Nice frosting. <span class="glaze">Let's talk about the layers underneath.</span></h1>
+    <p class="lede">Topaz enhancement models eat GPU and move a lot of pixels. We build the compute they run on, and the private path the media travels.</p>
+    <a class="cta" href="https://megaport.chilipiper.com/personal-page/henry-barton">Book 20 minutes with Henry</a>
+    <p class="byline">Henry Barton, Latitude Specialist</p>
+  </div>
+</header>
+
+<section class="layer layer--1">
+  <span class="icing"></span>
+  <div class="wrap rise">
+    <p class="tier">Layer 01</p>
+    <h2>Who we are</h2>
+    <p class="body">Megaport and Latitude, one company. Latitude runs dedicated GPU and CPU bare metal in 25 locations. Megaport runs the private network fabric between that compute, your clouds, and your storage.</p>
+  </div>
+</section>
+
+<section class="layer layer--2">
+  <span class="icing"></span>
+  <div class="wrap rise">
+    <p class="tier">Layer 02</p>
+    <h2>What we do</h2>
+    <p class="body">Dedicated GPU capacity for render and API jobs. A private route between the media sitting in storage and the GPUs waiting on it. Fewer public hops, fewer idle GPUs, a cost per render you can forecast.</p>
+  </div>
+</section>
+
+<section class="layer layer--3">
+  <span class="icing"></span>
+  <div class="wrap rise">
+    <p class="tier">Layer 03</p>
+    <h2>Who we've helped</h2>
+    <p class="body">Teams already running on us:</p>
+    <ul class="logos">
+        <li class="logo"><img src="assets/e15804a7b12d.svg" alt="MUBI" width="200" height="65"></li>
+        <li class="logo"><img src="assets/e9ac32054600.svg" alt="Algolia" width="200" height="51"></li>
+        <li class="logo"><img src="assets/8a54d51a61f1.svg" alt="AnyDesk" width="200" height="43"></li>
+        <li class="logo"><img src="assets/2cf5353a310a.svg" alt="Acronis" width="200" height="49"></li>
+        <li class="logo"><img src="assets/9759b78a5d03.svg" alt="Zyte" width="200" height="91"></li>
+        <li class="logo logo--wide"><img src="assets/39c270a3dd8b.svg" alt="Boosteroid" width="200" height="23"></li>
+    </ul>
+    <p class="proof">Shinami cut compute cost 79% and egress to zero.</p>
+  </div>
+</section>
+
+<section class="layer layer--4">
+  <span class="icing"></span>
+  <div class="wrap rise">
+    <p class="tier">Layer 04</p>
+    <h2>Proposed solution</h2>
+    <p class="body">Our hypothesis: a dedicated GPU pool for the heaviest enhancement jobs, fast flash beside it for the active working set, and a private Megaport connection to wherever the rest of the media lives.<span class="pun">The whole stack, not just the frosting.</span></p>
+    <p class="close">Worth twenty minutes to find out if we're right?</p>
+    <a class="cta" href="https://megaport.chilipiper.com/personal-page/henry-barton">Book 20 minutes with Henry</a>
+    <div class="sender">
+      <div class="sender-id">
+        <p class="sender-name">Henry Barton</p>
+        <p class="sender-role">Latitude Specialist</p>
+        <p class="sender-org">Megaport</p>
+      </div>
+      <figure class="qr">
+        <img src="assets/38ed1baf71e0.svg" alt="QR code linking to this page">
+        <figcaption>Pass it on</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var risers = document.querySelectorAll('.rise');
+    function lightAll() { for (var i = 0; i < risers.length; i++) risers[i].classList.add('lit'); }
+    if (!('IntersectionObserver' in window)) { lightAll(); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('lit'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -5% 0px' });
+    for (var i = 0; i < risers.length; i++) io.observe(risers[i]);
+    setTimeout(lightAll, 2000);
+  })();
+</script>
+
+</body>
+</html>
