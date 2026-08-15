@@ -140,7 +140,7 @@ footer{padding:28px 0 0;color:var(--muted);font-size:14.5px}
   </table>
   </div>
 
-  <h3>Business model, and who actually signs</h3>
+  <h3>Business model, and who is involved in a decision</h3>
   <p>Robots-as-a-service, sold per hospital facility. Diligent has publicly indicated
      <b>annual sales at each hospital expected to range between $200k and $400k</b>. That figure is
      why per-site economics matter more here than raw scale does: this is a volume-of-sites
@@ -198,7 +198,7 @@ footer{padding:28px 0 0;color:var(--muted);font-size:14.5px}
       <td class="n">Feb 17, 2025</td>
       <td><b>1 million deliveries</b> across the fleet ("not a pilot, not a prototype").</td>
       <td class="n"><span class="pill old">~18 mo · FLAG &gt;12mo</span></td>
-      <td>Superseded — the current number is 1.25M+. Quote the newer one.</td>
+      <td>Superseded — the current published number is 1.25M+.</td>
     </tr>
     <tr>
       <td class="n">Nov 14, 2024</td>
@@ -302,13 +302,14 @@ footer{padding:28px 0 0;color:var(--muted);font-size:14.5px}
     <tr><th>Diligent's constraint</th><th>Why it bites</th><th>What we change</th></tr>
     <tr>
       <td><b>Fleet telemetry volume off hospital floors.</b> A dataset "heading to petabytes" has to physically move from 25+ facilities to wherever training happens.</td>
-      <td>On hyperscalers the ingest is cheap and the <b>egress is not</b>. Every time they move that corpus — to retrain, to re-label, to migrate — they pay again. Petabyte-scale egress is a five-to-six-figure line item that grows with site count.</td>
+      <td>On hyperscalers the ingest is cheap and the <b>egress is not</b> — so on standard list pricing, each move of that corpus (to retrain, re-label or migrate) is charged again, and the charge scales with site count. <i>How much of that actually applies to Diligent depends on their contract, their architecture and how often the full corpus really moves — none of which we can see from outside. This is the mechanic we would want to test against their real numbers, not a claim about their bill.</i>
+</td>
       <td><b>Megaport private circuits (Port + VXC) from each hospital region into Latitude.</b> Private fabric, no public-internet backhaul, predictable port-based pricing rather than per-GB metering. The published Latitude customer proof point is <b>Shinami: 79% compute-cost reduction and egress cost to zero.</b>
           <span class="srcline">Source: <b>latitude.sh/customers/shinami</b> — <code>https://www.latitude.sh/customers/shinami</code>, HTTP 200, retrieved 2026-08-14. The page's own stat cards read verbatim <b>"79% reduction in compute costs"</b> and <b>"100% reduction in egress costs"</b>; the narrative gives the underlying numbers as a validator bill of <b>~$4,000/mo &rarr; ~$850/mo</b> and egress of <b>$300&ndash;500/mo &rarr; essentially zero</b>, absorbed by Latitude's 20&nbsp;TB/month per-server allowance.</span></td>
     </tr>
     <tr>
       <td><b>Burst training and simulation compute</b> for navigation and manipulation — including Omniverse simulation, which is GPU-heavy and spiky by nature.</td>
-      <td>Training is bursty; inference on the robot is not. Reserved hyperscaler capacity sized for the burst idles between runs. On-demand sized for the average makes every training cycle slow.</td>
+      <td>Training is bursty; inference on the robot is not. That shape creates a standing trade-off — capacity reserved for the burst tends to idle between runs, while on-demand sized for the average makes every training cycle slow. Which side of it Diligent actually sits on is Question 4 in Section 05, not something we have observed.</td>
       <td><b>Latitude dedicated GPU bare metal — NVIDIA H100, A100, L40S on AMD EPYC hosts, provisioned in minutes across 24+ locations.</b> No hypervisor tax, no noisy neighbours, a fixed monthly number instead of a variable one. Sized for the burst, and the burst is the whole job.</td>
     </tr>
     <tr>
@@ -347,13 +348,13 @@ footer{padding:28px 0 0;color:var(--muted);font-size:14.5px}
   </div>
 
   <h3>The metric to put a number against</h3>
-  <p>Lead with <b>cost per effective GPU-hour of training</b>, and its partner,
+  <p>The two worth measuring are <b>cost per effective GPU-hour of training</b> and
      <b>total cost to move one petabyte of fleet data into a training run</b>. Those two are where
      the difference is structural rather than promotional: dedicated bare metal removes the
      virtualization overhead and the idle-reservation waste, and private fabric removes per-GB
      egress from the equation entirely.</p>
-  <p>The business framing that lands with a CEO rather than an infra lead:
-     <b>"your cost per training cycle should stop scaling with your fleet size."</b> For a company
+  <p>Stated as a business outcome rather than an infrastructure one:
+     <b>"cost per training cycle should stop scaling with fleet size."</b> For a company
      whose product improves as a direct function of how much fleet data it can afford to train on,
      that is a product-velocity argument, not an IT-savings argument.</p>
   <div class="stale">
