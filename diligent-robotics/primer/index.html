@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Briefing note — Diligent Robotics | Latitude, a Megaport company</title>
+<style>
+:root{
+  --dg-teal:#02C1CA;
+  --dg-teal-lt:#3FC0C9;
+  --dg-teal-dk:#028991;
+  --dg-teal-deep:#013E42;
+  --dg-tier:#016B72;
+  --ink:#16181A;
+  --ink-2:#2B3033;
+  --muted:#5A6367;
+  --line:#DDE3E5;
+  --paper:#FFFFFF;
+  --wash:#F4F7F8;
+  --warn-bg:#FFF6E6;
+  --warn-line:#E0A100;
+  --r:10px;
+}
+.lockup{margin:0 0 18px}
+.lockup img{display:block;width:210px;max-width:58vw;height:auto}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--wash);color:var(--ink);
+  font-family:Nunito,Poppins,"Avenir Next","Segoe UI",system-ui,-apple-system,sans-serif;
+  font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:940px;margin:0 auto;padding:0 24px}
+header.top{background:var(--ink);color:#fff;padding:34px 0 30px;border-bottom:5px solid var(--dg-teal)}
+.badge{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+  background:var(--dg-teal);color:var(--ink);padding:5px 11px;border-radius:5px;margin:0 0 14px}
+header.top h1{margin:0;font-size:34px;line-height:1.16;letter-spacing:-.02em}
+header.top p{margin:10px 0 0;color:#C9D2D5;font-size:17px;max-width:70ch}
+.internal{margin:16px 0 0;padding:11px 14px;border-radius:var(--r);
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);color:#F0F4F5;font-size:15px}
+main{padding:0 0 70px}
+section{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);
+  padding:26px 28px;margin:26px 0 0}
+h2{margin:0 0 4px;font-size:13px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--dg-tier)}
+h2 + .h{margin:0 0 16px;font-size:26px;font-weight:800;letter-spacing:-.015em;line-height:1.2}
+h3{margin:24px 0 8px;font-size:19px;font-weight:800}
+p{margin:0 0 12px;max-width:78ch}
+ul,ol{margin:0 0 12px;padding-left:22px;max-width:78ch}
+li{margin:0 0 8px}
+b,strong{font-weight:800}
+table{border-collapse:collapse;width:100%;margin:12px 0 14px;font-size:15.5px}
+th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:var(--wash);font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+td.n{white-space:nowrap}
+.pill{display:inline-block;font-size:12px;font-weight:800;padding:2px 8px;border-radius:20px;white-space:nowrap}
+.hi{background:#DFF3E4;color:#1B5E2A}
+.me{background:#FFF1D6;color:#7A5200}
+.lo{background:#FBE0E0;color:#8A1F1F}
+.cur{background:#E1F6F7;color:#08585D}
+.old{background:#FFE9C9;color:#7A4B00}
+.stale{background:var(--warn-bg);border-left:5px solid var(--warn-line);padding:12px 15px;border-radius:6px;margin:0 0 14px;font-size:15.5px}
+.callout{background:var(--dg-teal-deep);color:#EAFBFC;border-radius:var(--r);padding:20px 22px;margin:18px 0}
+.callout p{color:#EAFBFC;margin:0 0 10px}
+.callout p:last-child{margin:0}
+.callout b{color:var(--dg-teal-lt)}
+.arch{background:var(--wash);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;margin:14px 0}
+.arch ol{margin:0;padding-left:20px}
+.q{background:var(--wash);border-left:5px solid var(--dg-teal);border-radius:6px;padding:14px 16px;margin:0 0 12px}
+.q p{margin:0 0 6px;font-weight:800;font-size:18px}
+.q span{display:block;color:var(--muted);font-size:15.5px;font-weight:600}
+.obj{border:1px solid var(--line);border-radius:var(--r);padding:15px 17px;margin:0 0 12px}
+.obj .said{font-weight:800;font-size:17.5px;margin:0 0 6px}
+.obj .say{margin:0;color:var(--ink-2)}
+.obj .say b{color:var(--dg-tier)}
+.src{font-size:14px;color:var(--muted);margin:6px 0 0}
+.srcline{display:block;font-size:13px;line-height:1.5;color:var(--muted);margin:8px 0 0;padding-top:8px;border-top:1px dashed currentColor}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;word-break:break-all}
+a{color:var(--dg-tier);font-weight:700}
+footer{padding:28px 0 0;color:var(--muted);font-size:14.5px}
+@media (max-width:640px){
+  body{font-size:17px}
+  header.top h1{font-size:27px}
+  h2 + .h{font-size:22px}
+  section{padding:20px 18px}
+  table{font-size:16px}
+  th,td{padding:7px 8px}
+  th{font-size:13.5px}
+  .stale,.q span,.obj .say{font-size:16px}
+  .src{font-size:16px}
+  .srcline{font-size:16px}
+  code{word-break:break-word;overflow-wrap:anywhere}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <p class="lockup"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1ODYuMzQgMTYzLjI0Ij48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTI4LjEsODYuNTZWMTEuNzhoLTExLjY0djc0Ljc4aDExLjY0WiI+PC9wYXRoPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xNjEuMDEsODcuODRjNi4wOSwwLDEyLjkzLTIuOTksMTYuMDItOC4wMXY2LjczaDExLjU0di00OS43OGgtMTEuNTR2Ni43M2MtMy4xLTUuMDItOS4wOC04LjAxLTE1LjctOC4wMS0xNS40OSwwLTI0Ljc4LDExLjU0LTI0Ljc4LDI2LjE3czguNDQsMjYuMTcsMjQuNDYsMjYuMTdaTTE2Mi43Miw3Ny40OGMtOS4wOCwwLTE0LjUzLTYuNzMtMTQuNTMtMTUuODFzNS40NS0xNS44MSwxNC41My0xNS44MWM5LjkzLDAsMTQuNzQsNy4yNiwxNC43NCwxNS44MXMtNC44MSwxNS44MS0xNC43NCwxNS44MVoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMjIzLjI3LDc2LjczYy00LjU5LDAtNy4yNi0xLjA3LTcuMjYtOS43MnYtMjAuNTFoMTEuNDN2LTkuNzJoLTExLjQzdi0xNS4wNmgtMTEuNjR2MTUuMDZoLTguNDR2OS43Mmg4LjQ0djIzLjE4YzAsMTYuNzcsMTAuNDcsMTcuNTIsMTYuMTMsMTcuNTIsMy40MiwwLDYuODQtLjMyLDguNjUtLjY0di0xMC4yNmMtMS4xOC4yMS00LjA2LjQzLTUuODcuNDNaIj48L3BhdGg+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTI0Mi44NCwyOS42MmM1LjEzLDAsOC42NS0zLjg1LDguNjUtOC42NXMtMy41Mi04LjY1LTguNjUtOC42NS04LjY1LDMuODUtOC42NSw4LjY1LDMuNTMsOC42NSw4LjY1LDguNjVaTTI0OC42MSw4Ni41NnYtNDkuNzhoLTExLjU0djQ5Ljc4aDExLjU0WiI+PC9wYXRoPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0yODMuMzMsNzYuNzNjLTQuNTksMC03LjI2LTEuMDctNy4yNi05Ljcydi0yMC41MWgxMS40M3YtOS43MmgtMTEuNDN2LTE1LjA2aC0xMS42NHYxNS4wNmgtOC40NHY5LjcyaDguNDR2MjMuMThjMCwxNi43NywxMC40NywxNy41MiwxNi4xMywxNy41MiwzLjQyLDAsNi44NC0uMzIsOC42NS0uNjR2LTEwLjI2Yy0xLjE4LjIxLTQuMDYuNDMtNS44OC40M1oiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMzE1LjA4LDg3Ljg0YzcuMTYsMCwxMi4zOS0yLjg4LDE1LjM4LTguMjN2Ni45NGgxMS42NHYtNDkuNzhoLTExLjY0djI4LjFjMCw3LjE2LTMuMjEsMTMuMDMtMTIuMDcsMTMuMDMtNy41OSwwLTEwLjE1LTQuNy0xMC4xNS0xMi43MXYtMjguNDJoLTExLjY0djMxLjNjMCwxMy4zNSw3LjU4LDE5Ljc2LDE4LjQ4LDE5Ljc2WiI+PC9wYXRoPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0zOTAuOTksNDMuNTFjLTMuMS01LjAyLTkuMDgtOC4wMS0xNS43LTguMDEtMTUuNDksMC0yNC43OCwxMS41NC0yNC43OCwyNi4xN3M4LjQ0LDI2LjE3LDI0LjQ2LDI2LjE3YzYuMDksMCwxMi45My0yLjk5LDE2LjAyLTguMDF2Ni43M2gxMS41NFYxMS43OGgtMTEuNTR2MzEuNzNaTTM3Ni42Nyw3Ny40OGMtOS4wOCwwLTE0LjUzLTYuNzMtMTQuNTMtMTUuODFzNS40NS0xNS44MSwxNC41My0xNS44MWM5Ljk0LDAsMTQuNzQsNy4yNiwxNC43NCwxNS44MXMtNC44MSwxNS44MS0xNC43NCwxNS44MVoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNNDU5Ljc2LDU5LjFjMC0xMy45OS05LjYxLTIzLjYxLTIzLjgyLTIzLjYxLTE1LjE3LDAtMjUsMTAuMjYtMjUsMjYuMTdzOS43MiwyNi4xNywyNS40MiwyNi4xN2MxMS45NywwLDIxLjM3LTYuNTIsMjIuODYtMTUuODFoLTExLjc1Yy0xLjkyLDMuODUtNS4zNCw1LjY2LTExLjExLDUuNjYtOC40NCwwLTEzLjU3LTQuMjctMTMuODktMTIuMThoMzYuOTZjLjIxLTIuNzguMzItNC4zOC4zMi02LjQxWk00MjIuNDgsNTYuNjVjLjExLTcuMDUsNS4wMi0xMS45NiwxMy4yNS0xMS45NnMxMi41LDQuMjcsMTIuNjEsMTEuOTZoLTI1Ljg1WiI+PC9wYXRoPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik00NzQuMDYsODcuNDFjNS4wMiwwLDkuMDgtNC4xNyw5LjA4LTkuMDhzLTQuMDYtOC45Ny05LjA4LTguOTctOC45Nyw0LjA2LTguOTcsOC45NywzLjk1LDkuMDgsOC45Nyw5LjA4WiI+PC9wYXRoPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik01MTEuNjcsODcuODRjMTIuMDcsMCwxOS42Ni01Ljc3LDE5LjY2LTE1LjQ5LDAtNy4wNS00LjQ5LTEyLjE4LTExLjU0LTE0LjIxbC05LjkzLTIuODhjLTQuNTktMS4yOC02LjItMy4xLTYuMi01Ljc3LDAtMi45OSwyLjk5LTUuMTMsNy4xNi01LjEzLDUuNDUsMCw4LjY1LDIuNDYsOC42NSw2LjYyaDExLjQzYzAtOS42MS03LjQ4LTE1LjQ5LTE5LjY2LTE1LjQ5LTExLjExLDAtMTkuMTIsNi4yLTE5LjEyLDE0LjY0LDAsNy4wNSwzLjk1LDEyLjA3LDEwLjksMTMuOTlsOS45MywyLjY3YzUuMzQsMS4zOSw2LjUyLDMuMSw2LjUyLDUuODgsMCwzLjUzLTIuNzgsNS44OC03LjE2LDUuODgtNS45OCwwLTEwLjE1LTIuOTktMTAuMTUtNy4yNmgtMTEuNjRjMCw5LjUxLDguOTcsMTYuNTYsMjEuMTUsMTYuNTZaIj48L3BhdGg+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTU2OC4xOCwzNS40OWMtNy4zNywwLTEzLjE0LDIuODgtMTYuMjQsOC4yM1YxMS43OGgtMTEuNjR2NzQuNzhoMTEuNjR2LTI3LjM1YzAtOC43Niw0LjI3LTEzLjc4LDExLjg2LTEzLjc4LDguMTIsMCwxMC45LDQuNTksMTAuOSwxNS4xN3YyNS45NmgxMS42NHYtMzEuM2MwLTEzLjAzLTYuMi0xOS43Ni0xOC4xNi0xOS43NloiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNODUuMSw3OS4yNGwtOC45LDI2LjUzSDI0LjkybDguOTEtMjYuNTNoNTEuMjhaTTU2LjgxLDBoLTMxLjc5TDAsNzQuNTZoMzEuNzlMNTYuODEsMFoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik00ODAuMzMsMTI3LjQxYy0uNTMtLjU1LTEuMTEtLjk5LTEuNzUtMS4zLTEuMTEtLjU1LTIuNDEtLjgyLTMuODUtLjgyLTEuNTMsMC0yLjkyLjMxLTQuMDkuOTEtMS4xOS42LTIuMTksMS40MS0yLjk4LDIuNDMtLjguOTktMS4zOSwyLjE3LTEuODEsMy40Ny0uNCwxLjMtLjYsMi42NS0uNiw0LjA0cy4xOCwyLjg3LjUzLDQuMThjLjM1LDEuMzUuOTMsMi41NCwxLjY4LDMuNTQuNzcsMS4wMiwxLjc3LDEuODMsMi45OCwyLjQzLDEuMTkuNiwyLjYzLjg4LDQuMjcuODgsMS4zNSwwLDIuNjMtLjI5LDMuODUtLjg0LjY5LS4zMSwxLjI4LS43MywxLjc5LTEuMjR2Ljk3Yy4wMiwxLjMtLjI5LDIuNDEtLjkzLDMuMjMtLjYyLjgtMS41OSwxLjE5LTIuOTgsMS4xOS0uOTEsMC0xLjctLjE4LTIuMzctLjU1LS42Mi0uMzMtMS4wMi0uOTMtMS4yNC0xLjgxbC0uMTEtLjQ5aC02LjgxbC4wNC42OWMuMDksMS4yOC40NiwyLjQxLDEuMDgsMy4zNC42Mi45MSwxLjQxLDEuNjYsMi4zNCwyLjIzLjkxLjU1LDEuOTUuOTksMy4wNSwxLjI2LDEuMTEuMjcsMi4xOS40LDMuMjUuNCwyLjQ1LDAsNC40NC0uMzMsNS45Mi0xLjAyLDEuNS0uNjksMi42NS0xLjUzLDMuNDctMi41Mi44LS45OSwxLjMzLTIuMDgsMS41OS0zLjI1LjI0LTEuMTEuMzUtMi4xLjM1LTIuOTZ2LTE5Ljk2aC02LjY1djEuNTdoLS4wNFpNNDc5LjM4LDEzMi40M2MuMzMuNTMuNTcsMS4xMy43MSwxLjgxLjE1LjcxLjIyLDEuNDguMjIsMi4yOCwwLC42OS0uMDksMS4zNS0uMjcsMS45Ny0uMTguNi0uNDQsMS4xNS0uOCwxLjYxLS4zNS40Ni0uNzcuODItMS4zLDEuMTEtLjUxLjI3LTEuMTMuNC0xLjgxLjQtLjc1LDAtMS4zNy0uMTUtMS44Ni0uNDYtLjUxLS4zMS0uOTEtLjczLTEuMjItMS4yNC0uMzEtLjUxLS41NS0xLjExLS42OS0xLjc3LS4xMy0uNjktLjItMS4zOS0uMi0yLjFzLjA5LTEuNDEuMjQtMi4wNmMuMTUtLjYyLjQtMS4xOS43NS0xLjY2LjMzLS40Ni43NS0uODQsMS4yNC0xLjExLjQ2LS4yNywxLjA2LS40LDEuNzUtLjQuODIsMCwxLjUuMTUsMi4wMS40NC41My4yOS45My42OSwxLjI2LDEuMTlsLS4wNC0uMDJaIj48L3BhdGg+PHBhdGggZmlsbD0iI2ZmZiIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNTMxLjYxLDEyOC44OWMtLjgyLTEuMDgtMS44OC0xLjk3LTMuMTItMi42MS0xLjI2LS42Ni0yLjc2LS45OS00LjQ5LS45OS0xLjM3LDAtMi42My4yNy0zLjc4LjgyLS42Ni4zMS0xLjI4Ljc1LTEuODEsMS4yOHYtMS41NWgtNi42NXYyOS4xM2g2Ljk0di04LjhjLjUzLjUxLDEuMTUuOTMsMS44MywxLjI2LDEuMTUuNTUsMi40My44NCwzLjguODQsMS42MSwwLDMuMDUtLjMxLDQuMjctLjk1LDEuMjItLjYyLDIuMjMtMS40OCwzLjA1LTIuNTQuOC0xLjA0LDEuNDEtMi4yNSwxLjgxLTMuNi40LTEuMzMuNTctMi43NC41Ny00LjE4cy0uMi0yLjk4LS41Ny00LjM4Yy0uNC0xLjQxLS45OS0yLjY3LTEuODEtMy43NmwtLjA0LjAyWk01MjcuMDgsMTM2Ljg3YzAsLjc3LS4wNywxLjU3LS4yMiwyLjMyLS4xNS43MS0uNCwxLjM1LS43MywxLjg4LS4zMy41MS0uNzcuOTMtMS4zLDEuMjYtLjUzLjMxLTEuMTkuNDYtMi4wMS40NnMtMS40Ni0uMTUtMS45OS0uNDZjLS41NS0uMzMtLjk5LS43My0xLjMzLTEuMjYtLjMzLS41My0uNi0xLjE3LS43NS0xLjg4LS4xNS0uNzUtLjI0LTEuNTMtLjI0LTIuM3MuMDktMS41OS4yMi0yLjM0Yy4xMy0uNzMuNC0xLjM3LjczLTEuOS4zMy0uNTMuNzctLjk3LDEuMy0xLjMuNTMtLjMzLDEuMTktLjQ5LDIuMDEtLjQ5czEuNDQuMTUsMS45Ny40OWMuNTUuMzMuOTkuNzcsMS4zNSwxLjMzcy42MiwxLjIyLjc3LDEuOTJjLjE1Ljc1LjI0LDEuNTMuMjQsMi4zbC0uMDItLjAyWiI+PC9wYXRoPjxwYXRoIGZpbGw9IiNmZmYiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTU1NS4yMiwxMjguNDVjLS45OS0uOTktMi4yMS0xLjc5LTMuNTgtMi4zNC0xLjM5LS41NS0yLjk2LS44Mi00LjY0LS44MnMtMy4yNS4yOS00LjYyLjgyYy0xLjM3LjU1LTIuNTksMS4zMy0zLjU4LDIuMzQtLjk5Ljk5LTEuNzcsMi4yMy0yLjMsMy42NS0uNTMsMS40MS0uOCwzLjAxLS44LDQuNzFzLjI3LDMuMjkuOCw0LjY5Yy41MywxLjQxLDEuMywyLjYzLDIuMywzLjYyLjk5Ljk5LDIuMTksMS43OSwzLjU4LDIuMzIsMS4zNy41MywyLjkyLjgsNC42Mi44czMuMjUtLjI3LDQuNjQtLjgsMi42MS0xLjMzLDMuNi0yLjMyYy45OS0uOTksMS43Ny0yLjIzLDIuMy0zLjYyLjUzLTEuMzkuOC0yLjk4LjgtNC42OXMtLjI3LTMuMjktLjgtNC43MS0xLjMtMi42NS0yLjMtMy42NWgtLjAyWk01NDkuMDcsMTQyLjMxYy0uNTUuMzEtMS4yNi40Ni0yLjEuNDZzLTEuNTUtLjE1LTIuMDgtLjQ2Yy0uNTUtLjMzLS45Ny0uNzUtMS4zMy0xLjI4LS4zNS0uNTUtLjYtMS4xOS0uNzMtMS45LS4xNS0uNzMtLjIyLTEuNS0uMjItMi4zcy4wOS0xLjU1LjIyLTIuMzJjLjE1LS43MS40LTEuMzUuNzMtMS45LjMzLS41My43Ny0uOTUsMS4zMy0xLjMuNTMtLjMzLDEuMjQtLjQ5LDIuMDgtLjQ5czEuNTUuMTUsMi4xLjQ5Yy41Ny4zMywxLjAyLjc1LDEuMzUsMS4yOC4zNS41NS42LDEuMTkuNzMsMS45LjE1Ljc1LjIyLDEuNTMuMjIsMi4zMnMtLjA3LDEuNTUtLjIyLDIuM2MtLjE1LjcxLS40LDEuMzUtLjczLDEuOS0uMzMuNTMtLjc3Ljk1LTEuMzMsMS4yOGwtLjAyLjAyWiI+PC9wYXRoPjxwYXRoIGZpbGw9IiNmZmYiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTU4Ni4xOCwxMzEuNjV2LTYuMzdoLTQuMTZ2LTUuNjRoLTYuOTR2MjIuNzljMCwxLjE1LjIsMi4wOC42LDIuODEuNC43NS45NSwxLjMzLDEuNjYsMS43Mi42Ni4zOCwxLjQ0LjY0LDIuMy43Ny44Mi4xMywxLjY4LjE4LDIuNTkuMTguNTcsMCwxLjE1LDAsMS43NS0uMDQuNjItLjAyLDEuMTctLjA5LDEuNjgtLjE4bC41My0uMDl2LTUuN2wtLjc1LjE1Yy0uMjQuMDQtLjUxLjA5LS43Ny4xMS0uMjcuMDItLjU1LjA0LS44Ni4wNC0xLjA4LDAtMS4zOS0uMjItMS40Ni0uMjktLjA3LS4wNy0uMjktLjM4LS4yOS0xLjQ2di04Ljg0aDQuMTZsLS4wMi4wMloiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik01NzMuNDUsMTI1LjI5Yy0uNzcsMC0yLjM0LjExLTMuMDcuMzUtLjcxLjIyLTEuMzkuNTUtMi4wMy45N3MtMS4xOS45My0xLjcsMS41M2MwLDAtLjAyLjAyLS4wNC4wNHYtMi4zNGgtNi42NXYyMS45aDYuOTR2LTkuOTVjMC0uODguMDktMS43LjI3LTIuNDUuMTUtLjcxLjQ0LTEuMzUuODQtMS44Ni4zOC0uNTEuODYtLjkzLDEuNS0xLjIyLjgyLS40LDEuOTUtLjUzLDMuMjctLjRsLjY5LjA3di02LjY1aDBaIj48L3BhdGg+PHBhdGggZmlsbD0iI2ZmZiIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNDYxLjIxLDEyOS4yOWMtLjg4LTEuMjItMi4wNi0yLjIxLTMuNDMtMi45Mi0xLjM5LS43My0zLjAzLTEuMDgtNC44OC0xLjA4LTEuNjYsMC0zLjE4LjMxLTQuNTUuODgtMS4zNy42LTIuNTYsMS40MS0zLjU0LDIuNDMtLjk5LDEuMDQtMS43NSwyLjI1LTIuMywzLjY3LS41MywxLjM5LS44LDIuOTItLjgsNC41M3MuMjcsMy4yMy43Nyw0LjYyYy41MSwxLjQxLDEuMjYsMi42MywyLjIzLDMuNjUuOTcsMS4wMiwyLjE0LDEuODEsMy41NCwyLjM3LDEuMzcuNTUsMi45Mi44Miw0LjYyLjgyLDIuNDUsMCw0LjU4LS41Nyw2LjMyLTEuNywxLjM5LS45MSwyLjUtMi4yOCwzLjMyLTQuMDlsLjQtLjg4aC02LjcybC0uMTguMTVjLS4xMS4wOS0uMjQuMi0uMzguMjktLjczLjUxLTEuNTcuNzUtMi41OS43NS0xLjQxLDAtMi41LS4zNS0zLjIzLTEuMDYtLjYyLS42LTEuMDItMS41OS0xLjE1LTIuOTJoMTQuODFsLjA0LS42Yy4xMS0xLjY2LS4wMi0zLjI3LS40Mi00LjgtLjQtMS41My0xLjA0LTIuOTItMS45Mi00LjEzbC4wMi4wMlpNNDUwLjc2LDEzMS4yMWMuNTEtLjI3LDEuMTctLjQsMS45Ny0uNCwxLjE5LDAsMi4wOC4zMSwyLjYzLjkxLjQ2LjUzLjg0LDEuMjYsMS4xMSwyLjIxaC03LjcxYy4wNC0uMTguMDktLjM1LjEzLS41NS4xMy0uNDIuMzMtLjg0LjY0LTEuMjJzLjcxLS43MSwxLjI0LS45N3YuMDJaIj48L3BhdGg+PHBhdGggZmlsbD0iI2ZmZiIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNTA5LjMxLDE0Mi41M3YtMTAuNzRjMC0xLjM5LS4zMy0yLjUyLS45NS0zLjM4LS42Mi0uODQtMS40MS0xLjUtMi4zOS0xLjk3LS45My0uNDQtMS45OS0uNzUtMy4wOS0uOTEtMi4zMi0uMzEtNC41OC0uMzEtNi43OS4xMy0xLjE5LjI0LTIuMy42NC0zLjI1LDEuMjItLjk5LjU3LTEuODEsMS4zNS0yLjQzLDIuMzItLjY0Ljk3LTEuMDIsMi4xOS0xLjExLDMuNjJsLS4wNC42Nmg2LjkybC4wNy0uNTdjLjA5LS45My4zOC0xLjU5Ljg2LTEuOTUuNTMtLjQsMS4yOC0uNiwyLjI1LS42LjQ2LDAsLjkxLjAyLDEuMzMuMDkuMzUuMDQuNjYuMTUuOTMuMzEuMjQuMTMuNDIuMzMuNTcuNi4xNS4yNy4yMi42NC4yMiwxLjE3LjAyLjUxLS4xNS43MS0uMjkuODItLjI5LjI0LS43My40NC0xLjI2LjU3LS42LjE1LTEuMy4yNy0yLjEuMzUtLjg0LjA5LTEuNy4yLTIuNTQuMzMtLjg2LjEzLTEuNzUuMzMtMi42MS41NS0uOTEuMjQtMS43Mi42Mi0yLjQzLDEuMTEtLjczLjUxLTEuMzMsMS4xOS0xLjc5LDIuMDMtLjQ2Ljg0LS43MSwxLjkyLS43MSwzLjIsMCwxLjE1LjIsMi4xNy42LDMuMDMuNC44Ni45NywxLjU5LDEuNjgsMi4xNC43MS41NSwxLjUzLjk3LDIuNDUsMS4yNC45MS4yNywxLjkuMzgsMi45NC4zOCwxLjMzLDAsMi42NS0uMiwzLjkzLS42LjkzLS4yOSwxLjc5LS43MywyLjU0LTEuMy4wNy4zMy4xNS42NC4yNy45NWwuMTMuNDJoNi4yMXYtMy40Yy0uMDctLjY5LS4wOS0xLjI2LS4wOS0xLjgzaC0uMDRaTTUwMi4zNywxMzguMDh2MS4wNGMwLC4yOS0uMDIuNzEtLjA5LDEuMTktLjA3LjQ0LS4yMi45MS0uNDYsMS4zNS0uMjQuNDItLjYyLjgtMS4xMywxLjExcy0xLjI2LjQ2LTIuMjUuNDZjLS40MiwwLS44Mi0uMDQtMS4xOS0uMTEtLjM1LS4wNy0uNjQtLjE4LS45MS0uMzMtLjIyLS4xMy0uNC0uMzMtLjUzLS41Ny0uMTMtLjI0LS4yLS41Ny0uMi0uOTcsMC0uNDIuMDctLjc3LjItMS4wMi4xNS0uMjcuMzMtLjQ5LjU1LS42NC4yNC0uMTguNTUtLjMzLjkxLS40NC4zOC0uMTMuNzctLjIyLDEuMTctLjMxLjQ0LS4wOS44OC0uMTMsMS4zMy0uMi40Ni0uMDQuOTMtLjEzLDEuMzUtLjIuNDQtLjA5Ljg2LS4yLDEuMjQtLjMzLDAsMCwuMDQsMCwuMDctLjAyaC0uMDRaIj48L3BhdGg+PHBhdGggZmlsbD0iI2ZmZiIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNDIzLjg4LDEzNi41OGwtNi4yOC0xNS40NWgtOS44OHYyNi42MWg3LjE0di0xNC41bDYuMDEsMTQuNWg1LjY4bDYuMDEtMTQuNjh2MTQuNjhoNy4xNHYtMjYuNjFoLTkuODhsLTUuOTIsMTUuNDVoLS4wMloiPjwvcGF0aD48cGF0aCBmaWxsPSIjZTQwMDQ2IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0zNjYuNjgsMTI5LjA0djcuNjlsMy44OSwzLjg5LDMuODctMy44N3YtNy43MWwtMy44OS0zLjg5LTMuODksMy44OWguMDJaIj48L3BhdGg+PHBhdGggZmlsbD0iI2U0MDA0NiIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzcwLjU5LDEwNS42NGMtMTUuOTEsMC0yOC44LDEyLjg5LTI4LjgsMjguOHMxMi44OSwyOC44LDI4LjgsMjguOCwyOC44LTEyLjg5LDI4LjgtMjguOC0xMi45MS0yOC44LTI4LjgtMjguOFpNMzg3LjQ1LDE1My43NmwtMy4wMywyLjIzLTMuMDMtMi4yM3YtNy42bC0zLjg5LTMuODktMy44OSwzLjg5djcuNmwtMy4wMywyLjIzLTMuMDMtMi4yM3YtNy42bC0zLjg5LTMuODktMy44OSwzLjg5djcuNmwtMy4wMywyLjIzLTMuMDMtMi4yM3YtMTAuMWw2LjktNi45di0xMC4yMWw2LjkyLTYuOTJ2LTguNzdsMy4wMy0yLjIzLDMuMDMsMi4yM3Y4Ljc3bDYuOTIsNi45MnYxMC4xOWw2Ljk0LDYuOTR2MTAuMS0uMDJaIj48L3BhdGg+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTI2MS41OCwxNDcuNjV2LTE1LjY1aC00Ljgydi0yLjdoNC44MnYtMi4wNWMwLTMuMjQsMS4zNy00Ljc4LDQuNzgtNC43OGg0LjgydjIuN2gtNC42NGMtMS40NywwLTIuMDEuNjEtMi4wMSwyLjAxdjIuMTJoNi42NXYyLjdoLTYuNjV2MTUuNjVoLTIuOTVaIj48L3BhdGg+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTI4OC40OCwxMjkuM3YyLjg4aC0yLjM3Yy00LjI4LDAtNS41NCwzLjI3LTUuNTQsNi4xOXY2LjU4aDUuMzZ2Mi43aC0xMi40MXYtMi43aDQuMXYtMTIuOTVoLTQuMXYtMi43aDYuOTFsLjExLDMuMDljLjgzLTEuNDQsMi40OC0zLjA5LDUuOTctMy4wOWgxLjk4WiI+PC9wYXRoPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0yODkuNjMsMTM4LjQ3YzAtNS41OCwzLjc0LTkuMzksOS4xLTkuMzlzOS4xLDMuODEsOS4xLDkuMzktMy43NCw5LjM5LTkuMSw5LjM5LTkuMS0zLjgxLTkuMS05LjM5Wk0zMDQuODEsMTM4LjQ3YzAtMy45Mi0yLjQ1LTYuNzYtNi4wOC02Ljc2cy02LjA4LDIuODQtNi4wOCw2Ljc2LDIuNDUsNi43Niw2LjA4LDYuNzYsNi4wOC0yLjg0LDYuMDgtNi43NloiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMzMzLjc0LDEzNS44MXYxMS44M2gtMi45NXYtMTEuNzNjMC0yLjQ1LTEuMTUtNC4wNi0zLjQyLTQuMDYtMi40MSwwLTMuODEsMS44My0zLjgxLDQuMjR2MTEuNTVoLTIuOTV2LTExLjczYzAtMi4yNy0uOTQtNC4wNi0zLjUzLTQuMDYtMi4zNywwLTMuNywxLjg3LTMuNyw0LjV2MTEuMjloLTIuOTV2LTE4LjM1aDIuNDhsLjI1LDEuOTRjLjk0LTEuMzMsMi41Mi0yLjE2LDQuNi0yLjE2LDIuMTksMCwzLjkyLDEuMTIsNC43NSwyLjgxLDEuMDgtMS42OSwyLjg0LTIuODEsNS4yNS0yLjgxLDMuNjMsMCw1Ljk3LDIuNTUsNS45Nyw2LjczWiI+PC9wYXRoPjwvc3ZnPg==" alt="latitude.sh, from Megaport"></p>
+    <p class="badge">Briefing note — the detail behind the cake page</p>
+    <h1>Diligent Robotics</h1>
+    <p>The Cake Connect page is deliberately short. This is the substance behind it: who
+       Diligent is, what we were able to verify, where Latitude and Megaport would actually
+       apply, and what we still need to ask. Companion page:
+       <a href="https://cake-connect.vercel.app/diligent-robotics/" style="color:#7FE3E9">cake-connect.vercel.app/diligent-robotics/</a></p>
+    <p class="internal">Working notes, published unlisted so they can be shared directly rather
+      than summarised second-hand. Everything here comes from Diligent's own public materials,
+      captured 2026-08-14, with confidence levels, staleness and open questions stated plainly —
+      including the things we do not know. Prepared by Henry Barton, Latitude Specialist.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ============ 01 ============ -->
+<section>
+  <h2>Section 01</h2>
+  <p class="h">Who Diligent is</p>
+
+  <p><b>Diligent Robotics</b> builds and operates <b>Moxi</b> — an autonomous mobile
+     manipulation robot that runs clinical logistics inside working hospitals. Moxi fetches and
+     delivers medications, lab samples, supplies and equipment so that nurses and pharmacy techs
+     stop walking miles per shift. It is not a research platform and not a pilot: it runs
+     revenue-generating routes in live U.S. health systems today.</p>
+
+  <table>
+    <tr><th>Field</th><th>Detail</th></tr>
+    <tr><td class="n">Founded</td><td>2017</td></tr>
+    <tr><td class="n">HQ</td><td>Austin, Texas</td></tr>
+    <tr><td class="n">Founders</td><td>Dr. <b>Andrea Thomaz</b> (CEO &amp; Co-Founder) and <b>Vivian Chu</b> (Co-Founder) — both social-robotics researchers</td></tr>
+    <tr><td class="n">Funding</td><td><b>Over $100M</b> raised since inception. Named investors: <b>Tiger Global, Canaan, True Ventures</b></td></tr>
+    <tr><td class="n">Category</td><td>Physical AI / mobile manipulation for healthcare logistics</td></tr>
+    <tr><td class="n">Scale signal</td><td><b>1.25M+</b> autonomous deliveries by <b>~100 robots</b> across <b>25+</b> hospital facilities</td></tr>
+    <tr><td class="n">Compliance</td><td>SOC 2 Type 2 certified</td></tr>
+  </table>
+
+  <h3>Business model, and who actually signs</h3>
+  <p>Robots-as-a-service, sold per hospital facility. Diligent has publicly indicated
+     <b>annual sales at each hospital expected to range between $200k and $400k</b>. That figure is
+     why per-site economics matter more here than raw scale does: this is a volume-of-sites
+     business, not a handful of megadeals.</p>
+  <p><b>Who buys Moxi:</b> health-system operations and supply-chain leadership, pharmacy directors,
+     and nursing leadership — they buy labor hours back. <b>Who reviews it:</b> hospital IT, security
+     and biomed, who own network access, data handling and anything touching patient-adjacent
+     systems. <b>Where this conversation sits:</b> with Diligent's own engineering and infrastructure
+     leadership — training compute and fleet data — not with their hospital customers. We are not in
+     their sales path.</p>
+  <p>As of <b>September 2025</b> distribution also runs through <b>Swisslog Healthcare</b> (and its
+     TransLogic pneumatic-tube business), which resells Moxi as a turnkey last-mile offering into
+     Swisslog's installed base. Read that as a step-change in <i>site count</i>, which is the same
+     as a step-change in fleet data volume.</p>
+  <p class="src">Sources: diligentrobots.com company pages and press releases (captured 2026-08-14);
+     Moxi 2.0 launch release, Austin, October 28, 2025.</p>
+</section>
+
+<!-- ============ 02 ============ -->
+<section>
+  <h2>Section 02</h2>
+  <p class="h">Current news — dated, with staleness flagged</p>
+
+  <p>Today is <b>2026-08-14</b>. Anything below older than 12 months is flagged, so nothing
+     stale gets described as recent.</p>
+
+  <table>
+    <tr><th>Date</th><th>Item</th><th>Age</th><th>Why it matters to us</th></tr>
+    <tr>
+      <td class="n">Oct 28, 2025</td>
+      <td><b>Moxi 2.0 launched</b> — redesigned hardware plus a new AI foundation model built on three years of real-world deployment data.</td>
+      <td class="n"><span class="pill cur">~9.5 mo · current</span></td>
+      <td>The most relevant item here. Underneath the hardware story it is a compute and data story.</td>
+    </tr>
+    <tr>
+      <td class="n">Sep 23, 2025</td>
+      <td><b>Selected for the inaugural Physical AI Fellowship</b>, powered by AWS, NVIDIA and MassRobotics — includes AWS cloud credits.</td>
+      <td class="n"><span class="pill cur">~11 mo · current</span></td>
+      <td>Indicates the current cloud relationship and why it exists. See Question 1 in Section 06.</td>
+    </tr>
+    <tr>
+      <td class="n">Sep 17, 2025</td>
+      <td><b>Swisslog Healthcare partnership</b> — turnkey last-mile autonomous delivery into Swisslog's hospital base.</td>
+      <td class="n"><span class="pill cur">~11 mo · current</span></td>
+      <td>Site count grows through the channel, and fleet data volume grows with it.</td>
+    </tr>
+    <tr>
+      <td class="n">Jul 16, 2025</td>
+      <td>Positioning piece on leading <b>U.S. hospital pharmacy robotics</b> and redefining the last mile.</td>
+      <td class="n"><span class="pill old">~13 mo · FLAG &gt;12mo</span></td>
+      <td>Useful as positioning context, not as news.</td>
+    </tr>
+    <tr>
+      <td class="n">Feb 17, 2025</td>
+      <td><b>1 million deliveries</b> across the fleet ("not a pilot, not a prototype").</td>
+      <td class="n"><span class="pill old">~18 mo · FLAG &gt;12mo</span></td>
+      <td>Superseded — the current number is 1.25M+. Quote the newer one.</td>
+    </tr>
+    <tr>
+      <td class="n">Nov 14, 2024</td>
+      <td><b>100,000+ autonomous elevator rides</b> across U.S. health systems.</td>
+      <td class="n"><span class="pill old">~21 mo · FLAG &gt;12mo</span></td>
+      <td>Evidence of deep building-systems integration. Still technically impressive, not news.</td>
+    </tr>
+    <tr>
+      <td class="n">Feb 21, 2024</td>
+      <td><b>SOC 2 Type 2</b> compliance achieved.</td>
+      <td class="n"><span class="pill old">~30 mo · FLAG &gt;12mo</span></td>
+      <td>Proves they already run a formal control regime. Our proposal must fit inside it.</td>
+    </tr>
+  </table>
+
+  <div class="stale">
+    <b>Gap, stated plainly:</b> this research is built from Diligent's own site and press
+    releases captured on 2026-08-14. No funding round after the "$100M+ raised to date" figure was
+    found, and no 2026-dated announcement was found in the captured set. Treat "most recent
+    news = Moxi 2.0, Oct 2025" as <i>the latest we verified</i>, not as proof nothing has happened
+    since. Check for a newer round or launch before the call.
+  </div>
+</section>
+
+<!-- ============ 03 ============ -->
+<section>
+  <h2>Section 03</h2>
+  <p class="h">Product specifics — verified, with confidence stated</p>
+
+  <p>Ten verified facts. The confidence column rates <i>the claim and its source</i>, not its
+     importance.</p>
+
+  <table>
+    <tr><th>#</th><th>Fact</th><th>Source &amp; date</th><th>Conf.</th></tr>
+    <tr><td class="n">1</td>
+      <td><b>"Moxi 2.0 has 10x the compute of Moxi 1.0, thanks to the rapid advancement of the NVIDIA Jetson line."</b> — direct quote, Dr. Andrea Thomaz.</td>
+      <td>Moxi 2.0 launch release, Oct 28 2025</td><td><span class="pill hi">High</span></td></tr>
+    <tr><td class="n">2</td>
+      <td>Moxi runs on <b>NVIDIA's embedded stack — Jetson for onboard compute, Omniverse for simulation</b>. Thomaz also called out <b>NVIDIA IGX Thor</b> as the next edge platform.</td>
+      <td>Moxi 2.0 release / company product pages, Oct 2025</td><td><span class="pill hi">High</span></td></tr>
+    <tr><td class="n">3</td>
+      <td><b>1.25M+ autonomous deliveries</b> completed, by <b>nearly 100 robots</b> in <b>25+ hospital facilities</b> — described as one of the largest datasets of real-world human-robot interaction.</td>
+      <td>Company press materials, 2025</td><td><span class="pill hi">High</span></td></tr>
+    <tr><td class="n">4</td>
+      <td>Moxi 2.0 ships a <b>new AI foundation model built on three years of proprietary real-world deployment data</b> — trained on the fleet's own operating history, not on public corpora.</td>
+      <td>Moxi 2.0 release, Oct 28 2025</td><td><span class="pill hi">High</span></td></tr>
+    <tr><td class="n">5</td>
+      <td>That deployment dataset is <b>"expected to grow to petabytes next year with Moxi 2.0"</b>, feeding "increasingly more powerful foundation models."</td>
+      <td>Moxi 2.0 release, Oct 28 2025</td><td><span class="pill hi">High</span></td></tr>
+    <tr><td class="n">6</td>
+      <td><b>Mobile manipulation</b> — Moxi has an arm. It opens drawers, presses controls and handles objects, which is a materially harder perception/control problem than a rolling cart.</td>
+      <td>Company product/about pages</td><td><span class="pill hi">High</span></td></tr>
+    <tr><td class="n">7</td>
+      <td><b>100,000+ autonomous elevator rides.</b> Moxi integrates with building systems and moves between floors unaccompanied.</td>
+      <td>Company release, Nov 14 2024 <span class="pill old">stale</span></td><td><span class="pill hi">High</span></td></tr>
+    <tr><td class="n">8</td>
+      <td>Positioned around <b>human-guided learning and social intelligence</b> — the robot is designed to operate among people in unstructured space, with humans correcting it.</td>
+      <td>Company about page / founder positioning</td><td><span class="pill hi">High</span></td></tr>
+    <tr><td class="n">9</td>
+      <td><b>SOC 2 Type 2</b>, framed as "one step in a multi-pronged approach" to protecting information entrusted by healthcare partners.</td>
+      <td>Company blog, Feb 21 2024 <span class="pill old">stale</span></td><td><span class="pill hi">High</span></td></tr>
+    <tr><td class="n">10</td>
+      <td><b>~$200k–$400k expected annual sales per hospital.</b></td>
+      <td>Company press materials, 2025</td><td><span class="pill me">Medium</span> — a company projection, not audited revenue</td></tr>
+  </table>
+
+  <div class="stale">
+    <b>Not established — open questions, not findings. Nothing below should be asserted as fact.</b>
+    Exact per-robot sensor bitrate; whether video leaves the hospital at all vs. being summarized
+    on-device; current cloud provider mix beyond the AWS credits signal; whether teleoperation is a
+    production feature or an internal fallback; and any HIPAA/BAA specifics. These are questions to
+    <b>ask</b> — that is what Section 05 is for.
+  </div>
+</section>
+
+<!-- ============ 04 ============ -->
+<section>
+  <h2>Section 04</h2>
+  <p class="h">The layer deeper — what Latitude + Megaport actually change for Diligent</p>
+
+  <p>A generic infrastructure pitch is not useful here. This is the version specific to
+     Diligent's actual constraints.</p>
+
+  <div class="callout">
+    <p><b>The one-sentence thesis.</b> Diligent has built a data flywheel — ~100 robots
+       generating fleet data that trains a foundation model that makes the robots better — and
+       every turn of that flywheel gets more expensive on metered cloud, because it is
+       simultaneously an <b>egress</b> problem, a <b>burst GPU</b> problem, and a
+       <b>data-residency</b> problem.</p>
+    <p>Latitude sells the burst GPU as dedicated bare metal at a fixed price. Megaport moves the
+       data there over private circuits instead of the public internet. Same company, one bill.</p>
+  </div>
+
+  <h3>Their four real constraints, and the specific answer to each</h3>
+
+  <table>
+    <tr><th>Diligent's constraint</th><th>Why it bites</th><th>What we change</th></tr>
+    <tr>
+      <td><b>Fleet telemetry volume off hospital floors.</b> A dataset "heading to petabytes" has to physically move from 25+ facilities to wherever training happens.</td>
+      <td>On hyperscalers the ingest is cheap and the <b>egress is not</b>. Every time they move that corpus — to retrain, to re-label, to migrate — they pay again. Petabyte-scale egress is a five-to-six-figure line item that grows with site count.</td>
+      <td><b>Megaport private circuits (Port + VXC) from each hospital region into Latitude.</b> Private fabric, no public-internet backhaul, predictable port-based pricing rather than per-GB metering. The published Latitude customer proof point is <b>Shinami: 79% compute-cost reduction and egress cost to zero.</b>
+          <span class="srcline">Source: <b>latitude.sh/customers/shinami</b> — <code>https://www.latitude.sh/customers/shinami</code>, HTTP 200, retrieved 2026-08-14. The page's own stat cards read verbatim <b>"79% reduction in compute costs"</b> and <b>"100% reduction in egress costs"</b>; the narrative gives the underlying numbers as a validator bill of <b>~$4,000/mo &rarr; ~$850/mo</b> and egress of <b>$300&ndash;500/mo &rarr; essentially zero</b>, absorbed by Latitude's 20&nbsp;TB/month per-server allowance.</span></td>
+    </tr>
+    <tr>
+      <td><b>Burst training and simulation compute</b> for navigation and manipulation — including Omniverse simulation, which is GPU-heavy and spiky by nature.</td>
+      <td>Training is bursty; inference on the robot is not. Reserved hyperscaler capacity sized for the burst idles between runs. On-demand sized for the average makes every training cycle slow.</td>
+      <td><b>Latitude dedicated GPU bare metal — NVIDIA H100, A100, L40S on AMD EPYC hosts, provisioned in minutes across 24+ locations.</b> No hypervisor tax, no noisy neighbours, a fixed monthly number instead of a variable one. Sized for the burst, and the burst is the whole job.</td>
+    </tr>
+    <tr>
+      <td><b>Clinical data-residency and HIPAA-adjacent handling.</b> They are SOC 2 Type 2 and sell into hospital IT and security review.</td>
+      <td>Robot logs from a hospital floor are patient-adjacent even when they are not PHI: video and audio of care areas, timestamps, room-level movement. Whatever path that data takes, a hospital security review will ask about it — and "it traverses the public internet" is a hard sentence to defend in that room.</td>
+      <td><b>Named single-tenant hardware in a named facility, reached over a private circuit.</b> That is a materially easier diagram to put in front of a hospital security committee than shared multi-tenant compute — and it is the same diagram at every site.</td>
+    </tr>
+    <tr>
+      <td><b>Site count is about to jump</b> via the Swisslog channel.</td>
+      <td>Per-site infrastructure cost that is comfortable at 25 facilities is worth re-checking at 100+, against $200k–$400k of expected annual revenue per hospital.</td>
+      <td>Port-based fabric economics scale with <b>sites</b>, not with <b>bytes</b> — so per-site cost stops tracking how chatty the robots get.</td>
+    </tr>
+  </table>
+
+  <h3>Proposed architecture — concrete enough to whiteboard</h3>
+  <div class="arch">
+    <ol>
+      <li><b>Edge (unchanged, theirs):</b> Moxi 2.0 on NVIDIA Jetson, running inference on-robot.
+          We do not touch the robot — worth being explicit about up front.</li>
+      <li><b>Aggregation:</b> per-facility or per-region collection point, feeding a
+          <b>Megaport Port</b>; multi-site regions consolidate through an <b>MCR</b> so new
+          hospitals attach to existing fabric instead of triggering new physical builds.</li>
+      <li><b>Transport:</b> <b>Megaport VXCs</b> from those ports into the Latitude region holding
+          the training cluster — private, no public-internet hop, and VXCs to AWS as a private
+          on-ramp so anything that must stay on the incumbent still moves privately.</li>
+      <li><b>Storage:</b> <b>VAST</b> for the hot training corpus that the GPUs actually read;
+          <b>Wasabi</b> for the cold multi-petabyte archive of historical deliveries — with no
+          egress fee when a future model wants to re-read the whole history. That last point is the
+          one that matters for a flywheel.</li>
+      <li><b>Compute:</b> <b>Latitude bare metal GPU</b> (H100 / A100 / L40S) for foundation-model
+          training and Omniverse simulation. Fixed monthly cost, dedicated, deploy in minutes.</li>
+      <li><b>Return path:</b> trained model artifacts ship back out to the fleet over the same
+          private fabric.</li>
+    </ol>
+  </div>
+
+  <h3>The metric to put a number against</h3>
+  <p>Lead with <b>cost per effective GPU-hour of training</b>, and its partner,
+     <b>total cost to move one petabyte of fleet data into a training run</b>. Those two are where
+     the difference is structural rather than promotional: dedicated bare metal removes the
+     virtualization overhead and the idle-reservation waste, and private fabric removes per-GB
+     egress from the equation entirely.</p>
+  <p>The business framing that lands with a CEO rather than an infra lead:
+     <b>"your cost per training cycle should stop scaling with your fleet size."</b> For a company
+     whose product improves as a direct function of how much fleet data it can afford to train on,
+     that is a product-velocity argument, not an IT-savings argument.</p>
+  <div class="stale">
+    <b>Honesty guardrail.</b> Shinami's 79% / zero-egress result is a <i>published Latitude
+    customer outcome</i> (<code>https://www.latitude.sh/customers/shinami</code>, retrieved
+    2026-08-14), not a forecast for Diligent. It is cited as evidence that the model works, and it
+    is cited <i>with the URL</i> so it can be checked. Two caveats stated up front: it is a
+    <b>Web3 validator workload</b>, not a robotics-telemetry one, and the zero egress is Latitude's
+    included <b>20&nbsp;TB/month per server</b> doing the work, not an unmetered promise. Nobody
+    should say "you will save 79%" — we have not seen Diligent's bill, and we will not pretend
+    otherwise.
+  </div>
+</section>
+
+<!-- ============ 05 ============ -->
+<section>
+  <h2>Section 05</h2>
+  <p class="h">Five questions we want answered</p>
+
+  <p>These are the genuine unknowns from Section 03. The note under each one says why we are
+     asking, so the reasoning is on the table rather than behind it.</p>
+
+  <div class="q"><p>1. "Moxi 2.0 carries 10x the compute of 1.0 — how much of that is running
+    inference on-robot versus feeding data back for the next foundation-model train?"</p>
+    <span>Establishes the edge/cloud split, which determines whether anything we do is relevant
+      at all. If it is overwhelmingly on-robot, we should know that in the first ten minutes.</span></div>
+
+  <div class="q"><p>2. "You've said the deployment dataset is heading to petabytes. What does it
+    cost you today to move one full training corpus from the hospital sites into wherever you
+    train — and does that number change when Swisslog adds sites?"</p>
+    <span>The egress question in concrete terms. Site growth through the Swisslog channel is the
+      variable most likely to change the answer, which is why the two halves are asked
+      together.</span></div>
+
+  <div class="q"><p>3. "When you retrain the foundation model, are you re-reading the full
+    historical corpus or a sampled slice — and is that a technical choice or a cost choice?"</p>
+    <span>The question we most want answered. If the constraint is cost rather than method, then a
+      no-egress archive changes what is affordable to train on — a model-quality outcome rather
+      than an IT one. If it is a deliberate technical choice, that is a different conversation and
+      a shorter one.</span></div>
+
+  <div class="q"><p>4. "How much of your GPU spend is burst training and Omniverse simulation
+    versus steady-state, and what happens to the reserved capacity between training runs?"</p>
+    <span>If reserved capacity idles between runs, dedicated bare metal wins on arithmetic rather
+      than on preference. If it does not, the arithmetic does not favour us and we should find
+      that out early.</span></div>
+
+  <div class="q"><p>5. "When a hospital's security review asks where robot data physically goes and
+    what network it crosses — what's the current answer, and how long does that review take?"</p>
+    <span>Private fabric may be worth more as sales-cycle acceleration than as a bandwidth saving.
+      For a company selling into 25+ health systems and scaling through a channel, a shorter
+      security review is the bigger number.</span></div>
+</section>
+
+<!-- ============ 06 ============ -->
+<section>
+  <h2>Section 06</h2>
+  <p class="h">Fair questions, and our answers</p>
+
+  <p>Four reasonable challenges to this proposal, and the honest response to each. Where the
+     answer depends on something we do not know, it says so.</p>
+
+  <div class="obj">
+    <p class="said">1. "We're already on AWS — and we have AWS credits from the Physical AI Fellowship."</p>
+    <p class="say"><b>Our answer:</b> "Then don't move inference — the credits are the right tool
+      for the workload they cover. The case is for putting burst training and the petabyte archive
+      on dedicated hardware, with a Megaport VXC as a private on-ramp back to AWS so it stays one
+      fabric rather than two clouds." <i>The distinction that matters: credits are finite and
+      dated; a petabyte-scale egress line is neither.</i></p>
+  </div>
+
+  <div class="obj">
+    <p class="said">2. "Bare metal means we lose elasticity."</p>
+    <p class="say"><b>Our answer:</b> "Latitude provisions in minutes, not weeks, across 24+
+      locations. Training bursts are scheduled rather than unpredictable, so the elasticity that
+      actually matters here is provisioning speed rather than per-second billing. If reserved
+      capacity is sitting idle between runs today, that gap is the number worth putting on the
+      table — and if it isn't, this argument doesn't apply."</p>
+  </div>
+
+  <div class="obj">
+    <p class="said">3. "Hospital data can't leave the building / our security review will kill this."</p>
+    <p class="say"><b>Our answer:</b> "That's the argument <i>for</i> this. To whatever extent any
+      part of that path runs over the public internet today, this replaces it with a private
+      circuit to named single-tenant hardware in a named facility — an easier diagram for a
+      security committee, and the same diagram at every site you add."</p>
+  </div>
+
+  <div class="obj">
+    <p class="said">4. "We're a robotics company, not an infrastructure company — we don't want to run this."</p>
+    <p class="say"><b>Our answer:</b> "Agreed, and you shouldn't have to. It's one vendor, one bill
+      and one support desk — Latitude <i>is</i> Megaport. You keep the flywheel; we keep the
+      transit and the tin."</p>
+  </div>
+</section>
+
+<!-- ============ 07 ============ -->
+<section>
+  <h2>Section 07</h2>
+  <p class="h">What is on the cake page</p>
+  <p>The cake page is deliberately under 250 words. It names exactly three Diligent
+     specifics — <b>Moxi 2.0's 10x compute</b>, the <b>petabyte-bound deployment dataset</b>, and
+     the <b>foundation model trained on 1.25 million real deliveries</b> — plus the Shinami proof
+     point and a proposed shape: <i>GPU bare metal for training and simulation, a private circuit
+     from every hospital region into it, VAST or Wasabi underneath.</i></p>
+  <p>That page is deliberately the short version. The detail behind each of those claims — and
+     the reasoning that produced them — is in Section 04.</p>
+  <p><b>Contact:</b> Henry Barton, Latitude Specialist ·
+     booking link <a href="https://megaport.chilipiper.com/personal-page/henry-barton">megaport.chilipiper.com/personal-page/henry-barton</a></p>
+</section>
+
+<footer>
+  <p>Briefing note · Latitude, a Megaport company · compiled 2026-08-14 from diligentrobots.com
+     primary sources captured the same day. Unlisted: reachable by direct link, not indexed by
+     search engines. Corrections welcome — if anything here is out of date or wrong, we would
+     rather be told than be right on paper.</p>
+</footer>
+
+</main>
+</body>
+</html>
