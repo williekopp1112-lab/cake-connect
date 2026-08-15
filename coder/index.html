@@ -83,30 +83,50 @@ h1{font-size:32px;line-height:1.15}
   box-shadow:0 6px 0 0 var(--cd-violet);
   transition:transform .18s var(--ease);
 }
+/* The finale CTA rides inside a staging wrapper so the scroll-driven build can
+   own the wrapper's transform while the button keeps its own hover/tap lift.
+   An animation with a forwards fill outranks :hover, so they cannot share a box. */
+.stage{margin:20px 0 0}
+.stage .cta{margin:0}
 .cta span{position:relative;z-index:1}
 .cta::after{content:"";position:absolute;top:0;left:-40%;width:40%;height:100%;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.8),rgba(255,255,255,0));transform:translateX(0);opacity:0;animation:swipe 1.05s ease-out .55s 1 both}
 .cta:hover,.cta:focus-visible{transform:translateY(-2px)}
 .cta:active{transform:translateY(2px) scale(.99)}
 .cta:focus-visible{outline:3px solid var(--cd-white);outline-offset:3px}
 
-/* ---------- sprinkles ---------- */
-.sprinkles{position:absolute;inset:0;z-index:0;pointer-events:none}
-.sprinkles i{position:absolute;top:-14px;width:5px;height:13px;border-radius:3px;opacity:0;animation:sprinkle 1.6s cubic-bezier(.3,.6,.3,1) var(--sd) 1 both}
+/* ---------- confetti: Layer 01's opening celebration (V2.4) ----------
+   The burst now belongs to Layer 01, not the page load. It fires exactly once,
+   when the icing divider crossing into "Who we are" is baked. Brand-coloured
+   pieces only, all of them legible against the linen layer. */
+.sprinkles{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.sprinkles i{position:absolute;top:-16px;width:5px;height:13px;border-radius:3px;opacity:0}
+.layer--1.celebrate .sprinkles i{animation:sprinkle 1.6s cubic-bezier(.3,.6,.3,1) var(--sd) 1 both}
 .sprinkles i:nth-child(1){left:6%;--drift:14px;--fall:250px;--spin:190deg;--sd:.10s;background:var(--cd-purple)}
-.sprinkles i:nth-child(2){left:15%;--drift:-18px;--fall:310px;--spin:-240deg;--sd:.22s;background:var(--cd-white)}
+.sprinkles i:nth-child(2){left:15%;--drift:-18px;--fall:310px;--spin:-240deg;--sd:.22s;background:var(--cd-violet)}
 .sprinkles i:nth-child(3){left:24%;--drift:22px;--fall:200px;--spin:150deg;--sd:.04s;background:var(--cd-magenta)}
-.sprinkles i:nth-child(4){left:33%;--drift:-10px;--fall:340px;--spin:280deg;--sd:.30s;background:var(--cd-sky)}
+.sprinkles i:nth-child(4){left:33%;--drift:-10px;--fall:340px;--spin:280deg;--sd:.30s;background:var(--cd-orchid)}
 .sprinkles i:nth-child(5){left:42%;--drift:16px;--fall:270px;--spin:-170deg;--sd:.16s;background:var(--cd-purple)}
-.sprinkles i:nth-child(6){left:51%;--drift:-24px;--fall:230px;--spin:210deg;--sd:.36s;background:var(--cd-white)}
+.sprinkles i:nth-child(6){left:51%;--drift:-24px;--fall:230px;--spin:210deg;--sd:.36s;background:var(--cd-twilight)}
 .sprinkles i:nth-child(7){left:60%;--drift:12px;--fall:320px;--spin:-260deg;--sd:.08s;background:var(--cd-magenta)}
 .sprinkles i:nth-child(8){left:69%;--drift:-16px;--fall:190px;--spin:160deg;--sd:.26s;background:var(--cd-ember)}
-.sprinkles i:nth-child(9){left:78%;--drift:20px;--fall:300px;--spin:-200deg;--sd:.13s;background:var(--cd-sky)}
-.sprinkles i:nth-child(10){left:86%;--drift:-12px;--fall:245px;--spin:230deg;--sd:.33s;background:var(--cd-white)}
+.sprinkles i:nth-child(9){left:78%;--drift:20px;--fall:300px;--spin:-200deg;--sd:.13s;background:var(--cd-violet)}
+.sprinkles i:nth-child(10){left:86%;--drift:-12px;--fall:245px;--spin:230deg;--sd:.33s;background:var(--cd-orchid)}
 .sprinkles i:nth-child(11){left:93%;--drift:18px;--fall:285px;--spin:-150deg;--sd:.19s;background:var(--cd-purple)}
 .sprinkles i:nth-child(12){left:98%;--drift:-20px;--fall:215px;--spin:200deg;--sd:.42s;background:var(--cd-magenta)}
 
-/* ---------- cake layers ---------- */
-.layer{position:relative;padding:42px 0 38px}
+/* ---------- cake layers: one scene each (V2.4) ----------
+   Each layer commands the 375x812 screen on its own. min-height is set in svh so
+   a phone's collapsing address bar cannot shrink a scene below its intended room,
+   and the content block is centred so a layer's own moment is never shared with
+   the neighbouring layer's content. Spacing is CSS only — no copy was added. */
+.layer{
+  position:relative;
+  display:flex;flex-direction:column;justify-content:center;
+  min-height:92vh;
+  min-height:92svh;
+  padding:76px 0 84px;
+}
+.layer .wrap{position:relative;z-index:1}
 .layer--1{background:var(--cd-linen);color:var(--cd-black)}
 .layer--2{background:var(--cd-shell);color:var(--cd-black)}
 .layer--3{background:var(--cd-twilight);color:var(--cd-white)}
@@ -149,15 +169,27 @@ h2{font-size:28px;line-height:1.16;margin:0 0 14px}
   min-height:64px;padding:12px 14px;border-radius:var(--r);
   background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);
   transform:rotate(var(--tilt));
-  transition:transform .2s var(--ease),opacity .2s var(--ease);
+  transition:opacity 0s linear,transform .66s var(--ease);
 }
+.logo:hover,.logo:focus-visible,.logo:active{transition-duration:0s,.18s}
 .logo{--tilt:0deg}
 .logo:nth-child(odd){--tilt:-1.1deg}
 .logo:nth-child(even){--tilt:1.1deg}
 .logo img{width:100%;height:auto;max-height:26px;object-fit:contain}
 .logo--wide{grid-column:span 2}
-.logo:hover{transform:translateY(-3px) rotate(0deg)}
-.logo:active{transform:translateY(0) scale(.97)}
+/* V2.4: each tile is its own beat, so the shelf assembles one logo at a time
+   rather than arriving as a single block. Only the delay varies per tile —
+   never the transform, or the nth-child rule would outrank .rise.lit .logo. */
+.logos .logo{opacity:0;transform:translateY(18px) rotate(var(--tilt))}
+.rise.lit .logos .logo{opacity:1;transform:rotate(var(--tilt))}
+.rise.lit .logos .logo:nth-child(1){transition-delay:.56s}
+.rise.lit .logos .logo:nth-child(2){transition-delay:.66s}
+.rise.lit .logos .logo:nth-child(3){transition-delay:.76s}
+.rise.lit .logos .logo:nth-child(4){transition-delay:.86s}
+.rise.lit .logos .logo:nth-child(5){transition-delay:.96s}
+.rise.lit .logos .logo:nth-child(6){transition-delay:1.06s}
+.logo:hover,.logo:focus-visible,.rise.lit .logos .logo:hover,.rise.lit .logos .logo:focus-visible{transform:translateY(-3px) rotate(0deg)}
+.logo:active,.rise.lit .logos .logo:active{transform:translateY(0) scale(.97)}
 
 .sender{margin:24px 0 0;padding:18px;border-radius:var(--r);background:var(--cd-white)}
 .sender-name{font-size:20px;font-weight:800;color:var(--cd-black)}
@@ -167,24 +199,66 @@ h2{font-size:28px;line-height:1.16;margin:0 0 14px}
 .qr img{width:112px;height:112px;border-radius:8px;background:#FFF;padding:6px}
 .qr figcaption{font-size:17px;font-weight:700;color:var(--cd-white)}
 
-/* ---------- reveal engine: one rule set, four personalities ---------- */
-.rise{--rest:translateY(16px);--dur:.55s;--lead:0s}
+/* ---------- reveal engine: one rule set, four personalities ----------
+   V2.4 retunes the engine for scene pacing: every duration now sits in the
+   600-900ms band and the stagger between elements is .16s, so a layer builds
+   label -> heading -> body -> accessory instead of arriving all at once. */
+.rise{--rest:translateY(20px);--dur:.72s;--lead:0s}
 .rise > *{opacity:0;transform:var(--rest);transition:opacity 0s linear,transform var(--dur) var(--ease)}
 .rise.lit > *{opacity:1;transform:none}
 .rise.lit > *:nth-child(1){transition-delay:calc(var(--lead) + 0s)}
-.rise.lit > *:nth-child(2){transition-delay:calc(var(--lead) + .07s)}
-.rise.lit > *:nth-child(3){transition-delay:calc(var(--lead) + .14s)}
-.rise.lit > *:nth-child(4){transition-delay:calc(var(--lead) + .21s)}
-.rise.lit > *:nth-child(5){transition-delay:calc(var(--lead) + .28s)}
-.rise.lit > *:nth-child(6){transition-delay:calc(var(--lead) + .35s)}
-/* Layer 01 — the knife slice: everything enters from the left edge, fast and level. */
-.rise--slice{--rest:translateX(-26px);--dur:.46s;--lead:.02s}
+.rise.lit > *:nth-child(2){transition-delay:calc(var(--lead) + .16s)}
+.rise.lit > *:nth-child(3){transition-delay:calc(var(--lead) + .32s)}
+.rise.lit > *:nth-child(4){transition-delay:calc(var(--lead) + .48s)}
+.rise.lit > *:nth-child(5){transition-delay:calc(var(--lead) + .64s)}
+.rise.lit > *:nth-child(6){transition-delay:calc(var(--lead) + .80s)}
+.rise.lit > *:nth-child(7){transition-delay:calc(var(--lead) + .96s)}
+/* Layer 01 — the knife slice: everything enters from the left edge, level. */
+.rise--slice{--rest:translateX(-30px);--dur:.66s;--lead:.02s}
 /* Layer 02 — the settle: the layer drops in from above and comes to rest. */
-.rise--settle{--rest:translateY(-20px);--dur:.60s;--lead:.22s}
-/* Layer 03 — the cascade: tight, quick, one tile after another. */
-.rise--cascade{--rest:translateY(12px) scale(.985);--dur:.40s;--lead:0s}
-/* Layer 04 — the finale: the tallest lift, the longest travel, the last word. */
-.rise--finale{--rest:translateY(30px) scale(.97);--dur:.72s;--lead:.06s}
+.rise--settle{--rest:translateY(-24px);--dur:.78s;--lead:.22s}
+/* Layer 03 — the cascade: the shelf assembles, one tile after another. */
+.rise--cascade{--rest:translateY(16px) scale(.985);--dur:.68s;--lead:0s}
+/* Layer 04 — the finale: the tallest lift, the longest travel, the last word.
+   Deliberately no scale() here. Layer 04 carries the two tap targets (Book 20
+   minutes, and the mailto). A scroll-driven build holds its "from" frame for as
+   long as the element is below the range, and a scale under 1 shrinks the
+   measured hit box with it — scale(.97) took the 44px mailto to 43px. Travel is
+   free; shrinking a tap target is not. */
+.rise--finale{--rest:translateY(34px);--dur:.88s;--lead:.06s}
+
+/* ---------- V2.4 scroll-driven build (progressive enhancement) ----------
+   Where the browser supports scroll-driven animations the transform is handed
+   to the scroll position itself, so each element develops as you slide down an
+   Apple product page rather than snapping on a timer. Staggered `cover` ranges
+   keep the label/heading/body/accessory order.
+   Opacity is deliberately NOT animated here: it stays owned by the .lit class
+   flip, so the IntersectionObserver + 2s failsafe can always make copy visible.
+   A scroll-driven animation cannot strand a word. */
+@supports (animation-timeline: view()){
+  @media (prefers-reduced-motion: no-preference){
+    .rise > *{
+      animation:scene-rise linear both;
+      animation-timeline:view();
+      animation-range:cover 2% cover 38%;
+    }
+    .rise > *:nth-child(2){animation-range:cover 6% cover 42%}
+    .rise > *:nth-child(3){animation-range:cover 10% cover 46%}
+    .rise > *:nth-child(4){animation-range:cover 14% cover 50%}
+    .rise > *:nth-child(5){animation-range:cover 18% cover 54%}
+    .rise > *:nth-child(6){animation-range:cover 22% cover 58%}
+    .rise > *:nth-child(7){animation-range:cover 26% cover 62%}
+    /* Logo tiles keep the class-flip cascade: an animation with a forwards fill
+       would outrank :hover and kill the tap/lift affordance on the tiles. */
+    .layer .icing{
+      animation:scene-icing linear both;
+      animation-timeline:view();
+      animation-range:cover 0% cover 26%;
+    }
+  }
+}
+@keyframes scene-rise{from{transform:var(--rest)}to{transform:none}}
+@keyframes scene-icing{from{transform:scaleX(0)}to{transform:none}}
 
 @keyframes swipe{
   0%{opacity:0;transform:translateX(0)}
@@ -225,22 +299,22 @@ h2{font-size:28px;line-height:1.16;margin:0 0 14px}
 }
 
 @media (prefers-reduced-motion: reduce){
-  .rise > *,.rise.lit > *{opacity:1 !important;transform:none !important;transition:none !important}
-  .icing,.layer.baked .icing{transform:none !important;transition:none !important}
+  .rise > *,.rise.lit > *{opacity:1 !important;transform:none !important;transition:none !important;animation:none !important}
+  .icing,.layer.baked .icing{transform:none !important;transition:none !important;animation:none !important}
   .icing::before,.icing::after,.layer.baked .icing::before,.layer.baked .icing::after{animation:none !important;opacity:0 !important;transform:none !important}
   .sprinkles{display:none !important}
+  .layer--1.celebrate .sprinkles i{animation:none !important}
   .cta::after{animation:none !important;opacity:0 !important;transform:none !important}
   .cta:hover,.cta:focus-visible,.cta:active{transform:none !important}
-  .logo,.logo:hover,.logo:active{transform:none !important;transition:none !important}
+  .logo,.logo:hover,.logo:active,.logos .logo,.rise.lit .logos .logo{opacity:1 !important;transform:none !important;transition:none !important;animation:none !important}
   .lockup-for,.lockup-mark,.lockup-caption{animation:none !important;opacity:1 !important;transform:none !important}
 }
 </style>
-<noscript><style>.rise > *{opacity:1;transform:none}.icing{transform:none}</style></noscript>
+<noscript><style>.rise > *{opacity:1;transform:none;animation:none}.icing{transform:none;animation:none}.logos .logo{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
 
 <header class="hero">
-  <div class="sprinkles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
   <div class="wrap">
     <div class="lockup">
       <p class="lockup-for">from</p>
@@ -258,6 +332,7 @@ h2{font-size:28px;line-height:1.16;margin:0 0 14px}
 
 <section class="layer layer--1">
   <span class="icing"></span>
+  <div class="sprinkles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
   <div class="wrap rise rise--slice">
     <p class="tier">Layer 01</p>
     <h2>Who we are</h2>
@@ -301,7 +376,7 @@ h2{font-size:28px;line-height:1.16;margin:0 0 14px}
     <h2>What we'd propose</h2>
     <p class="pun">Coder on top, our metal at the base, private fabric as the filling.</p>
     <p class="close">Dedicated capacity for agent workloads, a private circuit into each new region as you scale across Europe and Asia. You keep the governance. We keep the traffic off the public internet.</p>
-    <a class="cta" href="https://megaport.chilipiper.com/personal-page/henry-barton"><span>Book 20 minutes</span></a>
+    <div class="stage"><a class="cta" href="https://megaport.chilipiper.com/personal-page/henry-barton"><span>Book 20 minutes</span></a></div>
     <div class="sender">
       <p class="sender-name">Henry Barton</p>
       <p class="sender-role">Latitude Specialist</p>
@@ -322,12 +397,20 @@ h2{font-size:28px;line-height:1.16;margin:0 0 14px}
     var layer = el.closest ? el.closest('.layer') : null;
     if (layer) layer.classList.add('baked');
   }
+  // The Layer 01 confetti is deliberately NOT part of bake(): the 2s failsafe
+  // must be free to make copy visible without spending the celebration on a
+  // layer nobody has reached yet. It fires on real intersection, exactly once.
+  function celebrate(el){
+    var layer = el.closest ? el.closest('.layer') : null;
+    if (layer && layer.className.indexOf('layer--1') !== -1) layer.classList.add('celebrate');
+  }
   function lightAll(){ for (var i=0;i<risers.length;i++) bake(risers[i]); }
+  function celebrateAll(){ for (var i=0;i<risers.length;i++) celebrate(risers[i]); }
   document.addEventListener('touchstart', function(){}, {passive:true});
-  if (!('IntersectionObserver' in window)) { lightAll(); return; }
+  if (!('IntersectionObserver' in window)) { lightAll(); celebrateAll(); return; }
   var io = new IntersectionObserver(function(entries){
     for (var i=0;i<entries.length;i++){
-      if (entries[i].isIntersecting){ bake(entries[i].target); io.unobserve(entries[i].target); }
+      if (entries[i].isIntersecting){ bake(entries[i].target); celebrate(entries[i].target); io.unobserve(entries[i].target); }
     }
   }, { threshold: 0.05, rootMargin: '0px 0px -5% 0px' });
   for (var j=0;j<risers.length;j++) io.observe(risers[j]);
