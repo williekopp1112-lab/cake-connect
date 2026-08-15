@@ -82,12 +82,15 @@ footer{padding:28px 0 0;color:var(--muted);font-size:14.5px}
   header.top h1{font-size:27px}
   h2 + .h{font-size:22px}
   section{padding:20px 18px}
+  /* Four-column tables cannot fit 375px. Make each table its own horizontal
+     scroller so the PAGE never scrolls sideways and no column is dropped. */
+  .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px -18px 14px;padding:0 18px}
+  .tscroll table{margin:0;min-width:520px}
   table{font-size:16px}
-  th,td{padding:7px 8px}
+  th,td{padding:8px 9px}
   th{font-size:13.5px}
-  .stale,.q span,.obj .say{font-size:16px}
-  .src{font-size:16px}
-  .srcline{font-size:16px}
+  .pill{font-size:14px}
+  .stale,.q span,.obj .say,.src,.srcline{font-size:16px}
   code{word-break:break-word;overflow-wrap:anywhere}
 }
 </style>
@@ -123,6 +126,7 @@ footer{padding:28px 0 0;color:var(--muted);font-size:14.5px}
      stop walking miles per shift. It is not a research platform and not a pilot: it runs
      revenue-generating routes in live U.S. health systems today.</p>
 
+  <div class="tscroll">
   <table>
     <tr><th>Field</th><th>Detail</th></tr>
     <tr><td class="n">Founded</td><td>2017</td></tr>
@@ -133,6 +137,7 @@ footer{padding:28px 0 0;color:var(--muted);font-size:14.5px}
     <tr><td class="n">Scale signal</td><td><b>1.25M+</b> autonomous deliveries by <b>~100 robots</b> across <b>25+</b> hospital facilities</td></tr>
     <tr><td class="n">Compliance</td><td>SOC 2 Type 2 certified</td></tr>
   </table>
+  </div>
 
   <h3>Business model, and who actually signs</h3>
   <p>Robots-as-a-service, sold per hospital facility. Diligent has publicly indicated
@@ -161,6 +166,7 @@ footer{padding:28px 0 0;color:var(--muted);font-size:14.5px}
   <p>Today is <b>2026-08-14</b>. Anything below older than 12 months is flagged, so nothing
      stale gets described as recent.</p>
 
+  <div class="tscroll">
   <table>
     <tr><th>Date</th><th>Item</th><th>Age</th><th>Why it matters to us</th></tr>
     <tr>
@@ -206,6 +212,7 @@ footer{padding:28px 0 0;color:var(--muted);font-size:14.5px}
       <td>Proves they already run a formal control regime. Our proposal must fit inside it.</td>
     </tr>
   </table>
+  </div>
 
   <div class="stale">
     <b>Gap, stated plainly:</b> this research is built from Diligent's own site and press
@@ -224,6 +231,7 @@ footer{padding:28px 0 0;color:var(--muted);font-size:14.5px}
   <p>Ten verified facts. The confidence column rates <i>the claim and its source</i>, not its
      importance.</p>
 
+  <div class="tscroll">
   <table>
     <tr><th>#</th><th>Fact</th><th>Source &amp; date</th><th>Conf.</th></tr>
     <tr><td class="n">1</td>
@@ -257,6 +265,7 @@ footer{padding:28px 0 0;color:var(--muted);font-size:14.5px}
       <td><b>~$200k–$400k expected annual sales per hospital.</b></td>
       <td>Company press materials, 2025</td><td><span class="pill me">Medium</span> — a company projection, not audited revenue</td></tr>
   </table>
+  </div>
 
   <div class="stale">
     <b>Not established — open questions, not findings. Nothing below should be asserted as fact.</b>
@@ -287,6 +296,7 @@ footer{padding:28px 0 0;color:var(--muted);font-size:14.5px}
 
   <h3>Their four real constraints, and the specific answer to each</h3>
 
+  <div class="tscroll">
   <table>
     <tr><th>Diligent's constraint</th><th>Why it bites</th><th>What we change</th></tr>
     <tr>
@@ -311,6 +321,7 @@ footer{padding:28px 0 0;color:var(--muted);font-size:14.5px}
       <td>Port-based fabric economics scale with <b>sites</b>, not with <b>bytes</b> — so per-site cost stops tracking how chatty the robots get.</td>
     </tr>
   </table>
+  </div>
 
   <h3>Proposed architecture — concrete enough to whiteboard</h3>
   <div class="arch">
