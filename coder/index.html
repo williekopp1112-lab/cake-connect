@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Latitude x Coder — we brought cake</title>
+<title>Latitude x Coder — you just scanned a cake</title>
 <meta name="description" content="Coder sells self-hosted. Somebody still has to own the metal underneath it. Bare metal and private fabric from Latitude, a Megaport company.">
-<meta property="og:title" content="Latitude x Coder — we brought cake">
-<meta property="og:description" content="Your AI, your rules, our metal. Bare metal and a private Megaport fabric for the platform running enterprise dev environments and their agents.">
+<meta property="og:title" content="Latitude x Coder — you just scanned a cake">
+<meta property="og:description" content="Your AI. Your rules. Our metal. Bare metal and a private Megaport fabric for the platform running enterprise dev environments and their agents.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cake-connect.vercel.app/coder/">
 <meta property="og:image" content="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAwIDYzMCI+PHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNjMwIiBmaWxsPSIjMDkwQjBCIi8+PHJlY3QgeT0iNTk4IiB3aWR0aD0iMTIwMCIgaGVpZ2h0PSIzMiIgZmlsbD0iIzc1MTFFMiIvPjx0ZXh0IHg9IjgwIiB5PSIyNTAiIGZvbnQtZmFtaWx5PSJJbnRlcixTZWdvZSBVSSxzeXN0ZW0tdWksc2Fucy1zZXJpZiIgZm9udC1zaXplPSI2NiIgZm9udC13ZWlnaHQ9IjgwMCIgZmlsbD0iI0ZGRkZGRiI+V2UgYnJvdWdodCBjYWtlLjwvdGV4dD48dGV4dCB4PSI4MCIgeT0iMzQyIiBmb250LWZhbWlseT0iSW50ZXIsU2Vnb2UgVUksc3lzdGVtLXVpLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iNjYiIGZvbnQtd2VpZ2h0PSI4MDAiIGZpbGw9IiNCQzdDRkYiPllvdXIgQUksIHlvdXIgcnVsZXMsIG91ciBtZXRhbC48L3RleHQ+PHRleHQgeD0iODAiIHk9IjQ0MiIgZm9udC1mYW1pbHk9IkludGVyLFNlZ29lIFVJLHN5c3RlbS11aSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjM0IiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjRkJGOEY4Ij5MYXRpdHVkZSwgYSBNZWdhcG9ydCBjb21wYW55ICYjMTgzOyBmb3IgQ29kZXI8L3RleHQ+PC9zdmc+">
@@ -14,7 +14,9 @@
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNyIgZmlsbD0iIzA5MEIwQiIvPjxwYXRoIGQ9Ik02IDIxaDIwdjRINnoiIGZpbGw9IiM3NTExRTIiLz48cGF0aCBkPSJNNiAxNWgyMHY1SDZ6IiBmaWxsPSIjRkJGOEY4Ii8+PHBhdGggZD0iTTYgMTVjMC00IDQuNS03IDEwLTdzMTAgMyAxMCA3eiIgZmlsbD0iI0JDN0NGRiIvPjxjaXJjbGUgY3g9IjE2IiBjeT0iNiIgcj0iMiIgZmlsbD0iI0YwOERGRiIvPjwvc3ZnPg==">
 <style>
 :root{
-  /* Coder brand tokens — all 18 verbatim from https://coder.com/brand */
+  /* Coder brand tokens — every value below was observed verbatim on
+     https://coder.com/brand (re-scraped 2026-09-02). None are derived,
+     darkened or tinted. */
   --cd-black:#090B0B;
   --cd-cinder:#18171A;
   --cd-smoke:#2F2D33;
@@ -36,6 +38,7 @@
   --shell-w:560px;
   --r:10px;
   --ease:cubic-bezier(.2,.72,.24,1);
+  --squash:cubic-bezier(.3,1.5,.4,1);
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -50,27 +53,49 @@ body{
 }
 img{display:block;max-width:100%}
 p{margin:0}
-h1,h2{margin:0;font-weight:800;letter-spacing:-.02em}
+h1,h2{margin:0;font-weight:800;letter-spacing:-.03em}
 .wrap{width:100%;max-width:var(--shell-w);margin:0 auto;padding:0 24px}
 
-/* ---------- hero (base of the cake) ---------- */
-.hero{position:relative;overflow:hidden;background:var(--cd-black);color:var(--cd-white);padding:24px 0 38px}
-.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 72% at 50% 0%,rgba(117,17,226,.42),rgba(117,17,226,0) 68%);pointer-events:none}
+/* ---------- hero: the stunt goes first (V2.6) ----------
+   A cake lands on a desk unannounced and someone scans the icing. The first
+   thing that should happen on screen is a cake building itself — not a logo
+   lockup, which is what a landing page does. Attribution follows the payoff. */
+.hero{position:relative;overflow:hidden;background:var(--cd-black);color:var(--cd-white);padding:18px 0 34px}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(115% 62% at 24% 4%,rgba(117,17,226,.52),rgba(117,17,226,0) 66%);pointer-events:none}
+.hero::after{content:"";position:absolute;left:-10%;top:-6%;width:56%;height:46%;background:radial-gradient(circle,rgba(240,141,255,.20),rgba(240,141,255,0) 70%);pointer-events:none}
 .hero .wrap{position:relative;z-index:1}
 
-.lockup{margin:0 0 18px}
-.lockup-for{font-size:16px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cd-purple);margin:0 0 8px}
-.lockup-mark{width:208px;max-width:68vw;height:auto}
-.lockup-caption{font-size:16px;font-weight:600;color:var(--cd-white);margin:10px 0 0}
-.lockup-lat::after{content:","}
-.lockup-dot::before{content:"\00B7";padding:0 6px;color:var(--cd-purple)}
+/* ---------- the self-building cake (V2.6 stunt) ----------
+   Four slabs in the four layer colours of this page, so the object in the hero
+   is a literal preview of the document you are about to scroll: linen, shell,
+   twilight, violet, top to bottom. Assembly is transform+opacity only, every
+   animation one-shot with a `both` fill, all of it finished inside 1.5s. */
+.cake{position:relative;width:252px;max-width:74vw;margin:0 0 20px;display:flex;flex-direction:column;align-items:center}
+.topper{width:64px;height:auto;margin:0 0 7px;opacity:0;animation:topperpop .52s var(--squash) .82s 1 both}
+.slab{
+  display:block;border-radius:5px;
+  box-shadow:0 0 0 1px rgba(255,255,255,.16);
+  opacity:0;transform-origin:bottom center;
+  animation:slabdrop .54s var(--squash) 1 both;
+}
+.slab--1{width:60%;height:23px;background:var(--cd-linen);border-radius:7px 7px 5px 5px;animation-delay:.58s}
+.slab--2{width:71%;height:25px;background:var(--cd-shell);animation-delay:.42s}
+.slab--3{width:83%;height:27px;background:var(--cd-twilight);animation-delay:.26s}
+.slab--4{width:95%;height:29px;background:var(--cd-violet);animation-delay:.10s}
+.plate{display:block;width:100%;height:8px;margin:5px 0 0;border-radius:999px;background:var(--cd-smoke);opacity:0;animation:platein .4s var(--ease) .02s 1 both}
 
-.rule{height:2px;background:var(--cd-violet);opacity:.9;margin:0 0 18px;border-radius:2px}
+/* Icing that actually draws itself across the top slab. */
+.slab--1::after{
+  content:"";position:absolute;left:20%;right:20%;top:-6px;height:11px;
+  background:radial-gradient(circle at 10px 11px,transparent 9px,var(--cd-linen) 9.5px) repeat-x 0 0/20px 11px;
+  transform:scaleX(0);transform-origin:left center;
+  animation:icedraw .62s var(--ease) .86s 1 both;
+}
 
-.eyebrow{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:16px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cd-purple);margin:0 0 12px}
-.mark-cd{width:190px;max-width:62vw;height:auto;margin:0 0 18px}
-h1{font-size:32px;line-height:1.15}
-.glaze{color:var(--cd-purple)}
+.eyebrow{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:16px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cd-purple);margin:0 0 10px}
+.mark-cd{width:190px;max-width:62vw;height:auto;margin:0 0 16px}
+h1{font-size:34px;line-height:1.12}
+.h1sub{margin:12px 0 0;font-size:26px;font-weight:800;line-height:1.2;letter-spacing:-.03em;color:var(--cd-purple)}
 .lede{margin:14px 0 0;font-size:19px;color:#E9E7EC}
 
 .cta{
@@ -89,15 +114,23 @@ h1{font-size:32px;line-height:1.15}
 .stage{margin:20px 0 0}
 .stage .cta{margin:0}
 .cta span{position:relative;z-index:1}
-.cta::after{content:"";position:absolute;top:0;left:-40%;width:40%;height:100%;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.8),rgba(255,255,255,0));transform:translateX(0);opacity:0;animation:swipe 1.05s ease-out .55s 1 both}
+.cta::after{content:"";position:absolute;top:0;left:-40%;width:40%;height:100%;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.8),rgba(255,255,255,0));transform:translateX(0);opacity:0;animation:swipe 1.05s ease-out 1.25s 1 both}
 .cta:hover,.cta:focus-visible{transform:translateY(-2px)}
 .cta:active{transform:translateY(2px) scale(.99)}
 .cta:focus-visible{outline:3px solid var(--cd-white);outline-offset:3px}
 
+/* Attribution sits under the payoff, not above it. Megaport is the guest. */
+.rule{height:2px;background:var(--cd-violet);opacity:.9;margin:26px 0 16px;border-radius:2px}
+.lockup{margin:0}
+.lockup-for{font-size:16px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cd-purple);margin:0 0 8px}
+.lockup-mark{width:208px;max-width:68vw;height:auto}
+.lockup-caption{font-size:16px;font-weight:600;color:var(--cd-white);margin:10px 0 0}
+.lockup-lat::after{content:","}
+.lockup-dot::before{content:"\00B7";padding:0 6px;color:var(--cd-purple)}
+
 /* ---------- confetti: Layer 01's opening celebration (V2.4) ----------
-   The burst now belongs to Layer 01, not the page load. It fires exactly once,
-   when the icing divider crossing into "Who we are" is baked. Brand-coloured
-   pieces only, all of them legible against the linen layer. */
+   The burst belongs to Layer 01, not the page load. It fires exactly once,
+   when the icing divider crossing into "Who we are" is baked. */
 .sprinkles{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .sprinkles i{position:absolute;top:-16px;width:5px;height:13px;border-radius:3px;opacity:0}
 .layer--1.celebrate .sprinkles i{animation:sprinkle 1.6s cubic-bezier(.3,.6,.3,1) var(--sd) 1 both}
@@ -114,11 +147,10 @@ h1{font-size:32px;line-height:1.15}
 .sprinkles i:nth-child(11){left:93%;--drift:18px;--fall:285px;--spin:-150deg;--sd:.19s;background:var(--cd-purple)}
 .sprinkles i:nth-child(12){left:98%;--drift:-20px;--fall:215px;--spin:200deg;--sd:.42s;background:var(--cd-magenta)}
 
-/* ---------- cake layers: one scene each (V2.4) ----------
-   Each layer commands the 375x812 screen on its own. min-height is set in svh so
-   a phone's collapsing address bar cannot shrink a scene below its intended room,
-   and the content block is centred so a layer's own moment is never shared with
-   the neighbouring layer's content. Spacing is CSS only — no copy was added. */
+/* ---------- cake layers: one scene each (V2.4, retained) ----------
+   Each layer commands the 375x812 screen on its own. min-height is set in svh
+   so a phone's collapsing address bar cannot shrink a scene, and the content
+   block is centred so a layer's moment is never shared with its neighbour. */
 .layer{
   position:relative;
   display:flex;flex-direction:column;justify-content:center;
@@ -131,6 +163,15 @@ h1{font-size:32px;line-height:1.15}
 .layer--2{background:var(--cd-shell);color:var(--cd-black)}
 .layer--3{background:var(--cd-twilight);color:var(--cd-white)}
 .layer--4{background:var(--cd-violet);color:var(--cd-white)}
+/* V2.6: the payoff layer gets a spotlight so the last scene reads as an
+   arrival rather than a footer. Decoration sits behind the copy. */
+/* Geometry is inset to the layer, not 150% wide: a decorative box that overhangs the
+   viewport adds to documentElement.scrollWidth on the right and forces a shrink-to-fit
+   470px layout viewport. Clipping via overflow on .layer--4 is NOT an option because
+   .icing intentionally overhangs the layer top by 15px. Constraining the box is the
+   only fix with no browser-support dependency. Gradient extent is widened (68% -> 86%)
+   so the spotlight keeps the same soft falloff in a narrower box. */
+.layer--4::before{content:"";position:absolute;left:0;right:0;top:8%;height:70%;background:radial-gradient(circle at 50% 46%,rgba(240,141,255,.30),rgba(240,141,255,0) 86%);pointer-events:none;z-index:0}
 
 .icing{
   position:absolute;top:-15px;left:0;right:0;height:16px;
@@ -150,17 +191,18 @@ h1{font-size:32px;line-height:1.15}
 .layer.baked .icing::before{animation:glisten 1.5s ease-in-out .18s 2 both}
 .layer.baked .icing::after{animation:drip 1.35s ease-out .28s 2 both}
 
-.tier{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:16px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin:0 0 6px}
+.tier{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:16px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px}
 .layer--1 .tier{color:var(--cd-violet)}
 .layer--2 .tier{color:var(--cd-orchid)}
 .layer--3 .tier{color:var(--cd-sky)}
 .layer--4 .tier{color:var(--cd-sky)}
-h2{font-size:28px;line-height:1.16;margin:0 0 14px}
+h2{font-size:29px;line-height:1.15;margin:0 0 14px}
 .body{font-size:19px}
 .spec{margin:14px 0 0;font-size:19px;padding:16px 18px;border-radius:var(--r);background:var(--cd-white);border-left:5px solid var(--cd-violet)}
 .proof{margin:18px 0 0;font-size:19px;font-weight:700;color:var(--cd-sky)}
 .cite{margin:6px 0 0;font-size:16px;font-weight:600;color:var(--cd-sky)}
-.pun{margin:0 0 14px;font-size:19px;font-weight:800;color:var(--cd-sky)}
+.pun{margin:0 0 12px;font-size:19px;font-weight:800;color:var(--cd-sky)}
+.kicker{margin:0 0 14px;font-size:23px;font-weight:800;line-height:1.2;letter-spacing:-.03em;color:var(--cd-white)}
 .close{font-size:19px}
 
 .logos{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:18px 0 0;padding:0}
@@ -177,9 +219,9 @@ h2{font-size:28px;line-height:1.16;margin:0 0 14px}
 .logo:nth-child(even){--tilt:1.1deg}
 .logo img{width:100%;height:auto;max-height:26px;object-fit:contain}
 .logo--wide{grid-column:span 2}
-/* V2.4: each tile is its own beat, so the shelf assembles one logo at a time
-   rather than arriving as a single block. Only the delay varies per tile —
-   never the transform, or the nth-child rule would outrank .rise.lit .logo. */
+/* Each tile is its own beat, so the shelf assembles one logo at a time. Only
+   the delay varies per tile — never the transform, or the nth-child rule would
+   outrank .rise.lit .logo and strand the tiles in their resting tilt. */
 .logos .logo{opacity:0;transform:translateY(18px) rotate(var(--tilt))}
 .rise.lit .logos .logo{opacity:1;transform:rotate(var(--tilt))}
 .rise.lit .logos .logo:nth-child(1){transition-delay:.56s}
@@ -200,9 +242,8 @@ h2{font-size:28px;line-height:1.16;margin:0 0 14px}
 .qr figcaption{font-size:17px;font-weight:700;color:var(--cd-white)}
 
 /* ---------- reveal engine: one rule set, four personalities ----------
-   V2.4 retunes the engine for scene pacing: every duration now sits in the
-   600-900ms band and the stagger between elements is .16s, so a layer builds
-   label -> heading -> body -> accessory instead of arriving all at once. */
+   Durations sit in the 600-900ms band and the stagger is .16s, so a layer
+   builds label -> heading -> body -> accessory instead of arriving at once. */
 .rise{--rest:translateY(20px);--dur:.72s;--lead:0s}
 .rise > *{opacity:0;transform:var(--rest);transition:opacity 0s linear,transform var(--dur) var(--ease)}
 .rise.lit > *{opacity:1;transform:none}
@@ -214,9 +255,9 @@ h2{font-size:28px;line-height:1.16;margin:0 0 14px}
 .rise.lit > *:nth-child(6){transition-delay:calc(var(--lead) + .80s)}
 .rise.lit > *:nth-child(7){transition-delay:calc(var(--lead) + .96s)}
 /* Layer 01 — the knife slice: everything enters from the left edge, level. */
-.rise--slice{--rest:translateX(-30px);--dur:.66s;--lead:.02s}
-/* Layer 02 — the settle: the layer drops in from above and comes to rest. */
-.rise--settle{--rest:translateY(-24px);--dur:.78s;--lead:.22s}
+.rise--slice{--rest:translateX(-34px);--dur:.66s;--lead:.02s}
+/* Layer 02 — the settle: the layer drops from above and comes to rest. */
+.rise--settle{--rest:translateY(-28px);--dur:.78s;--lead:.22s}
 /* Layer 03 — the cascade: the shelf assembles, one tile after another. */
 .rise--cascade{--rest:translateY(16px) scale(.985);--dur:.68s;--lead:0s}
 /* Layer 04 — the finale: the tallest lift, the longest travel, the last word.
@@ -225,13 +266,11 @@ h2{font-size:28px;line-height:1.16;margin:0 0 14px}
    long as the element is below the range, and a scale under 1 shrinks the
    measured hit box with it — scale(.97) took the 44px mailto to 43px. Travel is
    free; shrinking a tap target is not. */
-.rise--finale{--rest:translateY(34px);--dur:.88s;--lead:.06s}
+.rise--finale{--rest:translateY(38px);--dur:.88s;--lead:.06s}
 
-/* ---------- V2.4 scroll-driven build (progressive enhancement) ----------
-   Where the browser supports scroll-driven animations the transform is handed
-   to the scroll position itself, so each element develops as you slide down an
-   Apple product page rather than snapping on a timer. Staggered `cover` ranges
-   keep the label/heading/body/accessory order.
+/* ---------- scroll-driven build (progressive enhancement) ----------
+   Where supported the transform is handed to scroll position itself, so each
+   element develops as you slide down rather than snapping on a timer.
    Opacity is deliberately NOT animated here: it stays owned by the .lit class
    flip, so the IntersectionObserver + 2s failsafe can always make copy visible.
    A scroll-driven animation cannot strand a word. */
@@ -260,6 +299,25 @@ h2{font-size:28px;line-height:1.16;margin:0 0 14px}
 @keyframes scene-rise{from{transform:var(--rest)}to{transform:none}}
 @keyframes scene-icing{from{transform:scaleX(0)}to{transform:none}}
 
+@keyframes slabdrop{
+  0%{opacity:0;transform:translate3d(0,-40px,0) scaleY(.55)}
+  55%{opacity:1;transform:translate3d(0,0,0) scaleY(1.16)}
+  78%{opacity:1;transform:translate3d(0,0,0) scaleY(.93)}
+  100%{opacity:1;transform:none}
+}
+@keyframes topperpop{
+  0%{opacity:0;transform:translate3d(0,-26px,0) scale(.5)}
+  62%{opacity:1;transform:translate3d(0,0,0) scale(1.18)}
+  100%{opacity:1;transform:none}
+}
+@keyframes platein{
+  0%{opacity:0;transform:scaleX(.4)}
+  100%{opacity:1;transform:none}
+}
+@keyframes icedraw{
+  0%{transform:scaleX(0)}
+  100%{transform:none}
+}
 @keyframes swipe{
   0%{opacity:0;transform:translateX(0)}
   18%{opacity:1}
@@ -284,18 +342,29 @@ h2{font-size:28px;line-height:1.16;margin:0 0 14px}
   from{opacity:0;transform:translate3d(0,10px,0) scale(.985)}
   to{opacity:1;transform:none}
 }
+.eyebrow,.mark-cd,h1,.h1sub,.lede{animation:settle .58s var(--ease) 1 both}
+.eyebrow{animation-delay:.96s}
+.mark-cd{animation-delay:1.02s}
+h1{animation-delay:1.08s}
+.h1sub{animation-delay:1.16s}
+.lede{animation-delay:1.24s}
 .lockup-for,.lockup-mark,.lockup-caption{animation:settle .62s var(--ease) 1 both}
-.lockup-mark{animation-delay:.08s}
-.lockup-caption{animation-delay:.16s}
+.lockup-for{animation-delay:1.32s}
+.lockup-mark{animation-delay:1.38s}
+.lockup-caption{animation-delay:1.44s}
 
 @media (min-width:600px){
   body{font-size:20px}
-  h1{font-size:44px}
+  h1{font-size:46px}
+  .h1sub{font-size:32px}
   h2{font-size:34px}
+  .kicker{font-size:27px}
   .logos{grid-template-columns:repeat(3,1fr)}
   .logo--wide{grid-column:span 3}
   .mark-cd{width:230px}
   .lockup-mark{width:244px}
+  .cake{width:300px}
+  .topper{width:76px}
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -307,7 +376,8 @@ h2{font-size:28px;line-height:1.16;margin:0 0 14px}
   .cta::after{animation:none !important;opacity:0 !important;transform:none !important}
   .cta:hover,.cta:focus-visible,.cta:active{transform:none !important}
   .logo,.logo:hover,.logo:active,.logos .logo,.rise.lit .logos .logo{opacity:1 !important;transform:none !important;transition:none !important;animation:none !important}
-  .lockup-for,.lockup-mark,.lockup-caption{animation:none !important;opacity:1 !important;transform:none !important}
+  .eyebrow,.mark-cd,h1,.h1sub,.lede,.lockup-for,.lockup-mark,.lockup-caption{animation:none !important;opacity:1 !important;transform:none !important}
+  .slab,.topper,.plate,.slab--1::after{animation:none !important;opacity:1 !important;transform:none !important}
 }
 </style>
 <noscript><style>.rise > *{opacity:1;transform:none;animation:none}.icing{transform:none;animation:none}.logos .logo{opacity:1;transform:none}</style></noscript>
@@ -316,17 +386,26 @@ h2{font-size:28px;line-height:1.16;margin:0 0 14px}
 
 <header class="hero">
   <div class="wrap">
+    <div class="cake">
+      <img class="topper" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMiIgZGF0YS1uYW1lPSJMYXllciAyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MjUuOTMgMjAwIj4KICA8ZGVmcz4KICAgIDxzdHlsZT4KICAgICAgLmNscy0xIHsKICAgICAgICBmaWxsOiAjZmZmOwogICAgICAgIHN0cm9rZS13aWR0aDogMHB4OwogICAgICB9CiAgICA8L3N0eWxlPgogIDwvZGVmcz4KICA8ZyBpZD0iTGF5ZXJfMi0yIiBkYXRhLW5hbWU9IkxheWVyIDIiPgogICAgPGcgaWQ9IkxheWVyXzEtMiIgZGF0YS1uYW1lPSJMYXllciAxLTIiPgogICAgICA8Zz4KICAgICAgICA8cmVjdCBjbGFzcz0iY2xzLTEiIHg9IjI2My43NSIgeT0iNS40MSIgd2lkdGg9IjE2Mi4xOCIgaGVpZ2h0PSIxODkuMjQiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0wLDEwMEMwLDM4LjkyLDUxLjg5LDAsMTIzLjI1LDBzMTExLjM1LDMzLjc4LDExMi43LDgzLjUxbC02MS42MiwxLjg5Yy0xLjYyLTI3LjU3LTI2LjAzLTQ1LjY4LTUxLjA4LTQ1LjE0LTM0LjMyLjc0LTU5LjczLDIzLjUxLTU5LjczLDU5LjczczI1LjQxLDU4LjY1LDU5LjczLDU4LjY1YzI1LjA1LDAsNDguOTEtMTcuMyw1MS42Mi00NC44Nmw2MS42MiwxLjM1Yy0xLjYyLDUwLjU0LTQ0LjA1LDg0Ljg3LTExMy4yNCw4NC44N1MwLDE2MC44MSwwLDEwMFoiLz4KICAgICAgPC9nPgogICAgPC9nPgogIDwvZz4KPC9zdmc+" alt="Coder" width="426" height="200">
+      <span class="slab slab--1"></span>
+      <span class="slab slab--2"></span>
+      <span class="slab slab--3"></span>
+      <span class="slab slab--4"></span>
+      <span class="plate"></span>
+    </div>
+    <p class="eyebrow">Baked for</p>
+    <img class="mark-cd" data-mark="prospect" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMiIgZGF0YS1uYW1lPSJMYXllciAyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzIwLjgxIDIwMCI+CiAgPGRlZnM+CiAgICA8c3R5bGU+CiAgICAgIC5jbHMtMSB7CiAgICAgICAgZmlsbDogI2ZmZjsKICAgICAgICBzdHJva2Utd2lkdGg6IDBweDsKICAgICAgfQogICAgPC9zdHlsZT4KICA8L2RlZnM+CiAgPGcgaWQ9IkxheWVyXzItMiIgZGF0YS1uYW1lPSJMYXllciAyIj4KICAgIDxnIGlkPSJMYXllcl8xLTIiIGRhdGEtbmFtZT0iTGF5ZXIgMS0yIj4KICAgICAgPGc+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSIxMTU4LjYzIiB5PSI1LjQxIiB3aWR0aD0iMTYyLjE4IiBoZWlnaHQ9IjE4OS4yNCIvPgogICAgICAgIDxwb2x5Z29uIGNsYXNzPSJjbHMtMSIgcG9pbnRzPSI3NDUuMTggMTk0LjU5IDkwNS45OSAxOTQuNTkgOTA1Ljk5IDE1NC4wNSA4MDYuOCAxNTQuMDUgODA2LjggMTE2Ljc2IDg5MS45MyAxMTYuNzYgODkxLjkzIDgwLjgxIDgwNi44IDgwLjgxIDgwNi44IDQ0LjU5IDkwNC4xIDQ0LjU5IDkwNC4xIDUuNCA3NDUuMTggNS40IDc0NS4xOCAxOTQuNTkiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yMzYuNDksMTE1LjEzbC02MS42Mi0xLjM1Yy0yLjcsMjcuNTctMjYuNTcsNDQuODYtNTEuNjIsNDQuODYtMzQuMzMsMC01OS43My0yMi45Ny01OS43My01OC42NXMyNS40MS01OC45OSw1OS43My01OS43M2MyNS4wNS0uNTQsNDkuNDYsMTcuNTcsNTEuMDgsNDUuMTRsNjEuNjItMS44OUMyMzQuNiwzMy43OCwxOTIuMTYsMCwxMjMuMjUsMFMwLDM4LjkyLDAsMTAwczUxLjg5LDEwMCwxMjMuMjUsMTAwLDExMS42Mi0zNC4zMiwxMTMuMjQtODQuODdoMFoiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00OTYuMTQsMTAwYzAtNjAuMjctNDguODMtMTAwLTExOC45Mi0xMDBzLTExOC45MiwzOS43My0xMTguOTIsMTAwLDQ4LjgzLDEwMCwxMTguOTIsMTAwLDExOC45Mi0zOS40NiwxMTguOTItMTAwWk0zNzcuMjIsMzkuNzNjMzIuNzcsMCw1NS40MSwyNC41OSw1NS40MSw2MC4yN3MtMjIuNjMsNTkuMTktNTUuNDEsNTkuMTktNTUuNC0yNC4wNi01NS40LTU5LjE5LDIyLjg3LTYwLjI3LDU1LjQtNjAuMjdaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNTE3Ljk1LDE5NC41OWg3OC4zOGM3NS45NSwwLDEyNy4wMy0zNS40LDEyNy4wMy05NC41OVM2NzIuMjgsNS40LDU5Ni4zMyw1LjRoLTc4LjM4djE4OS4xOVpNNjYwLjM5LDEwMGMwLDM2LjIyLTI2Ljc2LDU2Ljc2LTY2Ljc2LDU2Ljc2aC0xMy41MVY0Mi45N2gxMy41MWM0MCwwLDY2Ljc2LDIwLjI3LDY2Ljc2LDU3LjAzWiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTkzMy4yNSwxOTQuNTloNjIuMTZ2LTYzLjUxaDE2LjQ5YzE5LjczLDAsMzcuMjksNy44NCw0Mi40MywyOS43M2w1Ljk1LDMzLjc4aDcxLjA4bC03LjU3LTM2LjQ5Yy03LjMzLTI5LjU2LTI1LjA1LTQ4Ljk2LTYyLjQzLTUxLjM2di0xLjYxYzM4LjM4LDAsNjEuODktMTcuMyw2MS44OS00NS4xMywwLTMzLjc4LTM0LjU5LTU0LjYtOTEuMzUtNTQuNmgtOTguNjV2MTg5LjE5aDBaTTEwNjEuMDksNjkuNzNjMCwxNy41Ny0xMy4yNCwyOC4xMS0zNC41OSwyOC4xMWgtMzEuMDh2LTU1Ljk1aDMxLjA4YzIxLjM1LDAsMzQuNTksMTAuNTQsMzQuNTksMjcuODRaIi8+CiAgICAgIDwvZz4KICAgIDwvZz4KICA8L2c+Cjwvc3ZnPg==" alt="Coder" width="1321" height="200">
+    <h1>You just scanned a cake.</h1>
+    <p class="h1sub">Your AI. Your rules. Our metal.</p>
+    <p class="lede">You sell self-hosted. Someone still has to own the metal underneath.</p>
+    <a class="cta" href="https://megaport.chilipiper.com/personal-page/henry-barton"><span>Grab 20 minutes with Henry</span></a>
+    <div class="rule" aria-hidden="true"></div>
     <div class="lockup">
       <p class="lockup-for">from</p>
       <img class="lockup-mark" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1ODYuMzQgMTYzLjI0Ij48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTI4LjEsODYuNTZWMTEuNzhoLTExLjY0djc0Ljc4aDExLjY0WiI+PC9wYXRoPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xNjEuMDEsODcuODRjNi4wOSwwLDEyLjkzLTIuOTksMTYuMDItOC4wMXY2LjczaDExLjU0di00OS43OGgtMTEuNTR2Ni43M2MtMy4xLTUuMDItOS4wOC04LjAxLTE1LjctOC4wMS0xNS40OSwwLTI0Ljc4LDExLjU0LTI0Ljc4LDI2LjE3czguNDQsMjYuMTcsMjQuNDYsMjYuMTdaTTE2Mi43Miw3Ny40OGMtOS4wOCwwLTE0LjUzLTYuNzMtMTQuNTMtMTUuODFzNS40NS0xNS44MSwxNC41My0xNS44MWM5LjkzLDAsMTQuNzQsNy4yNiwxNC43NCwxNS44MXMtNC44MSwxNS44MS0xNC43NCwxNS44MVoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMjIzLjI3LDc2LjczYy00LjU5LDAtNy4yNi0xLjA3LTcuMjYtOS43MnYtMjAuNTFoMTEuNDN2LTkuNzJoLTExLjQzdi0xNS4wNmgtMTEuNjR2MTUuMDZoLTguNDR2OS43Mmg4LjQ0djIzLjE4YzAsMTYuNzcsMTAuNDcsMTcuNTIsMTYuMTMsMTcuNTIsMy40MiwwLDYuODQtLjMyLDguNjUtLjY0di0xMC4yNmMtMS4xOC4yMS00LjA2LjQzLTUuODcuNDNaIj48L3BhdGg+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTI0Mi44NCwyOS42MmM1LjEzLDAsOC42NS0zLjg1LDguNjUtOC42NXMtMy41Mi04LjY1LTguNjUtOC42NS04LjY1LDMuODUtOC42NSw4LjY1LDMuNTMsOC42NSw4LjY1LDguNjVaTTI0OC42MSw4Ni41NnYtNDkuNzhoLTExLjU0djQ5Ljc4aDExLjU0WiI+PC9wYXRoPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0yODMuMzMsNzYuNzNjLTQuNTksMC03LjI2LTEuMDctNy4yNi05Ljcydi0yMC41MWgxMS40M3YtOS43MmgtMTEuNDN2LTE1LjA2aC0xMS42NHYxNS4wNmgtOC40NHY5LjcyaDguNDR2MjMuMThjMCwxNi43NywxMC40NywxNy41MiwxNi4xMywxNy41MiwzLjQyLDAsNi44NC0uMzIsOC42NS0uNjR2LTEwLjI2Yy0xLjE4LjIxLTQuMDYuNDMtNS44OC40M1oiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMzE1LjA4LDg3Ljg0YzcuMTYsMCwxMi4zOS0yLjg4LDE1LjM4LTguMjN2Ni45NGgxMS42NHYtNDkuNzhoLTExLjY0djI4LjFjMCw3LjE2LTMuMjEsMTMuMDMtMTIuMDcsMTMuMDMtNy41OSwwLTEwLjE1LTQuNy0xMC4xNS0xMi43MXYtMjguNDJoLTExLjY0djMxLjNjMCwxMy4zNSw3LjU4LDE5Ljc2LDE4LjQ4LDE5Ljc2WiI+PC9wYXRoPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0zOTAuOTksNDMuNTFjLTMuMS01LjAyLTkuMDgtOC4wMS0xNS43LTguMDEtMTUuNDksMC0yNC43OCwxMS41NC0yNC43OCwyNi4xN3M4LjQ0LDI2LjE3LDI0LjQ2LDI2LjE3YzYuMDksMCwxMi45My0yLjk5LDE2LjAyLTguMDF2Ni43M2gxMS41NFYxMS43OGgtMTEuNTR2MzEuNzNaTTM3Ni42Nyw3Ny40OGMtOS4wOCwwLTE0LjUzLTYuNzMtMTQuNTMtMTUuODFzNS40NS0xNS44MSwxNC41My0xNS44MWM5Ljk0LDAsMTQuNzQsNy4yNiwxNC43NCwxNS44MXMtNC44MSwxNS44MS0xNC43NCwxNS44MVoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNNDU5Ljc2LDU5LjFjMC0xMy45OS05LjYxLTIzLjYxLTIzLjgyLTIzLjYxLTE1LjE3LDAtMjUsMTAuMjYtMjUsMjYuMTdzOS43MiwyNi4xNywyNS40MiwyNi4xN2MxMS45NywwLDIxLjM3LTYuNTIsMjIuODYtMTUuODFoLTExLjc1Yy0xLjkyLDMuODUtNS4zNCw1LjY2LTExLjExLDUuNjYtOC40NCwwLTEzLjU3LTQuMjctMTMuODktMTIuMThoMzYuOTZjLjIxLTIuNzguMzItNC4zOC4zMi02LjQxWk00MjIuNDgsNTYuNjVjLjExLTcuMDUsNS4wMi0xMS45NiwxMy4yNS0xMS45NnMxMi41LDQuMjcsMTIuNjEsMTEuOTZoLTI1Ljg1WiI+PC9wYXRoPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik00NzQuMDYsODcuNDFjNS4wMiwwLDkuMDgtNC4xNyw5LjA4LTkuMDhzLTQuMDYtOC45Ny05LjA4LTguOTctOC45Nyw0LjA2LTguOTcsOC45NywzLjk1LDkuMDgsOC45Nyw5LjA4WiI+PC9wYXRoPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik01MTEuNjcsODcuODRjMTIuMDcsMCwxOS42Ni01Ljc3LDE5LjY2LTE1LjQ5LDAtNy4wNS00LjQ5LTEyLjE4LTExLjU0LTE0LjIxbC05LjkzLTIuODhjLTQuNTktMS4yOC02LjItMy4xLTYuMi01Ljc3LDAtMi45OSwyLjk5LTUuMTMsNy4xNi01LjEzLDUuNDUsMCw4LjY1LDIuNDYsOC42NSw2LjYyaDExLjQzYzAtOS42MS03LjQ4LTE1LjQ5LTE5LjY2LTE1LjQ5LTExLjExLDAtMTkuMTIsNi4yLTE5LjEyLDE0LjY0LDAsNy4wNSwzLjk1LDEyLjA3LDEwLjksMTMuOTlsOS45MywyLjY3YzUuMzQsMS4zOSw2LjUyLDMuMSw2LjUyLDUuODgsMCwzLjUzLTIuNzgsNS44OC03LjE2LDUuODgtNS45OCwwLTEwLjE1LTIuOTktMTAuMTUtNy4yNmgtMTEuNjRjMCw5LjUxLDguOTcsMTYuNTYsMjEuMTUsMTYuNTZaIj48L3BhdGg+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTU2OC4xOCwzNS40OWMtNy4zNywwLTEzLjE0LDIuODgtMTYuMjQsOC4yM1YxMS43OGgtMTEuNjR2NzQuNzhoMTEuNjR2LTI3LjM1YzAtOC43Niw0LjI3LTEzLjc4LDExLjg2LTEzLjc4LDguMTIsMCwxMC45LDQuNTksMTAuOSwxNS4xN3YyNS45NmgxMS42NHYtMzEuM2MwLTEzLjAzLTYuMi0xOS43Ni0xOC4xNi0xOS43NloiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNODUuMSw3OS4yNGwtOC45LDI2LjUzSDI0LjkybDguOTEtMjYuNTNoNTEuMjhaTTU2LjgxLDBoLTMxLjc5TDAsNzQuNTZoMzEuNzlMNTYuODEsMFoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik00ODAuMzMsMTI3LjQxYy0uNTMtLjU1LTEuMTEtLjk5LTEuNzUtMS4zLTEuMTEtLjU1LTIuNDEtLjgyLTMuODUtLjgyLTEuNTMsMC0yLjkyLjMxLTQuMDkuOTEtMS4xOS42LTIuMTksMS40MS0yLjk4LDIuNDMtLjguOTktMS4zOSwyLjE3LTEuODEsMy40Ny0uNCwxLjMtLjYsMi42NS0uNiw0LjA0cy4xOCwyLjg3LjUzLDQuMThjLjM1LDEuMzUuOTMsMi41NCwxLjY4LDMuNTQuNzcsMS4wMiwxLjc3LDEuODMsMi45OCwyLjQzLDEuMTkuNiwyLjYzLjg4LDQuMjcuODgsMS4zNSwwLDIuNjMtLjI5LDMuODUtLjg0LjY5LS4zMSwxLjI4LS43MywxLjc5LTEuMjR2Ljk3Yy4wMiwxLjMtLjI5LDIuNDEtLjkzLDMuMjMtLjYyLjgtMS41OSwxLjE5LTIuOTgsMS4xOS0uOTEsMC0xLjctLjE4LTIuMzctLjU1LS42Mi0uMzMtMS4wMi0uOTMtMS4yNC0xLjgxbC0uMTEtLjQ5aC02LjgxbC4wNC42OWMuMDksMS4yOC40NiwyLjQxLDEuMDgsMy4zNC42Mi45MSwxLjQxLDEuNjYsMi4zNCwyLjIzLjkxLjU1LDEuOTUuOTksMy4wNSwxLjI2LDEuMTEuMjcsMi4xOS40LDMuMjUuNCwyLjQ1LDAsNC40NC0uMzMsNS45Mi0xLjAyLDEuNS0uNjksMi42NS0xLjUzLDMuNDctMi41Mi44LS45OSwxLjMzLTIuMDgsMS41OS0zLjI1LjI0LTEuMTEuMzUtMi4xLjM1LTIuOTZ2LTE5Ljk2aC02LjY1djEuNTdoLS4wNFpNNDc5LjM4LDEzMi40M2MuMzMuNTMuNTcsMS4xMy43MSwxLjgxLjE1LjcxLjIyLDEuNDguMjIsMi4yOCwwLC42OS0uMDksMS4zNS0uMjcsMS45Ny0uMTguNi0uNDQsMS4xNS0uOCwxLjYxLS4zNS40Ni0uNzcuODItMS4zLDEuMTEtLjUxLjI3LTEuMTMuNC0xLjgxLjQtLjc1LDAtMS4zNy0uMTUtMS44Ni0uNDYtLjUxLS4zMS0uOTEtLjczLTEuMjItMS4yNC0uMzEtLjUxLS41NS0xLjExLS42OS0xLjc3LS4xMy0uNjktLjItMS4zOS0uMi0yLjFzLjA5LTEuNDEuMjQtMi4wNmMuMTUtLjYyLjQtMS4xOS43NS0xLjY2LjMzLS40Ni43NS0uODQsMS4yNC0xLjExLjQ2LS4yNywxLjA2LS40LDEuNzUtLjQuODIsMCwxLjUuMTUsMi4wMS40NC41My4yOS45My42OSwxLjI2LDEuMTlsLS4wNC0uMDJaIj48L3BhdGg+PHBhdGggZmlsbD0iI2ZmZiIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNTMxLjYxLDEyOC44OWMtLjgyLTEuMDgtMS44OC0xLjk3LTMuMTItMi42MS0xLjI2LS42Ni0yLjc2LS45OS00LjQ5LS45OS0xLjM3LDAtMi42My4yNy0zLjc4LjgyLS42Ni4zMS0xLjI4Ljc1LTEuODEsMS4yOHYtMS41NWgtNi42NXYyOS4xM2g2Ljk0di04LjhjLjUzLjUxLDEuMTUuOTMsMS44MywxLjI2LDEuMTUuNTUsMi40My44NCwzLjguODQsMS42MSwwLDMuMDUtLjMxLDQuMjctLjk1LDEuMjItLjYyLDIuMjMtMS40OCwzLjA1LTIuNTQuOC0xLjA0LDEuNDEtMi4yNSwxLjgxLTMuNi40LTEuMzMuNTctMi43NC41Ny00LjE4cy0uMi0yLjk4LS41Ny00LjM4Yy0uNC0xLjQxLS45OS0yLjY3LTEuODEtMy43NmwtLjA0LjAyWk01MjcuMDgsMTM2Ljg3YzAsLjc3LS4wNywxLjU3LS4yMiwyLjMyLS4xNS43MS0uNCwxLjM1LS43MywxLjg4LS4zMy41MS0uNzcuOTMtMS4zLDEuMjYtLjUzLjMxLTEuMTkuNDYtMi4wMS40NnMtMS40Ni0uMTUtMS45OS0uNDZjLS41NS0uMzMtLjk5LS43My0xLjMzLTEuMjYtLjMzLS41My0uNi0xLjE3LS43NS0xLjg4LS4xNS0uNzUtLjI0LTEuNTMtLjI0LTIuM3MuMDktMS41OS4yMi0yLjM0Yy4xMy0uNzMuNC0xLjM3LjczLTEuOS4zMy0uNTMuNzctLjk3LDEuMy0xLjMuNTMtLjMzLDEuMTktLjQ5LDIuMDEtLjQ5czEuNDQuMTUsMS45Ny40OWMuNTUuMzMuOTkuNzcsMS4zNSwxLjMzcy42MiwxLjIyLjc3LDEuOTJjLjE1Ljc1LjI0LDEuNTMuMjQsMi4zbC0uMDItLjAyWiI+PC9wYXRoPjxwYXRoIGZpbGw9IiNmZmYiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTU1NS4yMiwxMjguNDVjLS45OS0uOTktMi4yMS0xLjc5LTMuNTgtMi4zNC0xLjM5LS41NS0yLjk2LS44Mi00LjY0LS44MnMtMy4yNS4yOS00LjYyLjgyYy0xLjM3LjU1LTIuNTksMS4zMy0zLjU4LDIuMzQtLjk5Ljk5LTEuNzcsMi4yMy0yLjMsMy42NS0uNTMsMS40MS0uOCwzLjAxLS44LDQuNzFzLjI3LDMuMjkuOCw0LjY5Yy41MywxLjQxLDEuMywyLjYzLDIuMywzLjYyLjk5Ljk5LDIuMTksMS43OSwzLjU4LDIuMzIsMS4zNy41MywyLjkyLjgsNC42Mi44czMuMjUtLjI3LDQuNjQtLjgsMi42MS0xLjMzLDMuNi0yLjMyYy45OS0uOTksMS43Ny0yLjIzLDIuMy0zLjYyLjUzLTEuMzkuOC0yLjk4LjgtNC42OXMtLjI3LTMuMjktLjgtNC43MS0xLjMtMi42NS0yLjMtMy42NWgtLjAyWk01NDkuMDcsMTQyLjMxYy0uNTUuMzEtMS4yNi40Ni0yLjEuNDZzLTEuNTUtLjE1LTIuMDgtLjQ2Yy0uNTUtLjMzLS45Ny0uNzUtMS4zMy0xLjI4LS4zNS0uNTUtLjYtMS4xOS0uNzMtMS45LS4xNS0uNzMtLjIyLTEuNS0uMjItMi4zcy4wOS0xLjU1LjIyLTIuMzJjLjE1LS43MS40LTEuMzUuNzMtMS45LjMzLS41My43Ny0uOTUsMS4zMy0xLjMuNTMtLjMzLDEuMjQtLjQ5LDIuMDgtLjQ5czEuNTUuMTUsMi4xLjQ5Yy41Ny4zMywxLjAyLjc1LDEuMzUsMS4yOC4zNS41NS42LDEuMTkuNzMsMS45LjE1Ljc1LjIyLDEuNTMuMjIsMi4zMnMtLjA3LDEuNTUtLjIyLDIuM2MtLjE1LjcxLS40LDEuMzUtLjczLDEuOS0uMzMuNTMtLjc3Ljk1LTEuMzMsMS4yOGwtLjAyLjAyWiI+PC9wYXRoPjxwYXRoIGZpbGw9IiNmZmYiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTU4Ni4xOCwxMzEuNjV2LTYuMzdoLTQuMTZ2LTUuNjRoLTYuOTR2MjIuNzljMCwxLjE1LjIsMi4wOC42LDIuODEuNC43NS45NSwxLjMzLDEuNjYsMS43Mi42Ni4zOCwxLjQ0LjY0LDIuMy43Ny44Mi4xMywxLjY4LjE4LDIuNTkuMTguNTcsMCwxLjE1LDAsMS43NS0uMDQuNjItLjAyLDEuMTctLjA5LDEuNjgtLjE4bC41My0uMDl2LTUuN2wtLjc1LjE1Yy0uMjQuMDQtLjUxLjA5LS43Ny4xMS0uMjcuMDItLjU1LjA0LS44Ni4wNC0xLjA4LDAtMS4zOS0uMjItMS40Ni0uMjktLjA3LS4wNy0uMjktLjM4LS4yOS0xLjQ2di04Ljg0aDQuMTZsLS4wMi4wMloiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik01NzMuNDUsMTI1LjI5Yy0uNzcsMC0yLjM0LjExLTMuMDcuMzUtLjcxLjIyLTEuMzkuNTUtMi4wMy45N3MtMS4xOS45My0xLjcsMS41M2MwLDAtLjAyLjAyLS4wNC4wNHYtMi4zNGgtNi42NXYyMS45aDYuOTR2LTkuOTVjMC0uODguMDktMS43LjI3LTIuNDUuMTUtLjcxLjQ0LTEuMzUuODQtMS44Ni4zOC0uNTEuODYtLjkzLDEuNS0xLjIyLjgyLS40LDEuOTUtLjUzLDMuMjctLjRsLjY5LjA3di02LjY1aDBaIj48L3BhdGg+PHBhdGggZmlsbD0iI2ZmZiIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNDYxLjIxLDEyOS4yOWMtLjg4LTEuMjItMi4wNi0yLjIxLTMuNDMtMi45Mi0xLjM5LS43My0zLjAzLTEuMDgtNC44OC0xLjA4LTEuNjYsMC0zLjE4LjMxLTQuNTUuODgtMS4zNy42LTIuNTYsMS40MS0zLjU0LDIuNDMtLjk5LDEuMDQtMS43NSwyLjI1LTIuMywzLjY3LS41MywxLjM5LS44LDIuOTItLjgsNC41M3MuMjcsMy4yMy43Nyw0LjYyYy41MSwxLjQxLDEuMjYsMi42MywyLjIzLDMuNjUuOTcsMS4wMiwyLjE0LDEuODEsMy41NCwyLjM3LDEuMzcuNTUsMi45Mi44Miw0LjYyLjgyLDIuNDUsMCw0LjU4LS41Nyw2LjMyLTEuNywxLjM5LS45MSwyLjUtMi4yOCwzLjMyLTQuMDlsLjQtLjg4aC02LjcybC0uMTguMTVjLS4xMS4wOS0uMjQuMi0uMzguMjktLjczLjUxLTEuNTcuNzUtMi41OS43NS0xLjQxLDAtMi41LS4zNS0zLjIzLTEuMDYtLjYyLS42LTEuMDItMS41OS0xLjE1LTIuOTJoMTQuODFsLjA0LS42Yy4xMS0xLjY2LS4wMi0zLjI3LS40Mi00LjgtLjQtMS41My0xLjA0LTIuOTItMS45Mi00LjEzbC4wMi4wMlpNNDUwLjc2LDEzMS4yMWMuNTEtLjI3LDEuMTctLjQsMS45Ny0uNCwxLjE5LDAsMi4wOC4zMSwyLjYzLjkxLjQ2LjUzLjg0LDEuMjYsMS4xMSwyLjIxaC03LjcxYy4wNC0uMTguMDktLjM1LjEzLS41NS4xMy0uNDIuMzMtLjg0LjY0LTEuMjJzLjcxLS43MSwxLjI0LS45N3YuMDJaIj48L3BhdGg+PHBhdGggZmlsbD0iI2ZmZiIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNTA5LjMxLDE0Mi41M3YtMTAuNzRjMC0xLjM5LS4zMy0yLjUyLS45NS0zLjM4LS42Mi0uODQtMS40MS0xLjUtMi4zOS0xLjk3LS45My0uNDQtMS45OS0uNzUtMy4wOS0uOTEtMi4zMi0uMzEtNC41OC0uMzEtNi43OS4xMy0xLjE5LjI0LTIuMy42NC0zLjI1LDEuMjItLjk5LjU3LTEuODEsMS4zNS0yLjQzLDIuMzItLjY0Ljk3LTEuMDIsMi4xOS0xLjExLDMuNjJsLS4wNC42Nmg2LjkybC4wNy0uNTdjLjA5LS45My4zOC0xLjU5Ljg2LTEuOTUuNTMtLjQsMS4yOC0uNiwyLjI1LS42LjQ2LDAsLjkxLjAyLDEuMzMuMDkuMzUuMDQuNjYuMTUuOTMuMzEuMjQuMTMuNDIuMzMuNTcuNi4xNS4yNy4yMi42NC4yMiwxLjE3LjAyLjUxLS4xNS43MS0uMjkuODItLjI5LjI0LS43My40NC0xLjI2LjU3LS42LjE1LTEuMy4yNy0yLjEuMzUtLjg0LjA5LTEuNy4yLTIuNTQuMzMtLjg2LjEzLTEuNzUuMzMtMi42MS41NS0uOTEuMjQtMS43Mi42Mi0yLjQzLDEuMTEtLjczLjUxLTEuMzMsMS4xOS0xLjc5LDIuMDMtLjQ2Ljg0LS43MSwxLjkyLS43MSwzLjIsMCwxLjE1LjIsMi4xNy42LDMuMDMuNC44Ni45NywxLjU5LDEuNjgsMi4xNC43MS41NSwxLjUzLjk3LDIuNDUsMS4yNC45MS4yNywxLjkuMzgsMi45NC4zOCwxLjMzLDAsMi42NS0uMiwzLjkzLS42LjkzLS4yOSwxLjc5LS43MywyLjU0LTEuMy4wNy4zMy4xNS42NC4yNy45NWwuMTMuNDJoNi4yMXYtMy40Yy0uMDctLjY5LS4wOS0xLjI2LS4wOS0xLjgzaC0uMDRaTTUwMi4zNywxMzguMDh2MS4wNGMwLC4yOS0uMDIuNzEtLjA5LDEuMTktLjA3LjQ0LS4yMi45MS0uNDYsMS4zNS0uMjQuNDItLjYyLjgtMS4xMywxLjExcy0xLjI2LjQ2LTIuMjUuNDZjLS40MiwwLS44Mi0uMDQtMS4xOS0uMTEtLjM1LS4wNy0uNjQtLjE4LS45MS0uMzMtLjIyLS4xMy0uNC0uMzMtLjUzLS41Ny0uMTMtLjI0LS4yLS41Ny0uMi0uOTcsMC0uNDIuMDctLjc3LjItMS4wMi4xNS0uMjcuMzMtLjQ5LjU1LS42NC4yNC0uMTguNTUtLjMzLjkxLS40NC4zOC0uMTMuNzctLjIyLDEuMTctLjMxLjQ0LS4wOS44OC0uMTMsMS4zMy0uMi40Ni0uMDQuOTMtLjEzLDEuMzUtLjIuNDQtLjA5Ljg2LS4yLDEuMjQtLjMzLDAsMCwuMDQsMCwuMDctLjAyaC0uMDRaIj48L3BhdGg+PHBhdGggZmlsbD0iI2ZmZiIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNDIzLjg4LDEzNi41OGwtNi4yOC0xNS40NWgtOS44OHYyNi42MWg3LjE0di0xNC41bDYuMDEsMTQuNWg1LjY4bDYuMDEtMTQuNjh2MTQuNjhoNy4xNHYtMjYuNjFoLTkuODhsLTUuOTIsMTUuNDVoLS4wMloiPjwvcGF0aD48cGF0aCBmaWxsPSIjZTQwMDQ2IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0zNjYuNjgsMTI5LjA0djcuNjlsMy44OSwzLjg5LDMuODctMy44N3YtNy43MWwtMy44OS0zLjg5LTMuODksMy44OWguMDJaIj48L3BhdGg+PHBhdGggZmlsbD0iI2U0MDA0NiIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzcwLjU5LDEwNS42NGMtMTUuOTEsMC0yOC44LDEyLjg5LTI4LjgsMjguOHMxMi44OSwyOC44LDI4LjgsMjguOCwyOC44LTEyLjg5LDI4LjgtMjguOC0xMi45MS0yOC44LTI4LjgtMjguOFpNMzg3LjQ1LDE1My43NmwtMy4wMywyLjIzLTMuMDMtMi4yM3YtNy42bC0zLjg5LTMuODktMy44OSwzLjg5djcuNmwtMy4wMywyLjIzLTMuMDMtMi4yM3YtNy42bC0zLjg5LTMuODktMy44OSwzLjg5djcuNmwtMy4wMywyLjIzLTMuMDMtMi4yM3YtMTAuMWw2LjktNi45di0xMC4yMWw2LjkyLTYuOTJ2LTguNzdsMy4wMy0yLjIzLDMuMDMsMi4yM3Y4Ljc3bDYuOTIsNi45MnYxMC4xOWw2Ljk0LDYuOTR2MTAuMS0uMDJaIj48L3BhdGg+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTI2MS41OCwxNDcuNjV2LTE1LjY1aC00Ljgydi0yLjdoNC44MnYtMi4wNWMwLTMuMjQsMS4zNy00Ljc4LDQuNzgtNC43OGg0LjgydjIuN2gtNC42NGMtMS40NywwLTIuMDEuNjEtMi4wMSwyLjAxdjIuMTJoNi42NXYyLjdoLTYuNjV2MTUuNjVoLTIuOTVaIj48L3BhdGg+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTI4OC40OCwxMjkuM3YyLjg4aC0yLjM3Yy00LjI4LDAtNS41NCwzLjI3LTUuNTQsNi4xOXY2LjU4aDUuMzZ2Mi43aC0xMi40MXYtMi43aDQuMXYtMTIuOTVoLTQuMXYtMi43aDYuOTFsLjExLDMuMDljLjgzLTEuNDQsMi40OC0zLjA5LDUuOTctMy4wOWgxLjk4WiI+PC9wYXRoPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0yODkuNjMsMTM4LjQ3YzAtNS41OCwzLjc0LTkuMzksOS4xLTkuMzlzOS4xLDMuODEsOS4xLDkuMzktMy43NCw5LjM5LTkuMSw5LjM5LTkuMS0zLjgxLTkuMS05LjM5Wk0zMDQuODEsMTM4LjQ3YzAtMy45Mi0yLjQ1LTYuNzYtNi4wOC02Ljc2cy02LjA4LDIuODQtNi4wOCw2Ljc2LDIuNDUsNi43Niw2LjA4LDYuNzYsNi4wOC0yLjg0LDYuMDgtNi43NloiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMzMzLjc0LDEzNS44MXYxMS44M2gtMi45NXYtMTEuNzNjMC0yLjQ1LTEuMTUtNC4wNi0zLjQyLTQuMDYtMi40MSwwLTMuODEsMS44My0zLjgxLDQuMjR2MTEuNTVoLTIuOTV2LTExLjczYzAtMi4yNy0uOTQtNC4wNi0zLjUzLTQuMDYtMi4zNywwLTMuNywxLjg3LTMuNyw0LjV2MTEuMjloLTIuOTV2LTE4LjM1aDIuNDhsLjI1LDEuOTRjLjk0LTEuMzMsMi41Mi0yLjE2LDQuNi0yLjE2LDIuMTksMCwzLjkyLDEuMTIsNC43NSwyLjgxLDEuMDgtMS42OSwyLjg0LTIuODEsNS4yNS0yLjgxLDMuNjMsMCw1Ljk3LDIuNTUsNS45Nyw2LjczWiI+PC9wYXRoPjwvc3ZnPg==" alt="Latitude, a Megaport company" width="586" height="163">
       <p class="lockup-caption"><span class="lockup-lat">Latitude</span> a Megaport company<span class="lockup-dot"></span>for Coder</p>
     </div>
-    <div class="rule" aria-hidden="true"></div>
-    <p class="eyebrow">Baked for</p>
-    <img class="mark-cd" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMiIgZGF0YS1uYW1lPSJMYXllciAyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzIwLjgxIDIwMCI+CiAgPGRlZnM+CiAgICA8c3R5bGU+CiAgICAgIC5jbHMtMSB7CiAgICAgICAgZmlsbDogI2ZmZjsKICAgICAgICBzdHJva2Utd2lkdGg6IDBweDsKICAgICAgfQogICAgPC9zdHlsZT4KICA8L2RlZnM+CiAgPGcgaWQ9IkxheWVyXzItMiIgZGF0YS1uYW1lPSJMYXllciAyIj4KICAgIDxnIGlkPSJMYXllcl8xLTIiIGRhdGEtbmFtZT0iTGF5ZXIgMS0yIj4KICAgICAgPGc+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSIxMTU4LjYzIiB5PSI1LjQxIiB3aWR0aD0iMTYyLjE4IiBoZWlnaHQ9IjE4OS4yNCIvPgogICAgICAgIDxwb2x5Z29uIGNsYXNzPSJjbHMtMSIgcG9pbnRzPSI3NDUuMTggMTk0LjU5IDkwNS45OSAxOTQuNTkgOTA1Ljk5IDE1NC4wNSA4MDYuOCAxNTQuMDUgODA2LjggMTE2Ljc2IDg5MS45MyAxMTYuNzYgODkxLjkzIDgwLjgxIDgwNi44IDgwLjgxIDgwNi44IDQ0LjU5IDkwNC4xIDQ0LjU5IDkwNC4xIDUuNCA3NDUuMTggNS40IDc0NS4xOCAxOTQuNTkiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yMzYuNDksMTE1LjEzbC02MS42Mi0xLjM1Yy0yLjcsMjcuNTctMjYuNTcsNDQuODYtNTEuNjIsNDQuODYtMzQuMzMsMC01OS43My0yMi45Ny01OS43My01OC42NXMyNS40MS01OC45OSw1OS43My01OS43M2MyNS4wNS0uNTQsNDkuNDYsMTcuNTcsNTEuMDgsNDUuMTRsNjEuNjItMS44OUMyMzQuNiwzMy43OCwxOTIuMTYsMCwxMjMuMjUsMFMwLDM4LjkyLDAsMTAwczUxLjg5LDEwMCwxMjMuMjUsMTAwLDExMS42Mi0zNC4zMiwxMTMuMjQtODQuODdoMFoiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00OTYuMTQsMTAwYzAtNjAuMjctNDguODMtMTAwLTExOC45Mi0xMDBzLTExOC45MiwzOS43My0xMTguOTIsMTAwLDQ4LjgzLDEwMCwxMTguOTIsMTAwLDExOC45Mi0zOS40NiwxMTguOTItMTAwWk0zNzcuMjIsMzkuNzNjMzIuNzcsMCw1NS40MSwyNC41OSw1NS40MSw2MC4yN3MtMjIuNjMsNTkuMTktNTUuNDEsNTkuMTktNTUuNC0yNC4wNi01NS40LTU5LjE5LDIyLjg3LTYwLjI3LDU1LjQtNjAuMjdaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNTE3Ljk1LDE5NC41OWg3OC4zOGM3NS45NSwwLDEyNy4wMy0zNS40LDEyNy4wMy05NC41OVM2NzIuMjgsNS40LDU5Ni4zMyw1LjRoLTc4LjM4djE4OS4xOVpNNjYwLjM5LDEwMGMwLDM2LjIyLTI2Ljc2LDU2Ljc2LTY2Ljc2LDU2Ljc2aC0xMy41MVY0Mi45N2gxMy41MWM0MCwwLDY2Ljc2LDIwLjI3LDY2Ljc2LDU3LjAzWiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTkzMy4yNSwxOTQuNTloNjIuMTZ2LTYzLjUxaDE2LjQ5YzE5LjczLDAsMzcuMjksNy44NCw0Mi40MywyOS43M2w1Ljk1LDMzLjc4aDcxLjA4bC03LjU3LTM2LjQ5Yy03LjMzLTI5LjU2LTI1LjA1LTQ4Ljk2LTYyLjQzLTUxLjM2di0xLjYxYzM4LjM4LDAsNjEuODktMTcuMyw2MS44OS00NS4xMywwLTMzLjc4LTM0LjU5LTU0LjYtOTEuMzUtNTQuNmgtOTguNjV2MTg5LjE5aDBaTTEwNjEuMDksNjkuNzNjMCwxNy41Ny0xMy4yNCwyOC4xMS0zNC41OSwyOC4xMWgtMzEuMDh2LTU1Ljk1aDMxLjA4YzIxLjM1LDAsMzQuNTksMTAuNTQsMzQuNTksMjcuODRaIi8+CiAgICAgIDwvZz4KICAgIDwvZz4KICA8L2c+Cjwvc3ZnPg==" alt="Coder" width="1321" height="200">
-    <h1>We brought cake. Your AI, your rules, <span class="glaze">our metal</span>.</h1>
-    <p class="lede">You sell self-hosted. Someone still has to own the metal underneath.</p>
-    <a class="cta" href="https://megaport.chilipiper.com/personal-page/henry-barton"><span>Grab 20 minutes with Henry</span></a>
   </div>
 </header>
 
@@ -334,7 +413,7 @@ h2{font-size:28px;line-height:1.16;margin:0 0 14px}
   <span class="icing"></span>
   <div class="sprinkles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
   <div class="wrap rise rise--slice">
-    <p class="tier">Layer 01</p>
+    <p class="tier">Layer 01 &middot; the base</p>
     <h2>Who we are</h2>
     <p class="body">Latitude.sh builds bare metal. Megaport owns the private fabric between clouds. One company, one bill, one support desk.</p>
   </div>
@@ -343,17 +422,17 @@ h2{font-size:28px;line-height:1.16;margin:0 0 14px}
 <section class="layer layer--2">
   <span class="icing"></span>
   <div class="wrap rise rise--settle">
-    <p class="tier">Layer 02</p>
+    <p class="tier">Layer 02 &middot; the filling</p>
     <h2>What we do</h2>
     <p class="body">Bare metal live in under five seconds, dedicated GPU clusters, and Cloud Gateway private links into AWS, GCP and Azure. Twenty-five locations, five continents.</p>
-    <p class="spec">KKR went from no AI-assisted code to more than half of commits inside Coder in a year. That curve is a compute curve.</p>
+    <p class="spec">Agent Relay runs cloud agents on the customer's own infrastructure. We are in the business of being that infrastructure.</p>
   </div>
 </section>
 
 <section class="layer layer--3">
   <span class="icing"></span>
   <div class="wrap rise rise--cascade">
-    <p class="tier">Layer 03</p>
+    <p class="tier">Layer 03 &middot; the taste test</p>
     <h2>Who we've helped</h2>
     <p class="body">Teams already running on us:</p>
     <ul class="logos">
@@ -372,8 +451,9 @@ h2{font-size:28px;line-height:1.16;margin:0 0 14px}
 <section class="layer layer--4">
   <span class="icing"></span>
   <div class="wrap rise rise--finale">
-    <p class="tier">Layer 04</p>
+    <p class="tier">Layer 04 &middot; the slice</p>
     <h2>What we'd propose</h2>
+    <p class="kicker">The cake was the easy part.</p>
     <p class="pun">Coder on top, our metal at the base, private fabric as the filling.</p>
     <p class="close">Dedicated capacity for agent workloads, a private circuit into each new region as you scale across Europe and Asia. You keep the governance. We keep the traffic off the public internet.</p>
     <div class="stage"><a class="cta" href="https://megaport.chilipiper.com/personal-page/henry-barton"><span>Book 20 minutes</span></a></div>
