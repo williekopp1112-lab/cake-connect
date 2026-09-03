@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Latitude &times; Coder &mdash; You just scanned a cake.</title>
-<meta name="description" content="A short note from Latitude for Coder: dedicated CPU and GPU infrastructure for the workspaces behind Agent Relay.">
+<title>Latitude &times; Coder &mdash; The real idea</title>
+<meta name="description" content="A short note from Latitude for Coder about a dedicated infrastructure option for secure, self-hosted workspaces.">
 <meta name="robots" content="noindex">
-<meta property="og:title" content="Latitude &times; Coder &mdash; You just scanned a cake.">
-<meta property="og:description" content="Your AI. Your rules. Our metal.">
+<meta property="og:title" content="Latitude &times; Coder &mdash; The real idea">
+<meta property="og:description" content="A dedicated infrastructure option for secure, self-hosted workspaces.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cake-connect.vercel.app/coder/">
 <meta name="theme-color" content="#0a0a0c">
@@ -41,9 +41,6 @@ a.logo-link{display:flex;align-items:center;flex:none;min-height:44px;
   transition:opacity .22s cubic-bezier(.2,.9,.25,1)}
 a.logo-link:hover{opacity:.78}
 .times{color:var(--purple);font-weight:800;font-size:20px;line-height:1}
-.brand-line{margin-top:11px;font-size:18px;color:#efeaf3}
-.brand-line b{display:block;color:#fff;letter-spacing:-.02em}
-.brand-line span{display:block;color:#c8bcd2}
 
 /* ---------- hero ---------- */
 .hero{position:relative;background:radial-gradient(125% 95% at 6% 0,#4d1291 0%,#1a0b31 45%,#0a0a0c 78%);
@@ -60,9 +57,8 @@ a.logo-link:hover{opacity:.78}
   border-radius:50%;background:rgba(0,0,0,.55)}
 .eyebrow{font:700 16px/1.1 ui-monospace,SFMono-Regular,Menlo,monospace;
   letter-spacing:.15em;color:var(--purple);margin-bottom:11px}
-h1{font-size:clamp(33px,9.4vw,52px);line-height:1.0;max-width:15ch}
-.hl{display:block;color:var(--purple);margin-top:9px}
-.hero p{margin-top:16px;color:#f3eef7;max-width:60ch}
+h1{font-size:36px;line-height:1.04;max-width:16ch}
+.hero p{margin-top:13px;color:#f3eef7;max-width:60ch;font-size:16px;line-height:1.38}
 .ask{margin-top:15px;font-weight:800;color:#fff}
 .support{margin-top:13px;font-size:18px;color:#d6cade}
 
@@ -103,6 +99,8 @@ h2{font-size:clamp(26px,7vw,31px);line-height:1.08}
 @media (min-width:620px){
   .header{padding:22px 0 18px}
   .hero{padding:40px 0 44px}
+  h1{font-size:42px}
+  .hero p{font-size:18px;line-height:1.45}
   .section{padding:44px 0}
   .final{padding:46px 0 32px}
   .cards{grid-template-columns:repeat(3,1fr)}
@@ -123,7 +121,6 @@ h2{font-size:clamp(26px,7vw,31px);line-height:1.08}
       <span class="times" aria-hidden="true">&times;</span>
       <svg class="logo logo-cod" role="img" aria-label="Coder" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320.81 200"><g><g><g><rect x="1158.63" y="5.41" width="162.18" height="189.24"/><polygon points="745.18 194.59 905.99 194.59 905.99 154.05 806.8 154.05 806.8 116.76 891.93 116.76 891.93 80.81 806.8 80.81 806.8 44.59 904.1 44.59 904.1 5.4 745.18 5.4 745.18 194.59"/><path d="M236.49,115.13l-61.62-1.35c-2.7,27.57-26.57,44.86-51.62,44.86-34.33,0-59.73-22.97-59.73-58.65s25.41-58.99,59.73-59.73c25.05-.54,49.46,17.57,51.08,45.14l61.62-1.89C234.6,33.78,192.16,0,123.25,0S0,38.92,0,100s51.89,100,123.25,100,111.62-34.32,113.24-84.87h0Z"/><path d="M496.14,100c0-60.27-48.83-100-118.92-100s-118.92,39.73-118.92,100,48.83,100,118.92,100,118.92-39.46,118.92-100ZM377.22,39.73c32.77,0,55.41,24.59,55.41,60.27s-22.63,59.19-55.41,59.19-55.4-24.06-55.4-59.19,22.87-60.27,55.4-60.27Z"/><path d="M517.95,194.59h78.38c75.95,0,127.03-35.4,127.03-94.59S672.28,5.4,596.33,5.4h-78.38v189.19ZM660.39,100c0,36.22-26.76,56.76-66.76,56.76h-13.51V42.97h13.51c40,0,66.76,20.27,66.76,57.03Z"/><path d="M933.25,194.59h62.16v-63.51h16.49c19.73,0,37.29,7.84,42.43,29.73l5.95,33.78h71.08l-7.57-36.49c-7.33-29.56-25.05-48.96-62.43-51.36v-1.61c38.38,0,61.89-17.3,61.89-45.13,0-33.78-34.59-54.6-91.35-54.6h-98.65v189.19h0ZM1061.09,69.73c0,17.57-13.24,28.11-34.59,28.11h-31.08v-55.95h31.08c21.35,0,34.59,10.54,34.59,27.84Z"/></g></g></g></svg>
     </div>
-    <p class="brand-line"><b>Latitude &times; Coder</b><span>Latitude, a Megaport company</span></p>
   </div>
 </header>
 
@@ -133,18 +130,18 @@ h2{font-size:clamp(26px,7vw,31px);line-height:1.08}
     <div class="wrap">
       <div class="cake" aria-hidden="true"></div>
       <p class="eyebrow">BAKED FOR CODER</p>
-      <h1 id="hero-h">You just scanned a cake.<span class="hl">Your AI. Your rules. Our metal.</span></h1>
-      <p>Coder&rsquo;s new Agent Relay lets cloud-hosted coding agents execute inside infrastructure the customer governs. Latitude provides dedicated CPU and GPU infrastructure that could sit underneath those workspaces.</p>
-      <p class="ask">Could Latitude become another infrastructure option for Coder customers?</p>
-      <a class="button" href="https://megaport.chilipiper.com/me/henry-barton/latitude-discussion">Compare notes for 20 minutes</a>
-      <p class="support">No deck. Just a quick conversation about where dedicated compute could fit.</p>
+      <h1 id="hero-h">The cake got us here. Here&rsquo;s the real idea.</h1>
+      <p>Coder gives platform teams control over where their workspaces run. Latitude could give those teams a single-tenant CPU and GPU option, managed through Terraform and connected privately to the clouds they already use.</p>
+      <p class="ask">Could Latitude be another infrastructure option for Coder customers?</p>
+      <a class="button" href="https://megaport.chilipiper.com/me/henry-barton/latitude-discussion">Pick a time with Henry</a>
+      <p class="support">A quick 20-minute conversation to see if there&rsquo;s a real fit.</p>
     </div>
   </section>
 
   <section class="section why" aria-labelledby="why-h">
     <div class="wrap">
-      <h2 id="why-h">Why Agent Relay caught our attention</h2>
-      <p>Agent Relay gives enterprises more control over where agent workloads execute. As those workloads grow, the infrastructure supporting each workspace matters too. That is where we think Latitude could fit.</p>
+      <h2 id="why-h">Why the timing is interesting</h2>
+      <p>Agent Relay lets cloud-hosted agents execute inside infrastructure the customer controls. When shared cloud isn&rsquo;t the right fit, Latitude could give those customers a dedicated CPU or GPU option underneath their Coder workspaces.</p>
       <a class="link" href="https://coder.com/blog/introducing-agent-relay-cloud-hosted-agents-self-hosted-execution">Read Coder&rsquo;s Agent Relay announcement &rarr;</a>
     </div>
   </section>
@@ -153,9 +150,9 @@ h2{font-size:clamp(26px,7vw,31px);line-height:1.08}
     <div class="wrap">
       <h2 id="fit-h">Where Latitude may fit</h2>
       <div class="cards">
-        <article class="card"><h3>YOUR OWN HARDWARE</h3><p>Single-tenant CPU and GPU infrastructure with predictable performance. No noisy neighbors stealing a bite.</p></article>
-        <article class="card"><h3>READY WHEN YOU ARE</h3><p>Deploy and manage infrastructure through an API, Terraform, or the Latitude dashboard.</p></article>
-        <article class="card"><h3>BUILT TO CONNECT</h3><p>Privately connect Latitude infrastructure to AWS, Azure, GCP, and other clouds through Cloud Gateway.</p></article>
+        <article class="card"><h3>DEDICATED COMPUTE</h3><p>Single-tenant CPU and GPU infrastructure for demanding developer and agent workloads.</p></article>
+        <article class="card"><h3>FITS THE WORKFLOW</h3><p>Latitude supports API and Terraform deployment, which lines up with Coder&rsquo;s template-driven approach.</p></article>
+        <article class="card"><h3>PRIVATE CONNECTIVITY</h3><p>Connect Latitude privately to AWS, Azure, GCP, and other clouds through Megaport Cloud Gateway.</p></article>
       </div>
       <a class="link" href="https://www.latitude.sh/">Explore Latitude.sh &rarr;</a>
     </div>
@@ -163,9 +160,9 @@ h2{font-size:clamp(26px,7vw,31px);line-height:1.08}
 
   <section class="final" aria-labelledby="cta-h">
     <div class="wrap">
-      <h2 id="cta-h">Worth comparing notes?</h2>
-      <p>We&rsquo;d love to learn how Coder and its customers think about the infrastructure supporting secure agent workloads.</p>
-      <a class="button" href="https://megaport.chilipiper.com/me/henry-barton/latitude-discussion">Book 20 minutes with Henry</a>
+      <h2 id="cta-h">Worth a conversation?</h2>
+      <p>We&rsquo;d like to understand how Coder thinks about infrastructure options for customers running secure, self-hosted workspaces.</p>
+      <a class="button" href="https://megaport.chilipiper.com/me/henry-barton/latitude-discussion">Pick a time with Henry</a>
       <p class="contact">Henry Barton / Latitude at Megaport / <a href="mailto:henry.barton@megaport.com">henry.barton@megaport.com</a></p>
       <p class="foot">Sent with questionable restraint by Henry at Latitude.</p>
     </div>
