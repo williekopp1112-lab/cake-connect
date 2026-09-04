@@ -40,7 +40,7 @@ a{color:inherit}
 .wrap{width:min(100%,860px);margin-inline:auto;padding-inline:20px}
 
 /* ---------- header ---------- */
-.header{background:var(--ink);color:#fff;padding:16px 0 13px;border-bottom:1px solid #221f2a}
+.header{background:var(--ink);color:#fff;padding:10px 0 9px;border-bottom:1px solid #221f2a}
 .brand{display:flex;align-items:center;gap:11px;flex-wrap:wrap}
 .logo{display:block;flex:none;height:auto}
 .logo-lat{width:118px}
@@ -52,11 +52,15 @@ a.logo-link:hover{opacity:.78}
 
 /* ---------- hero ---------- */
 .hero{position:relative;background:radial-gradient(125% 95% at 6% 0,#4d1291 0%,#1a0b31 45%,#0a0a0c 78%);
-  color:#fff;padding:22px 0 26px;overflow:hidden}
+  color:#fff;padding:22px 0 16px;overflow:hidden}
+/* padding-top is deliberately NOT reduced below 22px. .hero is overflow:hidden and the
+   sprinkle burst travels -34px above its rest position; at 22px the deepest sprinkle
+   clears the hero top edge by 6px. Cutting the top padding to compress the page would
+   re-open the clipping defect this file was repaired for. */
 .hero:after{content:"";position:absolute;right:-56px;top:34px;width:168px;height:168px;
   border:19px solid rgba(188,124,255,.13);border-radius:50%;pointer-events:none}
 .hero .wrap{position:relative;z-index:1}
-.cake-stage{position:relative;width:58px;height:40px;margin-bottom:13px}
+.cake-stage{position:relative;width:58px;height:40px;margin-bottom:10px}
 .cake{width:58px;height:40px;position:relative;
   background:linear-gradient(#bc7cff 0 30%,#fbf8fa 30% 60%,#7511e2 60%);
   border-radius:9px 9px 5px 5px;box-shadow:0 6px 0 rgba(0,0,0,.45)}
@@ -65,41 +69,43 @@ a.logo-link:hover{opacity:.78}
 .cake:after{content:"";position:absolute;left:-6px;right:-6px;bottom:-8px;height:6px;
   border-radius:50%;background:rgba(0,0,0,.55)}
 .eyebrow{font:700 16px/1.1 ui-monospace,SFMono-Regular,Menlo,monospace;
-  letter-spacing:.15em;color:var(--purple);margin-bottom:10px}
+  letter-spacing:.15em;color:var(--purple);margin-bottom:8px}
 h1{font-size:35px;line-height:1.05;max-width:17ch}
-.hero p{margin-top:12px;color:#f6f2fa;max-width:62ch;font-size:16.5px;line-height:1.4}
-.support{margin-top:11px;font-size:17px;color:#e4dbec}
+.hero p{margin-top:10px;color:#f6f2fa;max-width:62ch;font-size:16.5px;line-height:1.4}
+.support{margin-top:9px;font-size:17px;color:#e4dbec}
 
 /* ---------- buttons ---------- */
 .button{display:inline-flex;align-items:center;justify-content:center;
-  min-height:54px;padding:14px 22px;margin-top:16px;border-radius:999px;
+  min-height:54px;padding:14px 22px;margin-top:13px;border-radius:999px;
   background:var(--purple);color:#12030f;font-size:18px;font-weight:800;
   text-decoration:none;box-shadow:0 5px 0 var(--violet)}
 .button:hover{background:#c98fff}
 :where(a):focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 
 /* ---------- sections ---------- */
-.section{padding:26px 0}
+.section{padding:16px 0}
 .why{background:var(--paper)}
 .fit{background:var(--shell)}
 h2{font-size:clamp(26px,7vw,31px);line-height:1.08}
-.section p{margin-top:12px;max-width:64ch}
-.link{display:inline-flex;align-items:center;min-height:44px;margin-top:6px;
+.section p{margin-top:9px;max-width:64ch}
+/* .link keeps min-height:44px — that is the tap target, not decoration. Only the
+   margin above it was trimmed. */
+.link{display:inline-flex;align-items:center;min-height:44px;margin-top:2px;
   color:var(--violet-deep);font-weight:800;text-underline-offset:3px}
 .link:hover{color:#360a6c}
-.cards{display:grid;gap:10px;margin-top:16px}
-.card{padding:14px 16px;border-radius:var(--r);background:#fff;border:1px solid var(--line)}
+.cards{display:grid;gap:7px;margin-top:11px}
+.card{padding:10px 15px;border-radius:var(--r);background:#fff;border:1px solid var(--line)}
 .card h3{font:800 15px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;
   letter-spacing:.06em;color:#4f0f7d}
-.card p{margin-top:7px;font-size:17px;line-height:1.4;max-width:none}
+.card p{margin-top:5px;font-size:17px;line-height:1.4;max-width:none}
 
 /* ---------- final ---------- */
-.final{background:var(--night);color:#fff;padding:28px 0 22px}
-.final p{margin-top:12px;color:#f4eff8}
+.final{background:var(--night);color:#fff;padding:18px 0 14px}
+.final p{margin-top:10px;color:#f4eff8}
 .contact{font-size:17px;line-height:1.4}
 .contact a{display:inline-flex;align-items:center;min-height:44px;
   color:var(--purple);text-underline-offset:3px}
-.final .foot{margin-top:0;padding-top:18px;font-size:16px;color:#d0c5da}
+.final .foot{margin-top:0;padding-top:10px;font-size:16px;color:#d0c5da}
 
 /* ---------- motion 1 of 2: Coder logo block, one bounce on load ---------- */
 @keyframes coder-block-bounce{
